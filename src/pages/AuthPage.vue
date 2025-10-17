@@ -20,9 +20,13 @@ const mode = ref<'login' | 'register'>('login')
       <div v-if="mode === 'login'">
         <h1 class="text-2xl font-bold mb-4">Connexion</h1>
         <LoginForm />
-        <button @click="mode = 'register'" class="mt-3 text-blue-500 underline">
-          Créer un compte
-        </button>
+        <div class="flex flex-col items-center mt-4 gap-2">
+          <button @click="mode = 'register'" class="mt-3 text-blue-500 underline">
+            Créer un compte
+          </button>
+          <RouterLink class="text-red-500" to="/ForgotPassword">Mot de passe oublié ?</RouterLink>
+        </div>
+
       </div>
 
       <!-- formulaire inscription -->

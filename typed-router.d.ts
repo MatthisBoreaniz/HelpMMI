@@ -44,6 +44,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/ForgotPassword': RouteRecordInfo<
+      '/ForgotPassword',
+      '/ForgotPassword',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
   }
 
   /**
@@ -72,6 +79,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/AuthPage.vue': {
       routes:
         | '/AuthPage'
+      views:
+        | never
+    }
+    'src/pages/ForgotPassword.vue': {
+      routes:
+        | '/ForgotPassword'
       views:
         | never
     }
