@@ -12,4 +12,5 @@ import { RouterLink } from 'vue-router'
     </p>
   </section>
   <RouterLink to="/about" class=""> Go to About Page </RouterLink>
+  <RouterLink to="/authPage" class=""> Go to Connexion</RouterLink>
 </template>
