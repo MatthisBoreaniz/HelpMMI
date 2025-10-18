@@ -1,7 +1,6 @@
 import { ref, computed } from 'vue'
 import { pb } from '@/backend'
-import type { UsersResponse, UsersRecord } from '@/pocketbase-types'
-
+import type { UsersResponse, UsersRecord, AvatarsResponse } from '@/pocketbase-types'
 
 type UsersCreatePayload = UsersRecord & {
   email: string
@@ -9,10 +8,30 @@ type UsersCreatePayload = UsersRecord & {
   passwordConfirm: string
 }
 
-const currentUser = ref<UsersResponse | null>(pb.authStore.model as UsersResponse | null)
+const currentUser = ref<UsersResponse<{relAvatars: AvatarsResponse}> | null>(pb.authStore.record as UsersResponse<{relAvatars: AvatarsResponse}> | null)
+
+async function refreshUser() {
+  if (!pb.authStore.record) return null
+  try {
+    const user = await pb
+      .collection<UsersResponse<{ relAvatars: AvatarsResponse }>>('users')
+      .getOne(pb.authStore.record.id, {
+        expand: "relAvatars",
+      })
+    currentUser.value = user 
+    return user
+  } catch (e) {
+    console.error('Erreur refreshUser:', e)
+    return null
+  }
+}
 
 pb.authStore.onChange(() => {
-  currentUser.value = pb.authStore.model as UsersResponse | null
+  if (pb.authStore.isValid) {
+    refreshUser()
+  } else {
+    currentUser.value = null
+  }
 })
 
 async function register(email: string, password: string, name: string) {
@@ -26,7 +45,7 @@ async function register(email: string, password: string, name: string) {
 
     const record = await pb.collection('users').create(data)
     await pb.collection('users').authWithPassword(email, password)
-    currentUser.value = pb.authStore.model as UsersResponse
+    await refreshUser()
     return record
   } catch (err) {
     console.error('❌ Erreur lors de l’inscription :', err)
@@ -36,9 +55,8 @@ async function register(email: string, password: string, name: string) {
 
 async function login(email: string, password: string) {
   try {
-    const authData = await pb.collection('users').authWithPassword(email, password)
-    currentUser.value = authData.record as UsersResponse
-    return authData
+    await pb.collection('users').authWithPassword(email, password)
+    await refreshUser()
   } catch (err) {
     console.error('❌ Erreur de connexion :', err)
     throw err
@@ -53,5 +71,5 @@ function logout() {
 const isLoggedIn = computed(() => !!pb.authStore.token)
 
 export default function useAuth() {
-  return { pb, currentUser, isLoggedIn, register, login, logout }
+  return { pb, currentUser, isLoggedIn, register, login, logout, refreshUser }
 }

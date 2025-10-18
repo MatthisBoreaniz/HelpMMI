@@ -14,4 +14,7 @@ const { currentUser, logout } = useAuth()
       Déconnexion
     </button>
   </div>
+  <pre class="mt-4 p-4 bg-gray-100 border rounded w-96 overflow-x-auto">
+    {{ JSON.stringify(currentUser, null, 2) }}
+  </pre>
 </template>

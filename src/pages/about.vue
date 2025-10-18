@@ -10,7 +10,7 @@ const listAides = await pb.collection('Aides').getFullList();
     <p>This page provides information about the HelpMMI application.</p>
     <ul>
       <li v-for="aide in listAides" :key="aide.id">
-        {{ aide.name }}
+        {{ aide.nom }}
       </li>
     </ul>
   </div>

@@ -7,7 +7,7 @@ import type { RecordService } from 'pocketbase'
 
 export enum Collections {
 	Aides = "Aides",
-	Marco = "marco",
+	Avatars = "Avatars",
 	Users = "users",
 }
 
@@ -39,34 +39,35 @@ export type AuthSystemFields<T = unknown> = {
 // Record types for each collection
 
 export type AidesRecord = {
-	name?: string
+	nom?: string
 }
 
-export type MarcoRecord = {
-	name?: string
+export type AvatarsRecord = {
+	image?: string
+	nom?: string
 }
 
 export type UsersRecord = {
-	avatar?: string
 	name?: string
+	relAvatars?: RecordIdString[]
 }
 
 // Response types include system fields and match responses from the PocketBase API
 export type AidesResponse<Texpand = unknown> = Required<AidesRecord> & BaseSystemFields<Texpand>
-export type MarcoResponse<Texpand = unknown> = Required<MarcoRecord> & BaseSystemFields<Texpand>
+export type AvatarsResponse<Texpand = unknown> = Required<AvatarsRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
 
 export type CollectionRecords = {
 	Aides: AidesRecord
-	marco: MarcoRecord
+	Avatars: AvatarsRecord
 	users: UsersRecord
 }
 
 export type CollectionResponses = {
 	Aides: AidesResponse
-	marco: MarcoResponse
+	Avatars: AvatarsResponse
 	users: UsersResponse
 }
 
@@ -75,6 +76,6 @@ export type CollectionResponses = {
 
 export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'Aides'): RecordService<AidesResponse>
-	collection(idOrName: 'marco'): RecordService<MarcoResponse>
+	collection(idOrName: 'Avatars'): RecordService<AvatarsResponse>
 	collection(idOrName: 'users'): RecordService<UsersResponse>
 }

@@ -1,9 +1,11 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import useAuth from '@/composables/useAuth';
+import ImgPb from '@/pages/ImgPb.vue';
 import { RouterLink } from 'vue-router';
 
 const { currentUser, logout } = useAuth();
+
 </script>
 
 <template>
@@ -16,8 +18,14 @@ const { currentUser, logout } = useAuth();
 
         <div>
             <div v-if="currentUser" class="flex items-center gap-4">
-                <span class="flex items-center gap-2">
-                    <span>Bienvenue, {{ currentUser.name }}</span>
+                <span class="flex flex-col items-center">
+                  <ImgPb
+                    v-if="currentUser?.expand?.relAvatars"
+                    :record="currentUser.expand.relAvatars"
+                    :filename="currentUser.expand.relAvatars.image"
+                    class="w-10 h-10 rounded-full object-cover mb-1"
+                    />
+                    <p>{{ currentUser?.name }}</p>
                 </span> 
                 <button
                     @click="logout"
