@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { pb } from '@/backend'
-import type { UsersResponse, UsersRecord, AvatarsResponse } from '@/pocketbase-types'
+import type { UsersResponse, UsersRecord, AvatarsResponse, AidesResponse } from '@/pocketbase-types'
 
 type UsersCreatePayload = UsersRecord & {
   email: string
@@ -8,15 +8,21 @@ type UsersCreatePayload = UsersRecord & {
   passwordConfirm: string
 }
 
-const currentUser = ref<UsersResponse<{relAvatars: AvatarsResponse}> | null>(pb.authStore.record as UsersResponse<{relAvatars: AvatarsResponse}> | null)
+const currentUser = ref<UsersResponse<{
+  relAvatars: AvatarsResponse, 
+  relFavoris: AidesResponse[]
+}> | null>(pb.authStore.record as UsersResponse<{
+  relAvatars: AvatarsResponse, 
+  relFavoris: AidesResponse[],
+}> | null)
 
 async function refreshUser() {
   if (!pb.authStore.record) return null
   try {
     const user = await pb
-      .collection<UsersResponse<{ relAvatars: AvatarsResponse }>>('users')
+      .collection<UsersResponse<{ relAvatars: AvatarsResponse, relFavoris: AidesResponse[] }>>('users')
       .getOne(pb.authStore.record.id, {
-        expand: "relAvatars",
+        expand: "relAvatars, relFavoris",
       })
     currentUser.value = user 
     return user

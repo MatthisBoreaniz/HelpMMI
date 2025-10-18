@@ -50,6 +50,7 @@ export type AvatarsRecord = {
 export type UsersRecord = {
 	name?: string
 	relAvatars?: RecordIdString[]
+	relFavoris?: RecordIdString[]
 }
 
 // Response types include system fields and match responses from the PocketBase API
