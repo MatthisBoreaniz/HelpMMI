@@ -33,5 +33,5 @@ coverage
 /pocketbase/*
 !/pocketbase/pb_migrations
 
-#.env.development
-.env.production
+#env
+.env.development
