@@ -12,7 +12,6 @@ const { currentUser } = useAuth()
 const route = useRoute()
 const mode = ref<'login' | 'register'>('login')
 const ImageConnexion = await pb.collection('LogosAndImages').getOne('cc5yv63wbpagynl')
-const Immageregister = await pb.collection('LogosAndImages').getOne('vcqkgq47v01ifeh')
 
 watch(
   () => route.query.mode,
@@ -38,52 +37,47 @@ await checkGoogleOAuth();
 <template>
   <div class="flex flex-col md:flex-row h-[90vh]" v-if="!currentUser">
     <!-- Côté image -->
-    <div class="w-full md:w-1/2 relative h-64 md:h-auto">
+    <div class="w-full md:w-2/5 relative h-64 md:h-auto">
       <ImgPb
-        v-if="ImageConnexion && mode === 'login'"
+        v-if="ImageConnexion"
         :record="ImageConnexion"
         :filename="ImageConnexion.image"
-        class="object-cover w-full h-full"
+        class="object-cover w-full h-full rounded-r-2xl"
         
       />
 
-         <ImgPb
-        v-if="Immageregister && mode === 'register'"
-        :record="Immageregister"
-        :filename="Immageregister.image"
-        class="object-cover w-full h-full"
-        
-      />
       <div
-      class="absolute inset-0 bg-black/30"
-        :class="{'absolute inset-0 bg-gradient-to-tr from-blue-500/70 to-blue-500/70 mix-blend-multiply': mode === 'login',
-                 'absolute inset-0 bg-gradient-to-tr from-green-600/70 to-green-600/70 mix-blend-multiply': mode === 'register'}"
+        class="absolute inset-0 bg-gradient-to-tr from-Bleu to-Bleu mix-blend-multiply rounded-tr-2xl"
+    
       ></div>
     </div>
 
     <!-- Côté formulaire -->
-    <div class="w-full md:w-1/2 flex flex-col justify-center items-center bg-white p-6 md:p-12">
+    <div class="w-full md:w-3/5 flex flex-col justify-center items-center bg-white p-6 md:p-12">
       <div class="w-full max-w-md">
+        <div class ="mb-8">
+          <h1 class="text-Bleu font-bold font-permanent-marker text-3xl">REJOINS HELPMMI</h1>
+          <h2 class="text-Bleu font-permanent-agrandir text-xl">Et commence tes recherches</h2>
+        </div>
         <Transition name="fade-slide" mode="out-in">
           <div v-if="mode === 'login'" key="login" class="flex flex-col items-center">
-            <h1 class="text-2xl sm:text-3xl font-bold mb-6 text-center">Connexion</h1>
             <LogInOut />
             <LoginForm />
-            <div class="flex flex-col items-center mt-6 gap-2">
-              <button @click="mode = 'register'" class="text-blue-500 underline">
-                Créer un compte
+            <div class=" mt-6 gap-2">
+              <button @click="mode = 'register'" class="text-Bleu">
+                Pas encore inscrit ? Crée un compte !
               </button>
-              <RouterLink class="text-red-500" to="/ForgotPassword">
+            </div>
+             <RouterLink class="text-Bleu" to="/ForgotPassword">
                 Mot de passe oublié ?
               </RouterLink>
-            </div>
           </div>
 
           <div v-else key="register" class="flex flex-col items-center">
-            <h1 class="text-2xl sm:text-3xl font-bold mb-6 text-center">Inscription</h1>
+            <LogInOut />
             <RegisterForm />
-            <button @click="mode = 'login'" class="mt-4 text-blue-500 underline">
-              J’ai déjà un compte
+            <button @click="mode = 'login'" class="mt-4 text-Bleu">
+              Tu as déjà un compte ? Connecte-toi !
             </button>
           </div>
         </Transition>

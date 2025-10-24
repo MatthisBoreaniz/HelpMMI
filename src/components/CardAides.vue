@@ -3,6 +3,7 @@ import type { AidesResponse } from '@/pocketbase-types'
 import useAuth from '@/composables/useAuth'
 import { computed } from 'vue'
 import { pb } from '@/backend';
+import ImgPb from '@/pages/ImgPb.vue';
 
 defineProps<{ aides: AidesResponse[] }>()
 
@@ -35,24 +36,31 @@ const toggleFavorite = async (aideId: string) => {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
     <div
       v-for="aide in aides"
       :key="aide.id"
-      class="bg-white rounded-2xl shadow p-4 flex flex-col items-center"
+      class="bg-amber-200 rounded-2xl shadow p-4 flex flex-col items-center relative"
     >
       <h3 class="text-lg font-semibold mb-2">{{ aide.nom }}</h3>
-      <div v-if="currentUser">
+      <div v-if="currentUser" class="absolute top-2 right-4">
           <button
             @click="toggleFavorite(aide.id)"
-            :class="[
-              'px-4 py-2 rounded-xl transition-colors',
-              isFavorite(aide.id) ? 'bg-red-500 text-white' : 'bg-blue-500 text-white'
-            ]"
           >
-            {{ isFavorite(aide.id) ? 'Retirer des favoris' : 'Ajouter aux favoris' }}
+            <span 
+              :class="isFavorite(aide.id) ? 'text-red-500' : 'text-white'"
+              class="text-xl"
+            >
+              ♥
+            </span>
           </button>
       </div>
+      <ImgPb
+        v-if="aide.imageCard"
+        :record="aide"
+        :filename="aide.imageCard"
+        class="w-full h-32 object-cover mb-4 rounded"
+      />  
     </div>
   </div>
 </template>

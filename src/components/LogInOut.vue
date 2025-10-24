@@ -1,16 +1,25 @@
 <script setup lang="ts">
 import { LogInWithGoogle } from '@/backend';
 import useAuth from '@/composables/useAuth';
-
+import { pb } from '@/backend';
+import ImgPb from '@/pages/ImgPb.vue';
 const { currentUser } = useAuth();
+
+const GoogleImage = await pb.collection('LogosAndImages').getOne('01swgp50ebfcxe8');
 </script>
 
 
 <template>
   <div>
     <div v-if="!currentUser">
-      <button @click="LogInWithGoogle" style="padding: 10px 20px; background-color: #4285F4; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        Log in with Google
+      <button @click="LogInWithGoogle" class="p-2 mb-5 bg-white text-Bleu border border-Rose rounded-md flex items-center gap-2 hover:bg-blue-100 text-sm">
+        <ImgPb
+            v-if="GoogleImage"
+            :record="GoogleImage"
+            :filename="GoogleImage.image"
+            class="w-3 h-auto"
+          />  
+        Se connecter avec google
       </button>
     </div> 
   </div>

@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-screen bg-gradient-to-b from-slate-50 to-white flex items-center justify-center p-6">
     <div class="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
-      <h1 class="text-2xl font-extrabold text-slate-800 mb-1 text-center">Réinitialiser le mot de passe</h1>
-      <p class="text-sm text-slate-500 text-center mb-6">
+      <h1 class="text-2xl font-extrabold text-Bleu mb-1 text-center font-permanent-marker">Réinitialiser le mot de passe</h1>
+      <p class="text-sm text-Bleu text-center mb-6">
         Entrez un nouveau mot de passe pour votre compte.
       </p>
 
@@ -12,14 +12,14 @@
 
       <form v-else @submit.prevent="handleReset" class="space-y-4">
         <div>
-          <label for="password" class="block text-sm font-medium text-slate-700 mb-1">Nouveau mot de passe</label>
+          <label for="password" class="block text-sm font-medium text-Bleu mb-1">Nouveau mot de passe</label>
           <input
             id="password"
             v-model="password"
             type="password"
             autocomplete="new-password"
             :disabled="loading"
-            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-Bleu focus:border-Bleu"
             placeholder="Saisissez votre nouveau mot de passe"
             required
             minlength="8"
@@ -27,14 +27,14 @@
         </div>
 
         <div>
-          <label for="confirm" class="block text-sm font-medium text-slate-700 mb-1">Confirmer le mot de passe</label>
+          <label for="confirm" class="block text-sm font-medium text-Bleu mb-1">Confirmer le mot de passe</label>
           <input
             id="confirm"
             v-model="confirmPassword"
             type="password"
             autocomplete="new-password"
             :disabled="loading"
-            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-Bleu focus:border-emerald-400"
             placeholder="Confirmez le mot de passe"
             required
             minlength="8"
@@ -52,7 +52,7 @@
         <button
           type="submit"
           :disabled="loading"
-          class="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-60 text-white font-medium py-2 px-4 rounded-lg transition"
+          class="w-full flex items-center justify-center gap-2 bg-Bleu hover:bg-Rose disabled:opacity-60 text-white font-medium py-2 px-4 rounded-lg transition"
         >
           <svg v-if="loading" class="w-4 h-4 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -63,7 +63,7 @@
         </button>
 
         <div class="text-center text-sm text-slate-500">
-          <RouterLink to="/AuthPage" class="text-emerald-600 hover:underline">Retour à la connexion</RouterLink>
+          <RouterLink to="/AuthPage" class="text-Bleu hover:underline">Retour à la connexion</RouterLink>
         </div>
       </form>
     </div>

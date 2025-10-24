@@ -17,7 +17,7 @@ const { currentUser } = useAuth()
     <div>
       <div v-if="currentUser" class="flex items-center gap-4 group relative cursor-pointer">
         <button>
-          <RouterLink to="/authPage" class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-blue-500">
+          <RouterLink to="/authPage" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose">
             Mon Profil
           </RouterLink>
         </button>
@@ -26,7 +26,7 @@ const { currentUser } = useAuth()
 
         <RouterLink
           to="/authPage?mode=login"
-          class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-blue-500"
+          class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose"
         >
           Connexion
         </RouterLink>

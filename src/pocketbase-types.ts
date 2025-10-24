@@ -40,6 +40,7 @@ export type AuthSystemFields<T = unknown> = {
 // Record types for each collection
 
 export type AidesRecord = {
+	imageCard?: string
 	nom?: string
 }
 
