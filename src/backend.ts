@@ -22,6 +22,7 @@ export async function LogInWithGithub() {
   console.log('LogInWithGithub', authData)
 }
 
+
 /** Utilisteur connecté via Google */
 export async function LogInWithGoogle() {
   const authData = await pb.collection('users').authWithOAuth2({ provider: 'google' })

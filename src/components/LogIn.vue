@@ -11,9 +11,9 @@ const message = ref('')
 const handleLogin = async () => {
   try {
     await login(email.value, password.value)
-    message.value = '✅ Connexion réussie !'
+    message.value = 'Connexion réussie !'
   } catch {
-    message.value = '❌ Email ou mot de passe incorrect.'
+    message.value = 'Email ou mot de passe incorrect.'
   }
 }
 </script>

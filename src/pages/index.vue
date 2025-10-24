@@ -9,7 +9,6 @@ import { pb } from '@/backend'
 
 const { currentUser } = useAuth()
 
-// Stocke toutes les aides
 const aides = ref<AidesResponse[]>([])
 
 onMounted(async () => {

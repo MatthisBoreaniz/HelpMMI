@@ -54,7 +54,7 @@ async function register(email: string, password: string, name: string) {
     await refreshUser()
     return record
   } catch (err) {
-    console.error('❌ Erreur lors de l’inscription :', err)
+    console.error('Erreur lors de l’inscription :', err)
     throw err
   }
 }
@@ -64,7 +64,7 @@ async function login(email: string, password: string) {
     await pb.collection('users').authWithPassword(email, password)
     await refreshUser()
   } catch (err) {
-    console.error('❌ Erreur de connexion :', err)
+    console.error('Erreur de connexion :', err)
     throw err
   }
 }

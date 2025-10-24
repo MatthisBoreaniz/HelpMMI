@@ -18,6 +18,7 @@
                 >
                     Envoyer le lien de réinitialisation
                 </button>
+                <p v-if="message" class="text-center text-green-600">{{ message }}</p>
             </form>
             <RouterLink to="/authPage" class="block mt-4 text-center text-blue-500 underline">
                 Retour à la page de connexion
@@ -30,6 +31,7 @@
 import { ref } from 'vue';
 import { pb } from '@/backend';
 import { RouterLink } from 'vue-router';
+const message = ref('');
 
 const emailToReset = ref('');
 
@@ -38,9 +40,12 @@ const sendReset = async () => {
     await pb.collection('users').requestPasswordReset(emailToReset.value, {
       redirectUrl: `${window.location.origin}/ResetPassword`
     });
-    alert('Email de réinitialisation envoyé ! Vérifiez votre boîte mail.');
+    message.value = 'Un email de réinitialisation a été envoyé si l\'adresse est correct.';
   } catch (e) {
-    alert('Erreur : ' + e);
+    message.value = 'Erreur lors de la demande de réinitialisation du mot de passe.';
+    console.error(e);
   }
 };
+
+
 </script>
