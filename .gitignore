@@ -34,4 +34,4 @@ coverage
 !/pocketbase/pb_migrations
 
 #env
-/.env.development
+.env.development
