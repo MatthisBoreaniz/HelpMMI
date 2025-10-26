@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import useAuth from '@/composables/useAuth'
 import { RouterLink } from 'vue-router'
+import MenuMobileTop from './MenuMobileTop.vue';
 
 const { currentUser } = useAuth()
 </script>
@@ -14,7 +15,7 @@ const { currentUser } = useAuth()
       </RouterLink>
     </div>
 
-    <div>
+    <div class="hidden md:flex items-center gap-4">
       <div v-if="currentUser" class="flex items-center gap-4 group relative cursor-pointer">
         <button>
           <RouterLink to="/authPage" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose">
@@ -31,6 +32,9 @@ const { currentUser } = useAuth()
           Connexion
         </RouterLink>
       </div>
+    </div>
+    <div class="md:hidden">
+      <MenuMobileTop />
     </div>
   </header>
 </template>

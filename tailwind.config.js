@@ -7,7 +7,7 @@ export default {
         Bleu: '#7a89da',
         Rose: '#e0b1c5',
         Blanc: '#fffdf6',
-        'Bleu clair': '#b1d9e1',
+        'Bleu-clair': '#b1d9e1',
       },
       fontSize: {
         base: '1.125rem',
