@@ -9,8 +9,6 @@ const GoogleImage = await pb.collection('LogosAndImages').getFirstListItem('nom=
 </script>
 
 <template>
-  <div>
-    <div>
       <button
         @click="LogInWithGoogle"
         class="p-2 mb-5 bg-white text-Bleu border border-Rose rounded-md flex items-center gap-2 hover:bg-blue-100 text-sm"
@@ -23,7 +21,5 @@ const GoogleImage = await pb.collection('LogosAndImages').getFirstListItem('nom=
         />
         Se connecter avec Google
       </button>
-    </div>
-  </div>
 </template>
 
