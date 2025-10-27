@@ -11,7 +11,7 @@ import LogInOut from '@/components/LogInOut.vue'
 const { currentUser } = useAuth()
 const route = useRoute()
 const mode = ref<'login' | 'register'>('login')
-const ImageConnexion = await pb.collection('LogosAndImages').getOne('cc5yv63wbpagynl')
+const ImageConnexion = await pb.collection('LogosAndImages').getFirstListItem('nom="ImageConnexion"')
 
 watch(
   () => route.query.mode,

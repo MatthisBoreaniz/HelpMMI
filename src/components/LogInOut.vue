@@ -5,7 +5,7 @@ import { pb } from '@/backend';
 import ImgPb from '@/pages/ImgPb.vue';
 const { currentUser } = useAuth();
 
-const GoogleImage = await pb.collection('LogosAndImages').getOne('01swgp50ebfcxe8');
+const GoogleImage = await pb.collection('LogosAndImages').getFirstListItem('nom="GoogleLogo"');
 </script>
 
 
