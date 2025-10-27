@@ -11,7 +11,9 @@ import LogInOut from '@/components/LogInOut.vue'
 const { currentUser } = useAuth()
 const route = useRoute()
 const mode = ref<'login' | 'register'>('login')
-const ImageConnexion = await pb.collection('LogosAndImages').getFirstListItem('nom="ImageConnexion"')
+const ImageConnexion = await pb
+  .collection('LogosAndImages')
+  .getFirstListItem('nom="ImageConnexion"')
 
 watch(
   () => route.query.mode,
@@ -21,8 +23,6 @@ watch(
   },
   { immediate: true },
 )
-
-
 </script>
 
 <template>
@@ -34,34 +34,30 @@ watch(
         :record="ImageConnexion"
         :filename="ImageConnexion.image"
         class="object-cover w-full h-full md:rounded-r-2xl rounded-r-none"
-        
       />
 
       <div
         class="absolute inset-0 bg-gradient-to-tr from-Bleu to-Bleu mix-blend-multiply rounded-tr-2xl"
-    
       ></div>
     </div>
 
     <!-- Côté formulaire -->
     <div class="w-full md:w-3/5 flex flex-col justify-center items-center bg-white p-6 md:p-12">
       <div class="w-full max-w-md">
-        <div class ="mb-8">
+        <div class="mb-8">
           <h1 class="text-Bleu font-bold font-permanent-marker text-3xl">REJOINS HELPMMI</h1>
           <h2 class="text-Bleu font-permanent-agrandir text-xl">Et commence tes recherches</h2>
         </div>
-         <LogInOut class="my-10 flex justify-center items-center mx-auto" />
-
+        <LogInOut class="my-10 flex justify-center items-center mx-auto" />
+        <Transition name="fade-slide" mode="out-in">
           <div v-if="mode === 'login'" key="login" class="flex flex-col items-center">
             <LoginForm />
-            <div class=" mt-6 gap-2">
+            <div class="mt-6 gap-2">
               <button @click="mode = 'register'" class="text-Bleu">
                 Pas encore inscrit ? Crée un compte !
               </button>
             </div>
-             <RouterLink class="text-Bleu" to="/ForgotPassword">
-                Mot de passe oublié ?
-              </RouterLink>
+            <RouterLink class="text-Bleu" to="/ForgotPassword"> Mot de passe oublié ? </RouterLink>
           </div>
 
           <div v-else key="register" class="flex flex-col items-center">
@@ -70,7 +66,7 @@ watch(
               Tu as déjà un compte ? Connecte-toi !
             </button>
           </div>
-       
+        </Transition>
       </div>
     </div>
   </div>
