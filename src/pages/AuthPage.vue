@@ -22,15 +22,6 @@ watch(
   { immediate: true },
 )
 
-const checkGoogleOAuth = async () => {
-  const authMethods = await pb.collection('users').listAuthMethods();
-  if (!authMethods.oauth2?.providers.find(p => p.name === 'google')) {
-    console.error('Google OAuth2 provider not configured or detected');
-  } else {
-    console.log('Google OAuth2 provider is configured');
-  }
-};
-await checkGoogleOAuth();
 
 </script>
 

@@ -11,17 +11,17 @@ type UsersCreatePayload = UsersRecord & {
 const currentUser = ref<UsersResponse<{
   relAvatars: AvatarsResponse, 
   relFavoris: AidesResponse[]
-}> | null>(pb.authStore.record as UsersResponse<{
+}> | null>(pb.authStore.model as UsersResponse<{
   relAvatars: AvatarsResponse, 
   relFavoris: AidesResponse[],
 }> | null)
 
 async function refreshUser() {
-  if (!pb.authStore.record) return null
+  if (!pb.authStore.model) return null
   try {
     const user = await pb
       .collection<UsersResponse<{ relAvatars: AvatarsResponse, relFavoris: AidesResponse[] }>>('users')
-      .getOne(pb.authStore.record.id, {
+      .getOne(pb.authStore.model.id, {
         expand: "relAvatars, relFavoris",
       })
     currentUser.value = user 
