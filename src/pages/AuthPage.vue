@@ -33,7 +33,7 @@ watch(
         v-if="ImageConnexion"
         :record="ImageConnexion"
         :filename="ImageConnexion.image"
-        class="object-cover w-full h-full rounded-r-2xl"
+        class="object-cover w-full h-full md:rounded-r-2xl rounded-r-none"
         
       />
 
@@ -50,9 +50,9 @@ watch(
           <h1 class="text-Bleu font-bold font-permanent-marker text-3xl">REJOINS HELPMMI</h1>
           <h2 class="text-Bleu font-permanent-agrandir text-xl">Et commence tes recherches</h2>
         </div>
-        <Transition name="fade-slide" mode="out-in">
+         <LogInOut class="my-10 flex justify-center items-center mx-auto" />
+
           <div v-if="mode === 'login'" key="login" class="flex flex-col items-center">
-            <LogInOut />
             <LoginForm />
             <div class=" mt-6 gap-2">
               <button @click="mode = 'register'" class="text-Bleu">
@@ -65,13 +65,12 @@ watch(
           </div>
 
           <div v-else key="register" class="flex flex-col items-center">
-            <LogInOut />
             <RegisterForm />
             <button @click="mode = 'login'" class="mt-4 text-Bleu">
               Tu as déjà un compte ? Connecte-toi !
             </button>
           </div>
-        </Transition>
+       
       </div>
     </div>
   </div>
