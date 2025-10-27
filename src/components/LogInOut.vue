@@ -13,17 +13,17 @@ const GoogleImage = await pb.collection('LogosAndImages').getFirstListItem('nom=
     <div v-if="!currentUser">
       <button
         @click="LogInWithGoogle"
-        @touchstart.prevent="LogInWithGoogle"
         class="p-2 mb-5 bg-white text-Bleu border border-Rose rounded-md flex items-center gap-2 hover:bg-blue-100 text-sm"
       >
         <ImgPb
           v-if="GoogleImage"
           :record="GoogleImage"
           :filename="GoogleImage.image"
-          class="w-3 h-auto"
+          class="w-3 h-auto pointer-events-none"
         />
-        Se connecter avec google
+        Se connecter avec Google
       </button>
     </div>
   </div>
 </template>
+
