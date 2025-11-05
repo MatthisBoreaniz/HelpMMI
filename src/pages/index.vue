@@ -6,6 +6,7 @@ import useAuth from '@/composables/useAuth'
 import type { AidesResponse } from '@/pocketbase-types'
 import { onMounted, ref } from 'vue'
 import { pb } from '@/backend'
+import AideFinder from '@/components/aideFinder.vue'
 
 const { currentUser } = useAuth()
 
@@ -44,5 +45,7 @@ onMounted(async () => {
     <h2 class="mt-8 text-2xl font-bold">Toutes les aides :</h2>
     <CardAides :aides="aides" />
   </div>
+  <h2>FAQ</h2>
+  <AideFinder />
 
 </template>

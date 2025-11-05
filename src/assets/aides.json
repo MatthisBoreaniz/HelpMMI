@@ -1,0 +1,569 @@
+[
+  {
+    "id": "fin-doubs-urgence",
+    "categorie": "finance",
+    "question": "Que propose le Département du Doubs en cas d'urgence pour un mineur ?",
+    "reponse": "Le Département du Doubs propose un accueil d’urgence pour les mineurs en danger immédiat, sans évaluation préalable, pour une durée de 72 h à 5 jours.",
+    "tags": ["doubs", "urgence", "mineur", "danger", "accueil", "financière"]
+  },
+  {
+    "id": "logement-montbeliard-annonces",
+    "categorie": "logement",
+    "question": "Où trouver des annonces de logement à Montbéliard ?",
+    "reponse": "Le service Information Jeunesse de Montbéliard met à disposition des jeunes des annonces immobilières locales. Il propose aussi des conseils pratiques (budget, garanties, démarches).",
+    "tags": ["logement", "montbéliard", "annonces", "conseils", "budget", "financière"]
+  },
+  {
+    "id": "fin-permis",
+    "categorie": "finance",
+    "question": "Comment financer mon permis de conduire ?",
+    "reponse": "La Région Bourgogne-Franche-Comté propose une aide financière de 500 € pour le permis de conduire. Elle est destinée aux 15-25 ans (sous conditions) en contrepartie d'heures de bénévolat.",
+    "tags": ["permis", "conduire", "500€", "région bfc", "bénévolat", "financière"]
+  },
+  {
+    "id": "contact-france-travail",
+    "categorie": "contact",
+    "question": "Comment contacter France Travail (Pôle Emploi) ?",
+    "reponse": "Vous pouvez contacter France Travail (anciennement Pôle Emploi) par téléphone au 3949 pour toute question sur l'emploi, l'alternance ou les droits au chômage.",
+    "tags": ["france travail", "pôle emploi", "contact", "emploi", "chômage", "financière", "3949"]
+  },
+  {
+    "id": "contact-agefiph",
+    "categorie": "contact",
+    "question": "Je suis en situation de handicap, qui peut m'aider pour l'emploi ?",
+    "reponse": "L'Agefiph est l'organisme principal pour l'insertion professionnelle et le maintien dans l'emploi des personnes handicapées. Contactez-les pour connaître vos droits.",
+    "tags": ["agefiph", "handicap", "emploi", "financière", "insertion"]
+  },
+  {
+    "id": "contact-ministere-education",
+    "categorie": "contact",
+    "question": "Qui contacter au sujet des bourses de l'Éducation Nationale ?",
+    "reponse": "Pour les bourses relevant du secondaire (lycée) ou des questions non-universitaires, vous pouvez contacter le Ministère de l’éducation nationale.",
+    "tags": ["ministère", "éducation nationale", "bourse", "lycée", "financière"]
+  },
+  {
+    "id": "contact-crous-financier",
+    "categorie": "finance",
+    "question": "J'ai des difficultés financières, qui contacter en premier ?",
+    "reponse": "Le CROUS est votre interlocuteur principal. Il propose un accompagnement et des aides financières (ponctuelles ou annuelles) pour les étudiants en grave difficulté.",
+    "tags": ["crous", "financière", "difficulté", "aide", "bourse", "urgence"]
+  },
+  {
+    "id": "contact-action-logement",
+    "categorie": "logement",
+    "question": "Qu'est-ce qu'Action Logement ?",
+    "reponse": "Action Logement est un organisme clé pour les étudiants (surtout alternants et boursiers). Il propose des aides comme la Garantie Visale (garant), l'Avance Loca Pass (caution) et Mobili-jeunes (aide au loyer).",
+    "tags": ["action logement", "logement", "visale", "loca pass", "mobili-jeunes", "financière", "garant"]
+  },
+  {
+    "id": "contact-caf",
+    "categorie": "finance",
+    "question": "Qu'est-ce que la CAF (Allocations familiales) ?",
+    "reponse": "La Caisse d'Allocations familiales (CAF) est essentielle. Elle verse des aides comme l'APL (pour le logement) ou la Prime d'activité (si vous travaillez).",
+    "tags": ["caf", "allocations familiales", "apl", "prime activité", "logement", "financière"]
+  },
+  {
+    "id": "contact-fas-rr",
+    "categorie": "contact",
+    "question": "Qu'est-ce que le FAS-RR ?",
+    "reponse": "C'est le Fonds d'Action Sociale du Régime Rural. Si vous ou vos parents dépendez de ce régime (MSA par exemple), vous pourriez avoir droit à des aides spécifiques.",
+    "tags": ["fas-rr", "rural", "social", "financière", "msa"]
+  },
+  {
+    "id": "contact-erasmus",
+    "categorie": "international",
+    "question": "Je pars à l'étranger, qui contacter pour une bourse ?",
+    "reponse": "Le programme Erasmus+ est la principale source de bourses de mobilité pour les étudiants partant étudier ou faire un stage en Europe.",
+    "tags": ["erasmus", "international", "bourse", "mobilité", "financière", "étranger"]
+  },
+  {
+    "id": "contact-pays-apprentis",
+    "categorie": "finance",
+    "question": "Existe-t-il des aides spécifiques pour les apprentis ?",
+    "reponse": "Oui, de nombreuses aides existent. Renseignez-vous sur les dispositifs \"Pays apprentis\" de votre région ou département.",
+    "tags": ["apprentis", "alternance", "aide", "financière"]
+  },
+  {
+    "id": "materiel-pret-pc-scd",
+    "categorie": "materiel",
+    "question": "Où puis-je emprunter un ordinateur portable à l'université ?",
+    "reponse": "Vous pouvez emprunter un ordinateur portable pour vos études. Adressez-vous au Service Commun de Documentation (SCD) de l'Université de Franche-Comté (votre bibliothèque !).",
+    "tags": ["materiel", "pc", "ordinateur", "prêt", "emprunter", "scd", "ufc", "bibliothèque"]
+  },
+  {
+    "id": "materiel-emmaus-connect",
+    "categorie": "materiel",
+    "question": "J'ai besoin d'aide pour m'équiper en numérique (PC, téléphone).",
+    "reponse": "Pour lutter contre la fracture numérique, l'UFC (via le Bureau de la Vie Étudiante) a un partenariat avec Emmaüs Connect. Cela vous permet d'acheter du matériel informatique ou téléphonique à des prix solidaires.",
+    "tags": ["materiel", "pc", "ordinateur", "téléphone", "emmaüs connect", "bve", "ufc", "solidaire"]
+  },
+  {
+    "id": "materiel-pret-pc-composantes",
+    "categorie": "materiel",
+    "question": "Mon département (MMI, etc.) prête-t-il des ordinateurs ?",
+    "reponse": "Oui, en plus du SCD, les services informatiques de certaines composantes de l'UFC (comme votre département MMI) peuvent aussi proposer des prêts de PC.",
+    "tags": ["materiel", "pc", "ordinateur", "prêt", "emprunter", "ufc", "composantes", "mmi"]
+  },
+  {
+    "id": "intime-precarite-menstruelle-ufc",
+    "categorie": "intime",
+    "question": "Où trouver des protections périodiques gratuites à l'UFC ?",
+    "reponse": "Pour lutter contre la précarité menstruelle, l'Université de Franche-Comté installe des distributeurs de protections périodiques gratuites dans les composantes et les bibliothèques.",
+    "tags": ["intime", "précarité menstruelle", "règles", "protections", "gratuit", "ufc", "bu"]
+  },
+  {
+    "id": "intime-precarite-menstruelle-crous",
+    "categorie": "intime",
+    "question": "Y a-t-il des protections périodiques gratuites au CROUS ?",
+    "reponse": "Oui, le CROUS installe également des distributeurs de protections périodiques gratuites, notamment dans ses résidences étudiantes.",
+    "tags": ["intime", "précarité menstruelle", "règles", "protections", "gratuit", "crous", "résidence"]
+  },
+  {
+    "id": "intime-protections-lavables",
+    "categorie": "intime",
+    "question": "Existe-t-il une aide pour acheter des protections périodiques lavables ?",
+    "reponse": "Oui, si vous préférez les protections périodiques lavables (écologiques), SYBERT peut vous rembourser 50% de leur prix d'achat. L'aide est plafonnée à 50 euros maximum par an.",
+    "tags": ["intime", "précarité menstruelle", "règles", "lavable", "écologie", "sybert", "aide", "remboursement"]
+  },
+  {
+    "id": "alimentation-croix-rouge",
+    "categorie": "alimentation",
+    "question": "La Croix Rouge peut-elle m'aider pour la nourriture ou les vêtements ?",
+    "reponse": "Oui, la Croix Rouge est une organisation clé qui peut vous fournir une aide alimentaire (colis, repas) ainsi qu'une aide matérielle (vêtements, produits d'hygiène).",
+    "tags": ["alimentation", "materiel", "croix rouge", "nourriture", "vêtements", "hygiène"]
+  },
+  {
+    "id": "alimentation-crous",
+    "categorie": "alimentation",
+    "question": "Le CROUS propose-t-il une aide alimentaire (en plus du Resto'U) ?",
+    "reponse": "Oui. En plus des repas à tarif social dans les Resto'U, le CROUS propose des aides alimentaires spécifiques (comme des bons d'achat) pour les étudiants en grande difficulté.",
+    "tags": ["alimentation", "crous", "nourriture", "repas", "social", "difficulté", "resto u"]
+  },
+  {
+    "id": "alimentation-secours-catholique",
+    "categorie": "alimentation",
+    "question": "Où trouver des vêtements à bas prix ?",
+    "reponse": "Le Secours Catholique gère des 'vestiboutiques' ou des points de distribution de vêtements à des prix solidaires, voire gratuitement.",
+    "tags": ["alimentation", "vestimentaire", "secours catholique", "vêtements", "solidaire"]
+  },
+  {
+    "id": "alimentation-restos-du-coeur",
+    "categorie": "alimentation",
+    "question": "Que proposent les Restos du Cœur aux étudiants ?",
+    "reponse": "Les Restos du Cœur accueillent aussi les étudiants. Ils distribuent une aide alimentaire (colis) et parfois des vêtements, sous conditions de ressources.",
+    "tags": ["alimentation", "vestimentaire", "restos du coeur", "nourriture", "vêtements", "gratuit"]
+  },
+  {
+    "id": "alimentation-emmaus",
+    "categorie": "alimentation",
+    "question": "Que peut-on trouver chez Emmaüs ?",
+    "reponse": "Emmaüs est une boutique solidaire d’occasion. Vous pouvez y trouver des meubles, des vêtements, du matériel informatique ou de l'électroménager à très bas prix.",
+    "tags": ["alimentation", "materiel", "vestimentaire", "emmaüs", "occasion", "solidaire", "meubles"]
+  },
+  {
+    "id": "alimentation-ressourcerie",
+    "categorie": "alimentation",
+    "question": "Que peut-on trouver à La Ressourcerie ?",
+    "reponse": "Similaire à Emmaüs, La Ressourcerie est une boutique solidaire d'occasion où vous pouvez trouver des objets, meubles, vêtements et autres à bas prix.",
+    "tags": ["alimentation", "materiel", "vestimentaire", "la ressourcerie", "occasion", "solidaire", "meubles"]
+  },
+  {
+    "id": "alimentation-secours-populaire",
+    "categorie": "alimentation",
+    "question": "Que propose le Secours Populaire ?",
+    "reponse": "Le Secours Populaire propose une aide alimentaire (colis, libre-service solidaire) mais aussi des aides pour les vêtements, les vacances ou la culture.",
+    "tags": ["alimentation", "secours populaire", "nourriture", "vêtements", "culture"]
+  },
+  {
+    "id": "alimentation-friperie-60",
+    "categorie": "alimentation",
+    "question": "Où trouver une friperie à Montbéliard ?",
+    "reponse": "La Fripèrie 60, située à Montbéliard, est une boutique qui distribue des vêtements d'occasion à prix solidaires.",
+    "tags": ["alimentation", "vestimentaire", "friperie 60", "montbéliard", "vêtements", "solidaire", "occasion"]
+  },
+  {
+    "id": "logement-crous",
+    "categorie": "logement",
+    "question": "Comment trouver un logement étudiant (CROUS) ?",
+    "reponse": "Le CROUS est le principal fournisseur de logements étudiants (chambres en résidence). Pensez à faire votre Dossier Social Étudiant (DSE) tôt dans l'année. Ils proposent aussi des logements pour des séjours courts (stage, job d'été).",
+    "tags": ["logement", "hébergement", "crous", "chambre", "stage", "job", "dse", "résidence"]
+  },
+  {
+    "id": "logement-lokaviz",
+    "categorie": "logement",
+    "question": "Existe-t-il un site pour les logements étudiants chez les particuliers ?",
+    "reponse": "Oui, Lokaviz est la plateforme officielle du CROUS pour les offres d'hébergement (chambres, studios) chez des particuliers. C'est gratuit et sécurisé. Il existe aussi lacartedescolocs.fr pour les colocations.",
+    "tags": ["logement", "hébergement", "lokaviz", "colocation", "annonces", "particulier", "crous"]
+  },
+  {
+    "id": "logement-caf-apl",
+    "categorie": "logement",
+    "question": "Comment obtenir l'aide au logement (APL) ?",
+    "reponse": "L'Aide Personnalisée au Logement (APL) est une aide financière versée par la CAF. Vous devez faire la demande sur caf.fr dès que vous signez votre bail. Presque tous les étudiants y ont droit.",
+    "tags": ["logement", "hébergement", "caf", "apl", "aide", "financière", "loyer"]
+  },
+  {
+    "id": "logement-adil",
+    "categorie": "logement",
+    "question": "J'ai un problème avec mon propriétaire (bail, caution...), qui peut m'aider ?",
+    "reponse": "La Maison de l’Habitat du Doubs (ADIL) est un service gratuit. Ils offrent des conseils juridiques neutres sur tout ce qui concerne le logement : bail, état des lieux, caution, litiges avec le propriétaire.",
+    "tags": ["logement", "hébergement", "adil", "conseil", "bail", "propriétaire", "litige", "juridique", "caution"]
+  },
+  {
+    "id": "logement-dossier-facile",
+    "categorie": "logement",
+    "question": "Comment constituer un bon dossier de location ?",
+    "reponse": "Le service public et gratuit 'Dossier Facile' vous aide à constituer un dossier de location numérique, clair et sécurisé, que les propriétaires apprécient.",
+    "tags": ["logement", "hébergement", "dossier facile", "dossier", "location", "bail"]
+  },
+  {
+    "id": "logement-visale",
+    "categorie": "logement",
+    "question": "Je n'ai pas de garant pour mon logement, que faire ?",
+    "reponse": "La Garantie Visale d'Action Logement est la solution. C'est un service gratuit qui se porte garant pour vous. C'est ouvert aux étudiants boursiers, salariés, alternants et à de nombreux autres profils.",
+    "tags": ["logement", "hébergement", "action logement", "garantie visale", "garant", "caution", "gratuit"]
+  },
+  {
+    "id": "logement-loca-pass",
+    "categorie": "logement",
+    "question": "J'ai besoin d'une avance pour la caution (dépôt de garantie).",
+    "reponse": "L'Avance Loca Pass d'Action Logement est un prêt à taux 0. Ils vous avancent le montant du dépôt de garantie (la 'caution') et vous les remboursez petit à petit, sans intérêt.",
+    "tags": ["logement", "hébergement", "action logement", "avance loca pass", "caution", "dépôt de garantie", "prêt", "taux 0"]
+  },
+  {
+    "id": "logement-mobili-jeunes",
+    "categorie": "logement",
+    "question": "Je suis alternant, existe-t-il une aide au loyer ?",
+    "reponse": "Oui ! L'aide Mobili-jeunes d'Action Logement est faite pour vous. C'est une subvention (non remboursable) qui prend en charge une partie de votre loyer, pour les alternants et apprentis.",
+    "tags": ["logement", "hébergement", "action logement", "mobili jeunes", "loyer", "alternant", "apprentissage", "subvention"]
+  },
+  {
+    "id": "logement-fsl",
+    "categorie": "logement",
+    "question": "J'ai de grosses difficultés pour payer mon logement, que faire ?",
+    "reponse": "En cas de grosses difficultés (dettes de loyer, factures...), contactez le Fonds de Solidarité Logement (FSL). Il peut accorder des aides financières pour l'accès ou le maintien dans un logement.",
+    "tags": ["logement", "hébergement", "fsl", "fonds solidarité logement", "difficultés", "social", "dette", "facture"]
+  },
+  {
+    "id": "sante-ecoute-ufc",
+    "categorie": "sante",
+    "question": "Je suis en difficulté, j'ai besoin de parler à un autre étudiant.",
+    "reponse": "L'Université de Franche-Comté propose la 'Ligne Écoute-Info'. C'est une ligne où des étudiants formés vous écoutent, vous informent et vous orientent, en toute confidentialité.",
+    "tags": ["sante", "médicale", "ufc", "écoute", "info", "difficulté", "parler", "stress"]
+  },
+  {
+    "id": "sante-sse-ufc",
+    "categorie": "sante",
+    "question": "Où trouver une aide médicale ou psychologique à l'université ?",
+    "reponse": "Le Service de Santé Etudiant (SSE) de l'UFC est votre premier point de contact. Ils proposent des consultations (médecin, psychologue, infirmier) sur rendez-vous.",
+    "tags": ["sante", "médicale", "ufc", "sse", "médecin", "psychologue", "rendez-vous", "infirmier"]
+  },
+  {
+    "id": "sante-prevention-suicide",
+    "categorie": "sante",
+    "question": "J'ai des idées noires, qui appeler ?",
+    "reponse": "Ne restez pas seul. Appelez le 3114, le numéro national de prévention du suicide. Il est disponible 24/7 pour aider, informer et agir en prévention.",
+    "tags": ["sante", "médicale", "suicide", "prévention", "3114", "urgence", "parler", "détresse"]
+  },
+  {
+    "id": "sante-sse-internationaux",
+    "categorie": "sante",
+    "question": "Je suis étudiant international et j'ai des difficultés.",
+    "reponse": "Le SSE (Service de Santé Etudiant) de l'UFC organise 'Les rencontres Arbre à palabres'. C'est un groupe de discussion pour vous permettre d'échanger sur vos difficultés (culturelles, administratives, solitude...) pendant votre mobilité.",
+    "tags": ["sante", "médicale", "ufc", "sse", "international", "mobilité", "arbre à palabres", "solitude"]
+  },
+  {
+    "id": "sante-psy-etudiant",
+    "categorie": "sante",
+    "question": "Comment voir un psychologue gratuitement ?",
+    "reponse": "Grâce au Dispositif Santé Psy Etudiant du gouvernement, vous avez droit à 8 séances gratuites (sans aucune avance de frais) avec un psychologue partenaire. Parlez-en à votre médecin traitant ou au SSE pour obtenir une ordonnance.",
+    "tags": ["sante", "médicale", "psychologue", "gratuit", "santé psy étudiant", "séances", "8 séances", "remboursement"]
+  },
+  {
+    "id": "sante-urgences-psy",
+    "categorie": "sante",
+    "question": "Où aller en cas d'urgence psychiatrique ?",
+    "reponse": "En cas de crise grave, vous pouvez vous rendre aux Urgences psychiatriques du CHRU. Ils pourront évaluer la situation et proposer un rendez-vous ou une hospitalisation si nécessaire.",
+    "tags": ["sante", "médicale", "urgence", "psychiatrie", "chru", "psychologue", "crise"]
+  },
+  {
+    "id": "sante-bapu",
+    "categorie": "sante",
+    "question": "Qu'est-ce que le BAPU de Besançon ?",
+    "reponse": "Le BAPU (Bureau d’Aide Psychologique Universitaire) de Besançon est un lieu d'écoute psychologique spécifiquement destiné aux étudiants. Les consultations sont prises en charge.",
+    "tags": ["sante", "médicale", "bapu", "besançon", "psychologue", "écoute", "gratuit"]
+  },
+  {
+    "id": "sante-cmp",
+    "categorie": "sante",
+    "question": "Où obtenir un diagnostic psychologique ?",
+    "reponse": "Le Centre médico-psychologique (CMP) est un service public de santé mentale de secteur. Il propose des diagnostics, des soins psychologiques et un suivi gratuit.",
+    "tags": ["sante", "médicale", "cmp", "centre médico-psychologique", "diagnostic", "soin", "gratuit"]
+  },
+  {
+    "id": "sante-cegidd",
+    "categorie": "sante",
+    "question": "Où faire un dépistage MST/IST/VIH ?",
+    "reponse": "Le CEGIDD (Centre Gratuit d’Information, de Dépistage et de Diagnostic) est le lieu idéal. C'est gratuit, anonyme et ils s'occupent du dépistage de toutes les infections (VIH, IST, MST...).",
+    "tags": ["sante", "médicale", "cegidd", "dépistage", "ist", "mst", "vih", "sida", "gratuit", "anonyme"]
+  },
+  {
+    "id": "sante-apsytude",
+    "categorie": "sante",
+    "question": "Puis-je voir un psychologue en vidéo ?",
+    "reponse": "Oui, le CROUS BFC, en partenariat avec Apsytude, propose des rendez-vous gratuits en vidéo-consultation avec un psychologue. C'est confidentiel, bienveillant et sans jugement.",
+    "tags": ["sante", "médicale", "apsytude", "crous", "psychologue", "vidéo", "gratuit", "distance"]
+  },
+  {
+    "id": "sante-etucare",
+    "categorie": "sante",
+    "question": "Existe-t-il une app pour la santé mentale ?",
+    "reponse": "Oui, ETUCARE (proposé par IREPS BFC / ARS) est un programme numérique (application ou site web) conçu pour aider les étudiants à prendre soin de leur santé mentale via des modules et des conseils.",
+    "tags": ["sante", "médicale", "etucare", "ireps", "ars", "numérique", "application", "bien-être"]
+  },
+  {
+    "id": "sante-cgt-se",
+    "categorie": "sante",
+    "question": "Je suis étudiant salarié, qui peut m'aider ?",
+    "reponse": "La CGT-SE (Salarié Étudiant) est un syndicat qui peut vous offrir une aide, notamment juridique, si vous rencontrez des problèmes avec votre employeur.",
+    "tags": ["sante", "médicale", "cgt-se", "salarié", "emploi", "aide", "juridique", "syndicat"]
+  },
+  {
+    "id": "victimes-sos-ufc",
+    "categorie": "victimes",
+    "question": "Je suis victime ou témoin de violences/harcèlement à l'université.",
+    "reponse": "Utilisez le dispositif S.O.S Signalement/Orientation/Suivi de l'UFC. Il est fait pour accompagner les victimes et témoins de violences (sexuelles, sexistes, discrimination, harcèlement) au sein de l’université. C'est confidentiel.",
+    "tags": ["victimes", "ufc", "sos", "signalement", "violence", "vss", "harcèlement", "discrimination", "témoin"]
+  },
+  {
+    "id": "victimes-france-victimes",
+    "categorie": "victimes",
+    "question": "Qui contacter en cas de violences en dehors de l'université ?",
+    "reponse": "L'association France Victimes (antenne de Besançon Nord Franche-Comté) offre une aide globale (juridique, psychologique, sociale) à toute personne victime d'une infraction.",
+    "tags": ["victimes", "france victimes", "besançon", "aide", "juridique", "psychologique"]
+  },
+  {
+    "id": "victimes-solidarite-femmes",
+    "categorie": "victimes",
+    "question": "Je suis une femme victime de violences, qui contacter à Montbéliard ?",
+    "reponse": "L'association Solidarité femmes a une antenne à Besançon/Montbéliard. Elle propose un accueil, une écoute, un accompagnement et un suivi pour les femmes victimes de violences.",
+    "tags": ["victimes", "femmes", "solidarité femmes", "besançon", "montbéliard", "violence", "vss"]
+  },
+  {
+    "id": "victimes-cidff",
+    "categorie": "victimes",
+    "question": "Où trouver des informations juridiques sur les violences sexistes ?",
+    "reponse": "Le CIDFF (Centre d’information sur les droits des femmes et des familles) est spécialisé. Il fournit des informations juridiques gratuites et lutte contre les violences sexistes et sexuelles.",
+    "tags": ["victimes", "cidff", "juridique", "droit", "femmes", "familles", "violence", "vss", "gratuit"]
+  },
+  {
+    "id": "victimes-clasches",
+    "categorie": "victimes",
+    "question": "Qui lutte contre le harcèlement sexuel dans l'enseignement supérieur ?",
+    "reponse": "Le collectif CLASCHES (Collectif de lutte contre le harcèlement sexuel dans l’enseignement supérieur) est une association qui fournit des informations juridiques et milite sur ce sujet précis.",
+    "tags": ["victimes", "clasches", "harcèlement sexuel", "enseignement supérieur", "université", "juridique", "vss"]
+  },
+  {
+    "id": "victimes-mouvement-du-nid",
+    "categorie": "victimes",
+    "question": "Qui accompagne les personnes en situation de prostitution ?",
+    "reponse": "Le Mouvement du Nid, qui a une délégation dans le Doubs, est une association qui accompagne les personnes en situation de prostitution et milite pour son abolition.",
+    "tags": ["victimes", "mouvement du nid", "prostitution", "doubs", "accompagnement"]
+  },
+  {
+    "id": "victimes-sos-homophobie",
+    "categorie": "victimes",
+    "question": "Je suis victime d'homophobie, qui contacter ?",
+    "reponse": "L'association nationale SOS homophobie dispose d'une ligne d'écoute et de soutien pour les victimes d'actes ou de discriminations LGBTQIAphobes.",
+    "tags": ["victimes", "sos homophobie", "lgbtqia+", "lgbt", "homophobie", "soutien", "discrimination"]
+  },
+  {
+    "id": "victimes-nouvel-esprit",
+    "categorie": "victimes",
+    "question": "Existe-t-il une association LGBTQIA+ à Besançon ?",
+    "reponse": "Oui, l'Association Nouvel Esprit est une association locale (bisontine) LGBTQIA+ qui propose des temps d'accueil, de l'aide et du soutien.",
+    "tags": ["victimes", "nouvel esprit", "besançon", "lgbtqia+", "lgbt", "soutien", "association"]
+  },
+  {
+    "id": "finance-crous-bfc",
+    "categorie": "finance",
+    "question": "Le CROUS BFC peut-il m'aider financièrement ?",
+    "reponse": "Oui, le CROUS Bourgogne-Franche-Comté est votre principal allié. Il gère les bourses sur critères sociaux, mais aussi les aides spécifiques d'urgence (ponctuelles ou annuelles).",
+    "tags": ["finance", "crous bfc", "aide", "accompagnement", "bourse", "urgence"]
+  },
+  {
+    "id": "finance-cgt-salaries",
+    "categorie": "finance",
+    "question": "J'ai un problème avec mon job étudiant (contrat, salaire...).",
+    "reponse": "La CGT Salariés Etudiants est un syndicat qui peut vous offrir une aide juridique et des conseils si vous rencontrez des difficultés avec votre employeur (contrat non respecté, salaire non payé...).",
+    "tags": ["finance", "cgt", "salarié", "étudiant", "job", "emploi", "juridique", "conseil", "syndicat"]
+  },
+  {
+    "id": "finance-prime-activite",
+    "categorie": "finance",
+    "question": "Je suis étudiant salarié, ai-je droit à la Prime d'activité ?",
+    "reponse": "Très probablement ! Si vous êtes étudiant salarié ou apprenti et que vous gagnez plus qu'un certain seuil (environ 1070€ net/mois en 2024), vous pouvez demander la Prime d'activité. C'est un complément de revenu versé par la CAF. Faites une simulation sur caf.fr !",
+    "tags": ["finance", "caf", "prime activité", "salarié", "étudiant", "job", "revenu", "apprenti"]
+  },
+  {
+    "id": "finance-chomage",
+    "categorie": "finance",
+    "question": "Puis-je toucher le chômage en tant qu'étudiant ?",
+    "reponse": "C'est possible mais compliqué. En général, être étudiant n'est pas compatible avec le chômage (car vous n'êtes pas considéré comme 'disponible' pour un emploi). Cependant, si vous perdez un job étudiant que vous aviez en parallèle, vous pouvez avoir des droits. Contactez France Travail (3949) pour votre cas précis.",
+    "tags": ["finance", "pôle emploi", "france travail", "chômage", "droits", "salarié"]
+  },
+  {
+    "id": "finance-fonds-aide-jeunes",
+    "categorie": "finance",
+    "question": "Qu'est-ce que le Fonds départemental d’aide aux jeunes ?",
+    "reponse": "C'est une aide financière gérée par le Conseil départemental du Doubs. Elle est destinée aux jeunes (étudiants, apprentis, jeunes majeurs) en grande difficulté financière ou pour un projet d'insertion.",
+    "tags": ["finance", "doubs", "conseil départemental", "fonds aide jeunes", "apprentis", "difficulté"]
+  },
+  {
+    "id": "finance-micro-credit",
+    "categorie": "finance",
+    "question": "J'ai besoin d'un petit prêt sans frais.",
+    "reponse": "Certains établissements bancaires et sociaux (comme le Parcours Confiance de la Caisse d'Épargne ou des associations) proposent des micro-crédits étudiants à taux 0 %, sans frais de dossier et sans caution. Le remboursement est étalé (6 à 48 mois).",
+    "tags": ["finance", "prêt", "micro-crédit", "taux 0", "banque", "social", "caution"]
+  },
+  {
+    "id": "finance-crous-aide-specifique",
+    "categorie": "finance",
+    "question": "Je suis en grave difficulté financière, que peut faire le CROUS ?",
+    "reponse": "Contactez une assistante sociale du CROUS. Vous pouvez demander une aide spécifique : soit une 'aide ponctuelle' (si vous avez une dépense imprévue), soit une 'allocation annuelle' (si vos difficultés sont durables et graves).",
+    "tags": ["finance", "crous", "aide spécifique", "grave difficulté", "ponctuelle", "annuelle", "assistante sociale"]
+  },
+  {
+    "id": "finance-pret-garanti-etat",
+    "categorie": "finance",
+    "question": "Qu'est-ce que le Prêt garanti par l’État ?",
+    "reponse": "C'est un prêt étudiant (jusqu'à 20 000€) pour lequel l'État se porte garant. Il est ouvert aux étudiants de moins de 28 ans (français ou UE), sans conditions de ressources et sans caution d'un proche. Renseignez-vous auprès des banques partenaires.",
+    "tags": ["finance", "prêt", "garanti par l'état", "banque", "caution", "ressources", "20000€"]
+  },
+  {
+    "id": "bien-etre-sport-ordonnance",
+    "categorie": "bien-etre",
+    "question": "Peut-on faire du sport 'sur ordonnance' à l'UFC ?",
+    "reponse": "Oui, l'UFC (via Campus Sports) propose le 'sport sur ordonnance'. Si un médecin vous le prescrit pour des raisons de santé (stress, sédentarité...), vous pouvez suivre un programme adapté, parfois validé en UE libre.",
+    "tags": ["bien-etre", "ufc", "campus sports", "sport", "ordonnance", "ue libre", "santé"]
+  },
+  {
+    "id": "bien-etre-sport-video",
+    "categorie": "bien-etre",
+    "question": "Où trouver des vidéos de sport de l'UFC ?",
+    "reponse": "L'UFC (Campus Sports) a produit des capsules vidéo de séances de sport (fitness, relaxation...) que vous pouvez suivre de chez vous.",
+    "tags": ["bien-etre", "ufc", "campus sports", "sport", "vidéo", "capsules", "fitness", "relaxation"]
+  },
+  {
+    "id": "bien-etre-sport-midi",
+    "categorie": "bien-etre",
+    "question": "Puis-je faire du sport entre midi et deux à l'UFC ?",
+    "reponse": "Oui, Campus Sports organise de nombreuses séances et activités sportives sur la pause déjeuner (entre 12h00 et 14h00) pour s'adapter à votre emploi du temps.",
+    "tags": ["bien-etre", "ufc", "campus sports", "sport", "midi", "déjeuner"]
+  },
+  {
+    "id": "bien-etre-detente",
+    "categorie": "bien-etre",
+    "question": "Y a-t-il des ateliers bien-être ou détente à l'UFC ?",
+    "reponse": "Absolument. Campus Sports et d'autres services organisent des activités de détente et des ateliers bien-être, comme la 'Nuit du bien-être' ou les ateliers 'Zen’études' (sophrologie, yoga...) pendant les périodes d'examens.",
+    "tags": ["bien-etre", "ufc", "campus sports", "détente", "ateliers", "zen", "examens", "yoga", "sophrologie"]
+  },
+  {
+    "id": "bien-etre-ateliers-artistiques",
+    "categorie": "bien-etre",
+    "question": "Puis-je faire du théâtre ou du dessin à l'UFC ?",
+    "reponse": "Oui, le Service Sciences, Arts et Culture de l'UFC propose une variété d'ateliers artistiques (parfois en visio) : théâtre, dessin de presse, écriture, photographie, etc. C'est un bon moyen de décompresser.",
+    "tags": ["bien-etre", "ufc", "culture", "art", "théâtre", "dessin", "écriture", "visio", "photographie"]
+  },
+  {
+    "id": "pedagogie-salles-info",
+    "categorie": "pedagogie",
+    "question": "Les salles informatiques de l'UFC sont-elles ouvertes ?",
+    "reponse": "Oui, l'UFC (via les composantes comme MMI et les Bibliothèques Universitaires - BU) assure l'ouverture des salles informatiques pour que vous puissiez travailler sur les logiciels spécifiques.",
+    "tags": ["pedagogie", "ufc", "salles informatiques", "bu", "composantes", "mmi", "logiciels"]
+  },
+  {
+    "id": "pedagogie-tutorat",
+    "categorie": "pedagogie",
+    "question": "Je suis en difficulté dans mes cours, existe-t-il du tutorat ?",
+    "reponse": "Oui, c'est une aide précieuse. L'UFC propose le Tutorat d’Accompagnement Pédagogique. Ce sont souvent des étudiants plus âgés qui vous aident à comprendre les cours et à préparer les examens.",
+    "tags": ["pedagogie", "ufc", "tutorat", "accompagnement", "cours", "difficulté", "aide", "examens"]
+  },
+  {
+    "id": "pedagogie-ose-stage-emploi",
+    "categorie": "pedagogie",
+    "question": "Qui peut m'aider à chercher un stage ou un emploi ?",
+    "reponse": "Le service OSE (Service Orientation Stage Emploi) de l’UFC est là pour ça. Ils vous aident à trouver des offres, à rédiger vos CV/lettres de motivation, et organisent des ateliers (même à distance).",
+    "tags": ["pedagogie", "ose", "ufc", "stage", "emploi", "orientation", "ateliers", "cv", "lettre de motivation"]
+  },
+  {
+    "id": "entrepreneuriat-fsdie",
+    "categorie": "entrepreneuriat",
+    "question": "Qu'est-ce que le FSDIE ?",
+    "reponse": "Le FSDIE (Fonds de solidarité et de développement des initiatives étudiantes) est un fonds qui finance les projets étudiants. Si vous avez un projet associatif, culturel ou sportif pour le campus, vous pouvez demander une subvention.",
+    "tags": ["entrepreneuriat", "fsdie", "projet", "initiative", "financement", "subvention", "association"]
+  },
+  {
+    "id": "entrepreneuriat-culture-actions",
+    "categorie": "entrepreneuriat",
+    "question": "Qu'est-ce que le dispositif CULTURE ACTIONS / CVEC ?",
+    "reponse": "Financé par la CVEC (Contribution de Vie Étudiante et de Campus), le dispositif Culture Actions soutient et finance les projets étudiants dans les domaines de la culture, de la citoyenneté ou du sport.",
+    "tags": ["entrepreneuriat", "culture actions", "cvec", "projet", "culture", "financement", "sport", "citoyenneté"]
+  },
+  {
+    "id": "entrepreneuriat-budget-participatif",
+    "categorie": "entrepreneuriat",
+    "question": "Qu'est-ce que le BUDGET PARTICIPATIF ?",
+    "reponse": "C'est un fonds spécifique où les étudiants peuvent proposer des projets pour améliorer la vie de campus (ex: installer des bancs, une fontaine à eau...). Les projets sont ensuite soumis au vote de tous les étudiants.",
+    "tags": ["entrepreneuriat", "budget participatif", "projet", "campus", "financement", "vote"]
+  },
+  {
+    "id": "entrepreneuriat-clap",
+    "categorie": "entrepreneuriat",
+    "question": "Qu'est-ce que le CLAP ?",
+    "reponse": "Le CLAP (Comité Local d'Aide aux Projets) est un dispositif, souvent local (ville ou département), qui offre une aide (financière ou méthodologique) aux projets des jeunes (16-30 ans).",
+    "tags": ["entrepreneuriat", "clap", "projet", "aide", "jeunes", "local"]
+  },
+  {
+    "id": "entrepreneuriat-declics-jeunes",
+    "categorie": "entrepreneuriat",
+    "question": "Qu'est-ce que le CONCOURS DÉCLICS JEUNES ?",
+    "reponse": "C'est un concours de la Fondation de France. Il récompense (par une bourse) des jeunes de 18 à 30 ans qui sont porteurs de projets innovants, solidaires ou à impact social.",
+    "tags": ["entrepreneuriat", "concours déclics jeunes", "projet", "concours", "fondation de france", "bourse"]
+  },
+  {
+    "id": "entrepreneuriat-associations",
+    "categorie": "entrepreneuriat",
+    "question": "Qui peut m'aider à monter un projet (asso, etc.) ?",
+    "reponse": "De nombreuses structures peuvent vous aider : le service de la vie étudiante de l'UFC, les associations de votre campus, ou des structures d'accompagnement à la création d'entreprise ou d'association.",
+    "tags": ["entrepreneuriat", "projet", "association", "aide", "vie étudiante", "ufc"]
+  },
+  {
+    "id": "entrepreneuriat-region-humanitaire",
+    "categorie": "entrepreneuriat",
+    "question": "J'ai un projet humanitaire à l'étranger, puis-je avoir une aide ?",
+    "reponse": "Oui, la Région BFC propose une aide à la mobilité internationale pour les 18-30 ans qui réalisent un projet humanitaire à l'étranger au nom d'une association.",
+    "tags": ["entrepreneuriat", "région bfc", "humanitaire", "international", "mobilité", "projet", "association", "étranger"]
+  },
+  {
+    "id": "entrepreneuriat-region-creation-entreprise",
+    "categorie": "entrepreneuriat",
+    "question": "Je veux créer mon entreprise, existe-t-il une aide ?",
+    "reponse": "Oui, la Région BFC propose une prime à la création ou à la reprise d'une entreprise. Cette aide est souvent ciblée sur les quartiers prioritaires ou les zones rurales.",
+    "tags": ["entrepreneuriat", "région bfc", "création entreprise", "reprise", "prime", "aide", "statut étudiant-entrepreneur"]
+  },
+  {
+    "id": "entrepreneuriat-region-stage-etranger",
+    "categorie": "entrepreneuriat",
+    "question": "J'ai trouvé un stage à l'étranger, puis-je être aidé ?",
+    "reponse": "Oui, la Région BFC aide les jeunes diplômés et les demandeurs d'emploi (et parfois les étudiants via d'autres bourses comme Dynastage) à couvrir certains frais liés à un stage à l'étranger (transport, logement).",
+    "tags": ["entrepreneuriat", "région bfc", "stage", "étranger", "mobilité", "aide", "dynastage"]
+  },
+  {
+    "id": "finance-carte-avantage",
+    "categorie": "finance",
+    "question": "Existe-t-il une carte de réduction pour les étudiants à Montbéliard ?",
+    "reponse": "Oui, la 'Carte Avantage' (probablement celle de la ville ou de l'agglomération) coûte 10€ et offre de nombreux avantages et réductions chez les commerçants ou services de Montbéliard.",
+    "tags": ["finance", "carte avantage", "montbéliard", "réduction", "avantages", "commerçants"]
+  }
+]
