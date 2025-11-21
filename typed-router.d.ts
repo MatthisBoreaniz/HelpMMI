@@ -30,13 +30,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/about': RouteRecordInfo<
-      '/about',
-      '/about',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/AuthPage': RouteRecordInfo<
       '/AuthPage',
       '/AuthPage',
@@ -54,6 +47,13 @@ declare module 'vue-router/auto-routes' {
     '/ImgPb': RouteRecordInfo<
       '/ImgPb',
       '/ImgPb',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/MesAides': RouteRecordInfo<
+      '/MesAides',
+      '/MesAides',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -84,12 +84,6 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/about.vue': {
-      routes:
-        | '/about'
-      views:
-        | never
-    }
     'src/pages/AuthPage.vue': {
       routes:
         | '/AuthPage'
@@ -105,6 +99,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/ImgPb.vue': {
       routes:
         | '/ImgPb'
+      views:
+        | never
+    }
+    'src/pages/MesAides.vue': {
+      routes:
+        | '/MesAides'
       views:
         | never
     }

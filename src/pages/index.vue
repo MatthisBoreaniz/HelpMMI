@@ -3,22 +3,14 @@
 import CardAides from '@/components/CardAides.vue'
 import { RouterLink } from 'vue-router'
 import useAuth from '@/composables/useAuth'
-import type { AidesResponse } from '@/pocketbase-types'
-import { onMounted, ref } from 'vue'
 import { pb } from '@/backend'
 import AideFinder from '@/components/aideFinder.vue'
 
 const { currentUser } = useAuth()
 
-const aides = ref<AidesResponse[]>([])
+const aides = await pb.collection('Aides').getFullList()
 
-onMounted(async () => {
-  try {
-    aides.value = await pb.collection('Aides').getFullList()
-  } catch (err) {
-    console.error('Erreur récupération aides:', err)
-  }
-})
+
 </script>
 
 <template>
@@ -29,7 +21,7 @@ onMounted(async () => {
       features and sections of the app.
     </p>
   </section>
-  <RouterLink to="/about" class=""> Go to About Page </RouterLink>
+  <RouterLink to="/MesAides" class=""> Go to About Page </RouterLink>
   <RouterLink to="/authPage" class=""> Go to Connexion</RouterLink>
   <div class="mt-8">
     <div v-if="currentUser">

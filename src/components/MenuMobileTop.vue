@@ -41,7 +41,7 @@ const toggleMenu = () => {
           </RouterLink>
         </li>
         <li v-if="currentUser" @click="isOpen = false">
-          <RouterLink to="/about" class="flex items-center gap-2 font-bold hover:text-Bleu">
+          <RouterLink to="/MesAides" class="flex items-center gap-2 font-bold hover:text-Bleu">
             Mes Aides
           </RouterLink>
         </li>

@@ -1,28 +1,19 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref} from 'vue'
 import useAuth from '@/composables/useAuth'
 import LoginForm from '@/components/LogIn.vue'
 import RegisterForm from '@/components/Register.vue'
 import LoggedIn from '@/components/LoggedIn.vue'
-import { useRoute } from 'vue-router'
 import ImgPb from './ImgPb.vue'
 import { pb } from '@/backend'
 import LogInOut from '@/components/LogInOut.vue'
 const { currentUser } = useAuth()
-const route = useRoute()
 const mode = ref<'login' | 'register'>('login')
 const ImageConnexion = await pb
   .collection('LogosAndImages')
   .getFirstListItem('nom="ImageConnexion"')
 
-watch(
-  () => route.query.mode,
-  (newMode) => {
-    if (newMode === 'register') mode.value = 'register'
-    else mode.value = 'login'
-  },
-  { immediate: true },
-)
+
 </script>
 
 <template>

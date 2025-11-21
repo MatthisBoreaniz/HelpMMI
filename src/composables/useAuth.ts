@@ -18,19 +18,25 @@ const currentUser = ref<UsersResponse<{
 
 async function refreshUser() {
   if (!pb.authStore.model) return null
+
   try {
     const user = await pb
       .collection<UsersResponse<{ relAvatars: AvatarsResponse, relFavoris: AidesResponse[] }>>('users')
       .getOne(pb.authStore.model.id, {
         expand: "relAvatars, relFavoris",
       })
-    currentUser.value = user 
+
+    pb.authStore.save(pb.authStore.token, user)
+
+    currentUser.value = user
+
     return user
   } catch (e) {
     console.error('Erreur refreshUser:', e)
     return null
   }
 }
+
 
 pb.authStore.onChange(() => {
   if (pb.authStore.isValid) {

@@ -17,7 +17,7 @@ const { currentUser } = useAuth();
             </RouterLink>
           </li>
           <li v-if="currentUser" class="truncate">
-            <RouterLink to="/about" class="text-black font-agrandir hover:text-Blanc font-bold flex items-center gap-2">
+            <RouterLink to="/MesAides" class="text-black font-agrandir hover:text-Blanc font-bold flex items-center gap-2">
               <img src="@/assets/Icones/aides.png" alt="Mes Aides" class="w-5h-5 mr-2" />
               Mes Aides
             </RouterLink>

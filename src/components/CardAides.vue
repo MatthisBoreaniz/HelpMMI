@@ -9,13 +9,10 @@ defineProps<{ aides: AidesResponse[] }>()
 
 const { currentUser, refreshUser } = useAuth()
 
-// Computed pour récupérer les favoris complets
 const favoriteAides = computed(() => currentUser.value?.expand?.relFavoris ?? [])
 
-// Vérifie si une aide est favorite
 const isFavorite = (aideId: string) => favoriteAides.value.some(f => f.id === aideId)
 
-// Ajouter / retirer des favoris
 const toggleFavorite = async (aideId: string) => {
   if (!currentUser.value) return
 

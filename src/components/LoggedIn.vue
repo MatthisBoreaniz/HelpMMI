@@ -2,6 +2,7 @@
 import useAuth from '@/composables/useAuth'
 
 const { currentUser, logout } = useAuth()
+
 </script>
 
 <template>
