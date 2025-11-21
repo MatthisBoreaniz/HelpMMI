@@ -19,7 +19,9 @@ export default {
       },
       fontFamily: {
         'permanent-marker': 'Permanent Marker',
-        agrandir: ['Agrandir', 'sans-serif'],
+         agrandir: ['Agrandir', 'sans-serif'],
+        'agrandir-wide': ['"Agrandir Wide"', 'sans-serif'],
+        'agrandir-narrow': ['"Agrandir Narrow"', 'sans-serif'],
       },
       borderRadius: {
         'rounded-0': '0rem',

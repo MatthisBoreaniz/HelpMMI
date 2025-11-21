@@ -3,11 +3,76 @@
 @tailwind components;
 @tailwind utilities;
 
-/* --- Ajout de la font Agrandir --- */
+/* --- Agrandir - Regular (Normal) --- */
 @font-face {
-    font-family: 'Agrandir';
-    src: url('./assets/fonts/Agrandir-Regular.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Agrandir';
+  src: url('./assets/fonts/Agrandir-Regular.otf') format('opentype');
+  font-weight: 400; /* Normal */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Agrandir - Bold (Utilise le fichier TextBold) --- */
+@font-face {
+  font-family: 'Agrandir';
+  src: url('./assets/fonts/Agrandir-TextBold.otf') format('opentype');
+  font-weight: 700; /* Bold */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Agrandir - Light (Utilise le fichier GrandLight) --- */
+@font-face {
+  font-family: 'Agrandir';
+  src: url('./assets/fonts/Agrandir-GrandLight.otf') format('opentype');
+  font-weight: 300; /* Light */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Agrandir - Heavy (Utilise le fichier GrandHeavy) --- */
+@font-face {
+  font-family: 'Agrandir';
+  src: url('./assets/fonts/Agrandir-GrandHeavy.otf') format('opentype');
+  font-weight: 900; /* Black/Heavy */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Agrandir - Thin Italic --- */
+@font-face {
+  font-family: 'Agrandir';
+  src: url('./assets/fonts/Agrandir-ThinItalic.otf') format('opentype');
+  font-weight: 100; /* Thin */
+  font-style: italic;
+  font-display: swap;
+}
+
+/* --- VARIANTES LARGES ET ÉTROITES --- */
+/* Je recommande de créer des familles séparées pour éviter les conflits */
+
+/* Agrandir Wide */
+@font-face {
+  font-family: 'Agrandir Wide';
+  src: url('./assets/fonts/Agrandir-WideLight.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Agrandir Wide';
+  src: url('./assets/fonts/Agrandir-WideBlackItalic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Agrandir Narrow */
+@font-face {
+  font-family: 'Agrandir Narrow';
+  src: url('./assets/fonts/Agrandir-Narrow.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
