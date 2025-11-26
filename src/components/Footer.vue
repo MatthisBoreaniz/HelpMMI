@@ -1,6 +1,4 @@
 <!-- eslint-disable vue/multi-word-component-names -->
-<script lang="ts"></script>
-
 <template>
   <footer class="bg-[#7E8CE0] p-4 text-white font-agrandir">
     <div class="flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto">
@@ -102,7 +100,3 @@
     </div>
   </footer>
 </template>
-
-<script lang="ts">
-// Pas de logique nécessaire pour le moment
-</script>
