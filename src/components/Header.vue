@@ -11,7 +11,7 @@ const { currentUser } = useAuth()
   <header class="w-full p-4 flex justify-between items-center h-[10vh]">
     <div>
       <RouterLink to="/">
-        <img src="/src/assets/Img/helpMMi.png" alt="Logo HelpMMI" class="h-20 w-auto" />
+        <img src="/src/assets/Img/helpMMi.png" alt="Logo HelpMMI" class="h-16 w-auto" />
       </RouterLink>
     </div>
 

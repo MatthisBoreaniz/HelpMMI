@@ -30,7 +30,7 @@ const toggleChatBox = () => {
 </script>
 
 <template>
-  <!-- Chatbot Icon -->
+
   <img 
     @click="toggleChatBox" 
     class="w-16 h-16 fixed bottom-5 right-5 cursor-pointer hover:scale-110 transition-transform"
@@ -38,20 +38,16 @@ const toggleChatBox = () => {
     alt="Chatbot Icon"
   />
 
-  <!-- Chat Box -->
   <div 
     v-if="ChatBox" 
     class="fixed bottom-20 left-1/2 transform -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-5 w-full sm:w-96 bg-white border border-gray-300 rounded-lg shadow-lg"
   >
-    <!-- Chat Header -->
     <div class="flex items-center justify-between p-3 bg-Bleu text-white rounded-t-lg">
       <h3 class="text-lg font-semibold">Chat d'aide</h3>
       <button @click="toggleChatBox" class="text-white hover:text-gray-200">&times;</button>
     </div>
 
-    <!-- Chat Content -->
     <div class="flex flex-col h-[400px]">
-      <!-- Input Field -->
       <div class="p-3 border-b border-gray-300">
         <input 
           type="text"
@@ -61,7 +57,6 @@ const toggleChatBox = () => {
         />
       </div>
 
-      <!-- Results List -->
       <div class="flex-1 overflow-y-auto p-3">
         <ul v-if="filteredAides.length > 0" class="space-y-2">
           <li 

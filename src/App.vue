@@ -10,7 +10,7 @@ import Footer from './components/Footer.vue';
   <div class="" :class="['/authPage', '/ForgotPassword', '/ResetPassword'].includes($route.path) ? '' : 'flex'">
     <Menu class="hidden md:block" v-if="!['/authPage', '/ForgotPassword', '/ResetPassword'].includes($route.path)" />
 
-    <main>
+    <main class="font-agrandir">
       <RouterView v-slot="{ Component }">
         <Suspense>
           <component :is="Component" :key="$route.path" />

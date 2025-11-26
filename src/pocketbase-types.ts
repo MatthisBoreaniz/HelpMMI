@@ -8,6 +8,7 @@ import type { RecordService } from 'pocketbase'
 export enum Collections {
 	Aides = "Aides",
 	Avatars = "Avatars",
+	Categories = "Categories",
 	LogosAndImages = "LogosAndImages",
 	Users = "users",
 }
@@ -42,10 +43,15 @@ export type AuthSystemFields<T = unknown> = {
 export type AidesRecord = {
 	imageCard?: string
 	nom?: string
+	relCategories?: RecordIdString[]
 }
 
 export type AvatarsRecord = {
 	image?: string
+	nom?: string
+}
+
+export type CategoriesRecord = {
 	nom?: string
 }
 
@@ -63,6 +69,7 @@ export type UsersRecord = {
 // Response types include system fields and match responses from the PocketBase API
 export type AidesResponse<Texpand = unknown> = Required<AidesRecord> & BaseSystemFields<Texpand>
 export type AvatarsResponse<Texpand = unknown> = Required<AvatarsRecord> & BaseSystemFields<Texpand>
+export type CategoriesResponse<Texpand = unknown> = Required<CategoriesRecord> & BaseSystemFields<Texpand>
 export type LogosAndImagesResponse<Texpand = unknown> = Required<LogosAndImagesRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
@@ -71,6 +78,7 @@ export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSyste
 export type CollectionRecords = {
 	Aides: AidesRecord
 	Avatars: AvatarsRecord
+	Categories: CategoriesRecord
 	LogosAndImages: LogosAndImagesRecord
 	users: UsersRecord
 }
@@ -78,6 +86,7 @@ export type CollectionRecords = {
 export type CollectionResponses = {
 	Aides: AidesResponse
 	Avatars: AvatarsResponse
+	Categories: CategoriesResponse
 	LogosAndImages: LogosAndImagesResponse
 	users: UsersResponse
 }
@@ -88,6 +97,7 @@ export type CollectionResponses = {
 export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'Aides'): RecordService<AidesResponse>
 	collection(idOrName: 'Avatars'): RecordService<AvatarsResponse>
+	collection(idOrName: 'Categories'): RecordService<CategoriesResponse>
 	collection(idOrName: 'LogosAndImages'): RecordService<LogosAndImagesResponse>
 	collection(idOrName: 'users'): RecordService<UsersResponse>
 }
