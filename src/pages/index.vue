@@ -53,7 +53,7 @@ watch(searchQuery, () => {
 
 <template>
   <div class="p-6 pt-0">
-    <section class="rounded-2xl bg-Bleu text-Blanc p-6 m-4 ml-0">
+    <section class="rounded-2xl bg-Bleu text-Blanc lg:mr-4 my-4 p-6 ml-0">
       <div class="flex flex-col justify-center items-center text-center mb-6">
         <img
           src="/src/assets/Img/helpMMi.png"
