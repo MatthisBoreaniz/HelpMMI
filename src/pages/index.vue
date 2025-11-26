@@ -6,7 +6,7 @@ import { pb } from '@/backend'
 import AideFinder from '@/components/aideFinder.vue'
 import { ref, watch } from 'vue'
 import type { AidesResponse } from '@/pocketbase-types'
-import ImgPb from './ImgPb.vue'
+import TestFiltre from '@/components/testFiltre.vue'
 
 type Aide = AidesResponse
 
@@ -46,9 +46,9 @@ watch(searchQuery, () => {
   }, 300)
 })
 
-const aides = await pb.collection('Aides').getFullList(); 
 
-const Filtre = await pb.collection('LogosAndImages').getFirstListItem('nom="filtreIcone"')
+
+
 </script>
 
 <template>
@@ -140,31 +140,9 @@ const Filtre = await pb.collection('LogosAndImages').getFirstListItem('nom="filt
         </div>
       </div>
     </section>
-    <div class="flex gap-4">
-      <div class="border border-Bleu py-4 px-2 rounded-xl text-Bleu flex items-center gap-2">
-        <p>Filtres</p> 
-        <ImgPb
-          v-if="Filtre.image"
-          :record="Filtre"
-          :filename="Filtre.image"
-          class="w-6 h-6 object-cover"
-        />
-      </div>
-      <div class="border border-Bleu py-4 px-2 rounded-xl text-Bleu flex items-center gap-2">
-        <p>Catégories</p> 
-        <ImgPb
-          v-if="Filtre.image"
-          :record="Filtre"
-          :filename="Filtre.image"
-          class="w-6 h-6 object-cover"
-        />
-        
-      </div>
-    </div>
     <div>
-      <hr class="border-Bleu border-2 my-4" />
-      <CardAides :aides="aides" />
     </div>
     <AideFinder />
+    <TestFiltre/>
   </div>
 </template>

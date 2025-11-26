@@ -3,7 +3,7 @@ import type { AidesResponse } from '@/pocketbase-types'
 import useAuth from '@/composables/useAuth'
 import { computed } from 'vue'
 import { pb } from '@/backend';
-import ImgPb from '@/pages/ImgPb.vue';
+import ImgPb from '@/components/ImgPb.vue';
 
 defineProps<{ aides: AidesResponse[] }>()
 

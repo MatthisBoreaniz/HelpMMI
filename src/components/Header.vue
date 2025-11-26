@@ -26,7 +26,7 @@ const { currentUser } = useAuth()
       <div v-else class="cursor-pointer">
 
         <RouterLink
-          to="/authPage?mode=login"
+          to="/authPage"
           class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose"
         >
           Connexion

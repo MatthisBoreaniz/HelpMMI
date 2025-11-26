@@ -4,7 +4,7 @@ import useAuth from '@/composables/useAuth'
 import LoginForm from '@/components/LogIn.vue'
 import RegisterForm from '@/components/Register.vue'
 import LoggedIn from '@/components/LoggedIn.vue'
-import ImgPb from './ImgPb.vue'
+import ImgPb from '@/components/ImgPb.vue'
 import { pb } from '@/backend'
 import LogInOut from '@/components/LogInOut.vue'
 const { currentUser } = useAuth()

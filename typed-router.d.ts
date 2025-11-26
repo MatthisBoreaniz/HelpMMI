@@ -44,13 +44,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/ImgPb': RouteRecordInfo<
-      '/ImgPb',
-      '/ImgPb',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/MesAides': RouteRecordInfo<
       '/MesAides',
       '/MesAides',
@@ -93,12 +86,6 @@ declare module 'vue-router/auto-routes' {
     'src/pages/ForgotPassword.vue': {
       routes:
         | '/ForgotPassword'
-      views:
-        | never
-    }
-    'src/pages/ImgPb.vue': {
-      routes:
-        | '/ImgPb'
       views:
         | never
     }
