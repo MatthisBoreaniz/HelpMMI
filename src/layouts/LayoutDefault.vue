@@ -9,7 +9,7 @@ import Footer from '@/components/Footer.vue'
     <Header />
     <div class="flex flex-1">
       <Menu class="hidden md:block" />
-      <main class="flex-1">
+      <main class="flex-1 font-agrandir">
         <slot />
       </main>
     </div>
