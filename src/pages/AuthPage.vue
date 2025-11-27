@@ -17,7 +17,7 @@ const ImageConnexion = await pb
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row h-[90vh]" v-if="!currentUser">
+  <div class="flex flex-col md:flex-row h-[90vh] relative" v-if="!currentUser" >
     <!-- Côté image -->
     <div class="w-full md:w-2/5 relative h-64 md:h-auto">
       <ImgPb
