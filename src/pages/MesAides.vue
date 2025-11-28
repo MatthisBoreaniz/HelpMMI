@@ -17,7 +17,7 @@ await refreshUser()
 
 <template>
   <LayoutDefault>
-    <div class="ml-10">
+    <div class="p-10 pt-0">
       <div v-if="!currentUser" class="flex flex-col justify-center items-center w-full">
         <p class="text-center mt-10 text-Rose">
           Veuillez vous connecter pour voir vos aides et favoris.
@@ -30,7 +30,7 @@ await refreshUser()
       </div>
 
       <div v-else>
-        <ul class="flex gap-4 text-gray-300 text-xl">
+        <ul class="flex gap-4 text-gray-300 lg:text-base md:text-xl">
           <li
             @click="mode = 'aides'"
             class="cursor-pointer"
