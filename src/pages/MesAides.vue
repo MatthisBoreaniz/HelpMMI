@@ -12,7 +12,11 @@ const numberFavoris = computed(() => {
   return currentUser.value?.expand?.relFavoris?.length || 0
 })
 
+
+
 await refreshUser()
+
+
 </script>
 
 <template>
@@ -30,7 +34,7 @@ await refreshUser()
       </div>
 
       <div v-else>
-        <ul class="flex gap-4 text-gray-300 lg:text-base md:text-xl">
+        <ul class="flex gap-4 text-gray-300 text-base md:text-xl">
           <li
             @click="mode = 'aides'"
             class="cursor-pointer"

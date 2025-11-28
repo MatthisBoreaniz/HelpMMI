@@ -1,24 +1,30 @@
 <script setup lang="ts">
-import type { AidesResponse } from '@/pocketbase-types'
+import type { AidesResponse, CategoriesResponse } from '@/pocketbase-types'
 import useAuth from '@/composables/useAuth'
 import { computed } from 'vue'
 import { pb } from '@/backend'
 import ImgPb from '@/components/ImgPb.vue'
+import { RouterLink } from 'vue-router'
 
-defineProps<{ aides: AidesResponse[] }>()
+// On définit le type générique ici pour dire à TypeScript que "expand" contient "relCategories"
+// Assure-toi que le PARENT envoie bien ces données.
+defineProps<{
+  aides: AidesResponse<{ relCategories: CategoriesResponse,}>[]
+}>()
 
 const { currentUser, refreshUser } = useAuth()
 
+// ... (Le reste de ta logique favoris reste identique) ...
+
 const favoriteAides = computed(() => currentUser.value?.expand?.relFavoris ?? [])
 
-const isFavorite = (aideId: string) =>
-  favoriteAides.value.some(f => f.id === aideId)
+const isFavorite = (aideId: string) => favoriteAides.value.some((f) => f.id === aideId)
 
 const toggleFavorite = async (aideId: string) => {
   if (!currentUser.value) return
   const currentIds = currentUser.value.relFavoris ?? []
   const newIds = isFavorite(aideId)
-    ? currentIds.filter(id => id !== aideId)
+    ? currentIds.filter((id) => id !== aideId)
     : [...currentIds, aideId]
 
   try {
@@ -31,47 +37,72 @@ const toggleFavorite = async (aideId: string) => {
   }
 }
 
-const FavorisIconOff = await pb.collection('LogosAndImages').getFirstListItem(
-  `nom="FavOff"`
-);
+const FavorisIconOff = await pb.collection('LogosAndImages').getFirstListItem(`nom="FavOff"`)
+const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(`nom="FavOn"`)
 
-const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(
-  `nom="FavOn"`
-);
+// SUPPRIME LE FETCH 'aideCategorie' ICI, IL EST INUTILE
 </script>
 
 <template>
-  <div
-    v-for="aide in aides"
-    :key="aide.id"
-    class="bg-amber-200 rounded-2xl shadow p-4 flex flex-col items-center relative overflow-visible"
-  >
-    <h3 class="text-lg font-semibold mb-2">{{ aide.nom }}</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <RouterLink
+      v-for="aide in aides"
+      :key="aide.id"
+      :to="{ path: `/aides/${aide.id}` }"
+      class="group relative w-full aspect-[4/5] md:aspect-square overflow-hidden rounded-[2rem] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+    >
+      <ImgPb
+        v-if="aide.imageCard"
+        :record="aide"
+        :filename="aide.imageCard"
+        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+      />
+      <div v-else class="absolute inset-0 bg-gray-300 w-full h-full"></div>
 
-    <!-- Bouton favori -->
-    <div v-if="currentUser" class="absolute top-2 right-2 z-50">
-      <button @click="toggleFavorite(aide.id)" class="focus:outline-none">
-        <ImgPb
-          v-if="isFavorite(aide.id) && FavorisIconOn"
-          :record="FavorisIconOn"
-          :filename="FavorisIconOn.image"
-          class="w-6 h-6"
-        />
-        <ImgPb
-          v-else-if="!isFavorite(aide.id) && FavorisIconOff"
-          :record="FavorisIconOff"
-          :filename="FavorisIconOff.image"
-          class="w-6 h-6"
-        />
-      </button>
-    </div>
+      <div
+        class="absolute inset-0 transition-colors duration-300 mix-blend-multiply z-10"
+        :class="[aide.expand?.relCategories?.nom === 'test' ? 'bg-Rose/85' : 'bg-Bleu/85']"
+      ></div>
 
-    <!-- Image -->
-    <ImgPb
-      v-if="aide.imageCard"
-      :record="aide"
-      :filename="aide.imageCard"
-      class="w-full h-32 object-cover mb-4 rounded"
-    />
+      <div class="absolute inset-0 z-20 p-5 flex flex-col justify-between">
+        <div class="flex justify-end">
+          <button
+            v-if="currentUser"
+            @click.prevent="toggleFavorite(aide.id)"
+            class="focus:outline-none transform transition hover:scale-110 active:scale-95"
+          >
+            <ImgPb
+              v-if="isFavorite(aide.id) && FavorisIconOn"
+              :record="FavorisIconOn"
+              :filename="FavorisIconOn.image"
+              class="w-8 h-8 drop-shadow-md"
+            />
+            <ImgPb
+              v-else-if="!isFavorite(aide.id) && FavorisIconOff"
+              :record="FavorisIconOff"
+              :filename="FavorisIconOff.image"
+              class="w-8 h-8 drop-shadow-md opacity-80 hover:opacity-100"
+            />
+          </button>
+        </div>
+
+        <div class="flex-grow flex items-center justify-center">
+          <h3
+            class="text-white font-permanent-marker text-xl md:text-2xl text-center leading-tight drop-shadow-lg rotate-[-2deg]"
+          >
+            {{ aide.nom }}
+          </h3>
+        </div>
+
+        <div class="w-full">
+          <div
+            class="bg-[#FFFBF5] font-agrandir font-bold text-lg py-3 rounded-2xl text-center shadow-md group-hover:bg-white transition-colors"
+            :class="aide.expand?.relCategories?.nom === 'test' ? 'text-Rose' : 'text-Bleu'"
+          >
+            Découvrir
+          </div>
+        </div>
+      </div>
+    </RouterLink>
   </div>
 </template>

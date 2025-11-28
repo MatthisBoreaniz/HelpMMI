@@ -12,6 +12,9 @@ import useAuth from '@/composables/useAuth'
 
 type Aide = AidesResponse
 
+
+
+
 // --- Recherche ---
 const searchQuery = ref('')
 const lesAides = ref<Aide[]>([])

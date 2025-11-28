@@ -30,6 +30,20 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/aides/': RouteRecordInfo<
+      '/aides/',
+      '/aides',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/aides/[id]': RouteRecordInfo<
+      '/aides/[id]',
+      '/aides/:id',
+      { id: ParamValue<true> },
+      { id: ParamValue<false> },
+      | never
+    >,
     '/AuthPage': RouteRecordInfo<
       '/AuthPage',
       '/AuthPage',
@@ -74,6 +88,18 @@ declare module 'vue-router/auto-routes' {
     'src/pages/index.vue': {
       routes:
         | '/'
+      views:
+        | never
+    }
+    'src/pages/aides/index.vue': {
+      routes:
+        | '/aides/'
+      views:
+        | never
+    }
+    'src/pages/aides/[id].vue': {
+      routes:
+        | '/aides/[id]'
       views:
         | never
     }
