@@ -97,7 +97,7 @@ const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(`no
         <div class="w-full">
           <div
             class="bg-[#FFFBF5] font-agrandir font-bold text-lg py-3 rounded-2xl text-center shadow-md group-hover:bg-white transition-colors"
-            :class="aide.expand?.relCategories?.nom === 'test' ? 'text-Rose' : 'text-Bleu'"
+            :class="aide.expand?.relCategories?.nom == 'test' ? 'text-Rose' : 'text-Bleu'"
           >
             Découvrir
           </div>
