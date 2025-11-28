@@ -3,20 +3,26 @@
 import { ref, computed } from 'vue'
 import useAuth from '@/composables/useAuth'
 import CardAides from '@/components/CardAides.vue'
-const mode = ref<'aides' | 'favoris' | 'obtenues'>('aides')
+import { pb } from '@/backend'
 import LayoutDefault from '@/layouts/LayoutDefault.vue'
 
+const mode = ref<'aides' | 'favoris' | 'obtenues'>('aides')
 const { currentUser, refreshUser } = useAuth()
 
-const numberFavoris = computed(() => {
-  return currentUser.value?.expand?.relFavoris?.length || 0
-})
+const numberFavoris = computed(() => currentUser.value?.expand?.relFavoris?.length || 0)
 
+// On prépare les favoris enrichis avec relCategories
+const favorisEnrichis = ref<any[]>([])
 
+if (currentUser.value?.relFavoris?.length) {
+  const promises = currentUser.value.relFavoris.map(async (favId: string) => {
+    // Récupère l'aide complète avec la relation relCategories
+    return pb.collection('aides').getOne(favId, { expand: 'relCategories' })
+  })
+  favorisEnrichis.value = await Promise.all(promises)
+}
 
 await refreshUser()
-
-
 </script>
 
 <template>
@@ -63,10 +69,8 @@ await refreshUser()
               Retrouvez vos aides mises en favoris
             </h1>
             <div>
-              <CardAides
-                v-if="currentUser.expand?.relFavoris?.length"
-                :aides="(currentUser.expand?.relFavoris as any)"
-              />
+              <CardAides v-if="favorisEnrichis.length" :aides="favorisEnrichis" />
+
               <div v-else class="bg-none rounded-lg border border-Bleu">
                 <p class="p-4 text-center">Aucun favori pour le moment.</p>
               </div>

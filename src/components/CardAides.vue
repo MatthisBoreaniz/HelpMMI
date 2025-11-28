@@ -64,7 +64,8 @@ const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(`no
            :class="{
               'bg-Bleu-clair': aide.expand?.relCategories?.nom === 'finances',
               'bg-Rose/85': aide.expand?.relCategories?.nom === 'sante',
-              'bg-Bleu/85': aide.expand?.relCategories?.nom ===  'entrepreunariat'
+              'bg-Bleu/85': aide.expand?.relCategories?.nom ===  'entrepreunariat',
+              'bg-green-500/85': aide.expand?.relCategories?.nom ===  'test',
             }"
       ></div>
 
@@ -104,7 +105,8 @@ const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(`no
             :class="{
               'text-Bleu-clair': aide.expand?.relCategories?.nom === 'finances',
               'text-Rose': aide.expand?.relCategories?.nom === 'sante',
-              'text-Bleu': aide.expand?.relCategories?.nom ===  'entrepreunariat'
+              'text-Bleu': aide.expand?.relCategories?.nom ===  'entrepreunariat',
+              'text-green-500': aide.expand?.relCategories?.nom ===  'test'
             }"
           >
             Découvrir
