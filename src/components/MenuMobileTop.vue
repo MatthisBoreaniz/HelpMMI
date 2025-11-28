@@ -30,8 +30,9 @@ const toggleMenu = () => {
 
     <!-- Menu mobile -->
     <div
+      v-scroll-lock="isOpen"
       v-if="isOpen"
-      class="fixed inset-0 bg-Rose z-40 flex flex-col items-center justify-center transition-transform duration-300 h-screen"
+      class="fixed inset-0 bg-Rose z-40 flex flex-col items-center justify-center transition-transform duration-300 min-h-screen"
     >
       <img src="/src/assets//Img//helpMMi.png" alt="HelpMMI Logo" class="w-40 mb-8" />
       <ul class="flex flex-col items-center p-6 space-y-6 text-lg text-white">

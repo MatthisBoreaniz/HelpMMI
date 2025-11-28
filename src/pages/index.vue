@@ -128,18 +128,17 @@ watch(searchQuery, () => {
             >
               Aucune aide trouvée pour "{{ searchQuery }}"
             </p>
-            <div v-for="aide in lesAides" :key="aide.id">
+            <div v-for="aide in lesAides" :key="aide.id" class="z-10 mb-10" >
               <h3 class="font-permanent-marker text-xl text-Bleu mb-2 ml-2">
                 {{ aide.nom }}
               </h3>
-              <CardAides :aides="[aide]" />
+              <CardAides :aides="[aide]"  />
             </div>
           </div>
         </div>
       </section>
-      <div></div>
-      <AideFinder />
       <TestFiltre />
+      <AideFinder class="z-50" />
     </div>
   </LayoutDefault>
 </template>

@@ -31,7 +31,7 @@ const handleLogin = async () => {
 
     <button
       type="submit"
-      class="bg-Bleu w-1/2 flex justify-center items-center mx-auto text-white p-2 rounded-md hover:bg-Bleu transition duration-200 text-lg"
+      class="bg-Bleu text-white w-full sm:w-3/4 md:w-1/2 lg:w-2/3 mx-auto flex items-center justify-center px-4 py-3 sm:px-6 sm:py-3 rounded-xl hover:opacity-90 transition duration-200 text-sm md:text-base lg:text-lg focus:outline-none focus:ring-2 focus:ring-Bleu focus:ring-opacity-60"
     >
       Se connecter
     </button>
