@@ -61,7 +61,11 @@ const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(`no
 
       <div
         class="absolute inset-0 transition-colors duration-300 mix-blend-multiply z-10"
-        :class="[aide.expand?.relCategories?.nom === 'sante' ? 'bg-Rose/85' : 'bg-Bleu/85']"
+           :class="{
+              'bg-Bleu-clair': aide.expand?.relCategories?.nom === 'finances',
+              'bg-Rose/85': aide.expand?.relCategories?.nom === 'sante',
+              'bg-Bleu/85': aide.expand?.relCategories?.nom ===  'entrepreunariat'
+            }"
       ></div>
 
       <div class="absolute inset-0 z-20 p-5 flex flex-col justify-between">
@@ -102,7 +106,6 @@ const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(`no
               'text-Rose': aide.expand?.relCategories?.nom === 'sante',
               'text-Bleu': aide.expand?.relCategories?.nom ===  'entrepreunariat'
             }"
-          >
           >
             Découvrir
           </div>
