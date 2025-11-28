@@ -30,6 +30,14 @@ const toggleFavorite = async (aideId: string) => {
     console.error('Erreur gestion favoris:', err)
   }
 }
+
+const FavorisIconOff = await pb.collection('LogosAndImages').getFirstListItem(
+  `nom="FavOff"`
+);
+
+const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(
+  `nom="FavOn"`
+);
 </script>
 
 <template>
@@ -42,17 +50,19 @@ const toggleFavorite = async (aideId: string) => {
 
     <!-- Bouton favori -->
     <div v-if="currentUser" class="absolute top-2 right-2 z-50">
-      <button
-        @click="toggleFavorite(aide.id)"
-        class="p-4 bg-white/30 rounded-full hover:bg-white/50 active:scale-90 transition-transform duration-150"
-        style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;"
-      >
-        <span
-          :class="isFavorite(aide.id) ? 'text-red-500' : 'text-white'"
-          class="text-2xl select-none pointer-events-none"
-        >
-          ♥
-        </span>
+      <button @click="toggleFavorite(aide.id)" class="focus:outline-none">
+        <ImgPb
+          v-if="isFavorite(aide.id) && FavorisIconOn"
+          :record="FavorisIconOn"
+          :filename="FavorisIconOn.image"
+          class="w-6 h-6"
+        />
+        <ImgPb
+          v-else-if="!isFavorite(aide.id) && FavorisIconOff"
+          :record="FavorisIconOff"
+          :filename="FavorisIconOff.image"
+          class="w-6 h-6"
+        />
       </button>
     </div>
 
