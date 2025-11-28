@@ -65,7 +65,7 @@ await refreshUser()
             <div>
               <CardAides
                 v-if="currentUser.expand?.relFavoris?.length"
-                :aides="currentUser.expand.relFavoris"
+                :aides="(currentUser.expand?.relFavoris as any)"
               />
               <div v-else class="bg-none rounded-lg border border-Bleu">
                 <p class="p-4 text-center">Aucun favori pour le moment.</p>

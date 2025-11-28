@@ -190,7 +190,7 @@ const toggleFavorite = async (aideId: string) => {
                 {{ aide.nom }}
               </h3>
               <CardAides
-                :aides="[aide]"
+                :aides="[aide as any]"
                 :favoriteAides="favoriteAides"
                 :isFavorite="isFavorite"
                 :toggleFavorite="toggleFavorite"
