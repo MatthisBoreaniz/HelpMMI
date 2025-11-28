@@ -73,15 +73,15 @@
           <div class="space-y-4"> 
              <div>
                 <p class="font-bold">Numéro national de prévention du suicide</p>
-                <p class="text-lg font-bold">3114</p>
+                <p>3114</p>
              </div>
              <div>
                 <p class="font-bold">Violences faites aux femmes</p>
-                <p class="text-lg font-bold">3919</p>
+                <p>3919</p>
              </div>
              <div>
                 <p class="font-bold">Harcèlement / cyberharcèlement scolaire</p>
-                <p class="text-lg font-bold">3018</p>
+                <p>3018</p>
              </div>
              <div>
                 <p class="font-bold">Difficultés financières (étudiant)</p>
