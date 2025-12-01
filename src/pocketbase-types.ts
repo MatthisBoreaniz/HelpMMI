@@ -61,6 +61,11 @@ export type LogosAndImagesRecord = {
 }
 
 export type UsersRecord = {
+	Adress?: string
+	BirthDate?: IsoDateString
+	Formation?: string
+	Phone?: number
+	firstName?: string
 	name?: string
 	relAvatars?: RecordIdString[]
 	relFavoris?: RecordIdString[]

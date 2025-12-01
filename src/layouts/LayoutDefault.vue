@@ -3,6 +3,7 @@
 import Header from '@/components/Header.vue'
 import Menu from '@/components/Menu.vue'
 import Footer from '@/components/Footer.vue'
+import AideFinder from '@/components/aideFinder.vue';
 </script>
 <template>
   <div class="min-h-screen flex flex-col">
@@ -11,6 +12,7 @@ import Footer from '@/components/Footer.vue'
       <Menu class="hidden md:block" />
       <main class="flex-1 font-agrandir">
         <slot />
+        <AideFinder />
       </main>
     </div>
     <Footer />

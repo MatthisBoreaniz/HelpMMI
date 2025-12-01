@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { pb } from '@/backend'
 import CardAides from '@/components/CardAides.vue'
 import ImgPb from '@/components/ImgPb.vue'
@@ -48,6 +48,20 @@ const filtrerParCategorie = async (catId: string | null) => {
 // Icônes
 const FiltreIcon = await pb.collection('LogosAndImages').getFirstListItem('nom="filtreIcone"')
 const FiltreCross = await pb.collection('LogosAndImages').getFirstListItem('nom="crossFiltre"')
+
+const visibleCount = ref(3)
+
+const showMore = () => {
+  visibleCount.value += 3
+} 
+
+const showLess = () => {
+  visibleCount.value -= 3
+}
+
+const aidesAffichees = computed(() => {
+  return aides.value.slice(0, visibleCount.value)
+})
 </script>
 
 <template>
@@ -108,6 +122,24 @@ const FiltreCross = await pb.collection('LogosAndImages').getFirstListItem('nom=
     </div>
 
     <!-- Cartes Aides -->
-    <CardAides :aides="aides" />
+    <CardAides :aides="aidesAffichees" />
+
+    <!-- Boutons Voir Plus / Voir Moins -->
+    <div class="flex justify-center mt-6 space-x-4">
+      <button
+        v-if="visibleCount < aides.length"
+        @click="showMore"
+        class="bg-Bleu text-Blanc px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+      >
+        Voir Plus
+      </button>
+      <button
+        v-if="visibleCount > 3"
+        @click="showLess"
+        class="bg-Bleu text-Blanc px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+      >
+        Voir Moins
+      </button>
+    </div>
   </div>
 </template>

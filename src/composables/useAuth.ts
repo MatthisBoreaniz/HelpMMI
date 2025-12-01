@@ -80,8 +80,29 @@ function logout() {
   currentUser.value = null
 }
 
+async function DeleteUser() {
+  const user = pb.authStore.model
+
+  if (!user) {
+    console.error('Aucun user connecté, impossible de supprimer.')
+    return
+  }
+
+  try {
+    console.log('Tentative suppression ID :', user.id)
+    await pb.collection('users').delete(user.id)
+
+    pb.authStore.clear()
+    currentUser.value = null
+    console.log('Suppression OK')
+  } catch (error) {
+    console.error('Erreur lors de la suppression :', error)
+  }
+}
+
+
 const isLoggedIn = computed(() => !!pb.authStore.token)
 
 export default function useAuth() {
-  return { pb, currentUser, isLoggedIn, register, login, logout, refreshUser }
+  return { pb, currentUser, isLoggedIn, register, login, logout, refreshUser, DeleteUser }
 }

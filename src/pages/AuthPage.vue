@@ -8,6 +8,7 @@ import ImgPb from '@/components/ImgPb.vue'
 import { pb } from '@/backend'
 import LogInOut from '@/components/LogInOut.vue'
 import LayoutAuth from '@/layouts/LayoutAuth.vue'
+import LayoutDefault from '@/layouts/LayoutDefault.vue'
 const { currentUser } = useAuth()
 const mode = ref<'login' | 'register'>('login')
 const ImageConnexion = await pb
@@ -18,9 +19,14 @@ const ImageConnexion = await pb
 </script>
 
 <template>
-  <LayoutAuth>
-    <div class="flex flex-col md:flex-row min-h-screen md:h-[90vh]" v-if="!currentUser">
-      
+  <LayoutDefault v-if="currentUser">
+    <div>
+      <LoggedIn />
+    </div>
+  </LayoutDefault>
+
+  <LayoutAuth v-else>
+    <div class="flex flex-col md:flex-row min-h-screen md:h-[90vh]">
       <div class="w-full md:w-2/5 relative h-64 md:h-full shrink-0">
         <ImgPb
           v-if="ImageConnexion"
@@ -34,12 +40,14 @@ const ImageConnexion = await pb
       </div>
 
       <div class="w-full md:w-3/5 flex flex-col justify-center items-center bg-white p-6 md:p-12 h-auto md:h-full">
-        <div class="w-full max-w-md py-8 md:py-0"> <div class="mb-8 text-center md:text-left"> <h1 class="text-Bleu font-bold font-permanent-marker text-3xl">REJOINS HELPMMI</h1>
+        <div class="w-full max-w-md py-8 md:py-0">
+          <div class="mb-8 text-center md:text-left">
+            <h1 class="text-Bleu font-bold font-permanent-marker text-3xl">REJOINS HELPMMI</h1>
             <h2 class="text-Bleu font-permanent-agrandir text-xl mt-2">Et commence tes recherches</h2>
           </div>
-          
+
           <LogInOut class="my-8 flex justify-center items-center mx-auto" />
-          
+
           <Transition name="fade-slide" mode="out-in">
             <div v-if="mode === 'login'" key="login" class="flex flex-col items-center w-full">
               <LoginForm class="w-full" />
@@ -47,8 +55,8 @@ const ImageConnexion = await pb
                 <button @click="mode = 'register'" class="text-Bleu hover:underline">
                   Pas encore inscrit ? Crée un compte !
                 </button>
-                <RouterLink class="text-Bleu text-sm hover:underline" to="/ForgotPassword"> 
-                   Mot de passe oublié ? 
+                <RouterLink class="text-Bleu text-sm hover:underline" to="/ForgotPassword">
+                  Mot de passe oublié ?
                 </RouterLink>
               </div>
             </div>
@@ -60,13 +68,8 @@ const ImageConnexion = await pb
               </button>
             </div>
           </Transition>
-
         </div>
       </div>
-    </div>
-
-    <div v-if="currentUser" class="flex h-[calc(100vh-7rem)] justify-center items-center w-full">
-      <LoggedIn />
     </div>
   </LayoutAuth>
 </template>

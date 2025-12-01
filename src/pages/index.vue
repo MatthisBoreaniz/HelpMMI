@@ -79,7 +79,7 @@ const toggleFavorite = async (aideId: string) => {
   if (isFav) {
     favoriteAides.value = favoriteAides.value.filter(f => f.id !== aideId)
   } else {
-    favoriteAides.value.push({ id: aideId } as any)
+    favoriteAides.value.push({ id: aideId })
   }
 
   const newIds = isFav
@@ -104,7 +104,7 @@ const toggleFavorite = async (aideId: string) => {
     console.error('Erreur gestion favoris:', err)
     // rollback local
     favoriteAides.value = isFav
-      ? [...favoriteAides.value, { id: aideId } as any]
+      ? [...favoriteAides.value, { id: aideId }]
       : favoriteAides.value.filter(f => f.id !== aideId)
   }
 }
