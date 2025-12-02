@@ -1,35 +1,35 @@
 import { ref, computed } from 'vue'
 import { pb } from '@/backend'
-import type { UsersResponse, UsersRecord, AvatarsResponse, AidesResponse } from '@/pocketbase-types'
+import type { UsersResponse, AvatarsResponse, AidesResponse } from '@/pocketbase-types'
 
-type UsersCreatePayload = UsersRecord & {
+// --- Payload de création minimal ---
+type UsersCreatePayload = {
   email: string
   password: string
   passwordConfirm: string
+  username?: string
 }
 
+// --- Utilisateur courant avec expansions ---
 const currentUser = ref<UsersResponse<{
-  relAvatars: AvatarsResponse, 
+  relAvatars: AvatarsResponse
   relFavoris: AidesResponse[]
-}> | null>(pb.authStore.model as UsersResponse<{
-  relAvatars: AvatarsResponse, 
-  relFavoris: AidesResponse[],
-}> | null)
+}> | null>(null)
 
+// --- Rafraîchir le user loggé ---
 async function refreshUser() {
   if (!pb.authStore.model) return null
 
   try {
-    const user = await pb
-      .collection<UsersResponse<{ relAvatars: AvatarsResponse, relFavoris: AidesResponse[] }>>('users')
-      .getOne(pb.authStore.model.id, {
-        expand: "relAvatars, relFavoris",
-      })
+    const user = await pb.collection('users').getOne<UsersResponse<{
+      relAvatars: AvatarsResponse
+      relFavoris: AidesResponse[]
+    }>>(pb.authStore.model.id, {
+      expand: 'relAvatars, relFavoris',
+    })
 
     pb.authStore.save(pb.authStore.token, user)
-
     currentUser.value = user
-
     return user
   } catch (e) {
     console.error('Erreur refreshUser:', e)
@@ -37,27 +37,27 @@ async function refreshUser() {
   }
 }
 
-
+// --- Mise à jour automatique quand authStore change ---
 pb.authStore.onChange(() => {
-  if (pb.authStore.isValid) {
-    refreshUser()
-  } else {
-    currentUser.value = null
-  }
+  if (pb.authStore.isValid) refreshUser()
+  else currentUser.value = null
 })
 
-async function register(email: string, password: string, name: string) {
+async function register(email: string, password: string, username: string) {
   try {
-    const data: UsersCreatePayload = {
+    const data = {
+      username,
       email,
+      emailVisibility: true, // recommandé pour PB
       password,
       passwordConfirm: password,
-      name,
     }
 
     const record = await pb.collection('users').create(data)
+
     await pb.collection('users').authWithPassword(email, password)
     await refreshUser()
+
     return record
   } catch (err) {
     console.error('Erreur lors de l’inscription :', err)
@@ -65,6 +65,7 @@ async function register(email: string, password: string, name: string) {
   }
 }
 
+// --- Connexion ---
 async function login(email: string, password: string) {
   try {
     await pb.collection('users').authWithPassword(email, password)
@@ -75,11 +76,13 @@ async function login(email: string, password: string) {
   }
 }
 
+// --- Déconnexion ---
 function logout() {
   pb.authStore.clear()
   currentUser.value = null
 }
 
+// --- Suppression ---
 async function DeleteUser() {
   const user = pb.authStore.model
 
@@ -89,20 +92,25 @@ async function DeleteUser() {
   }
 
   try {
-    console.log('Tentative suppression ID :', user.id)
     await pb.collection('users').delete(user.id)
-
     pb.authStore.clear()
     currentUser.value = null
-    console.log('Suppression OK')
   } catch (error) {
     console.error('Erreur lors de la suppression :', error)
   }
 }
 
-
 const isLoggedIn = computed(() => !!pb.authStore.token)
 
 export default function useAuth() {
-  return { pb, currentUser, isLoggedIn, register, login, logout, refreshUser, DeleteUser }
+  return {
+    pb,
+    currentUser,
+    isLoggedIn,
+    register,
+    login,
+    logout,
+    refreshUser,
+    DeleteUser,
+  }
 }
