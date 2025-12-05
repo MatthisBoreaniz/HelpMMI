@@ -56,7 +56,17 @@ const showMore = () => {
 } 
 
 const showLess = () => {
-  visibleCount.value -= 3
+  visibleCount.value -= 3;
+  visibleCount.value -= 3;
+  if (visibleCount.value < 3) visibleCount.value = 3;
+
+  const el = document.getElementById('backScroll');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
 }
 
 const aidesAffichees = computed(() => {
@@ -67,7 +77,7 @@ const aidesAffichees = computed(() => {
 <template>
   <div class="relative">
     <!-- Dropdown Bouton -->
-    <div class="relative inline-block mb-6">
+    <div class="relative inline-block mb-6" id="backScroll">
       <button
         @click="toggleSelect"
         class="border border-Bleu py-3 px-4 rounded-xl text-Bleu flex items-center gap-3 hover:bg-Blanc hover:shadow-lg transition-all duration-300 focus:outline-none"

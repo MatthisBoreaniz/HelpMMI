@@ -6,15 +6,15 @@ import { pb } from '@/backend'
 import ImgPb from '@/components/ImgPb.vue'
 import { RouterLink } from 'vue-router'
 
-// On définit le type générique ici pour dire à TypeScript que "expand" contient "relCategories"
-// Assure-toi que le PARENT envoie bien ces données.
 defineProps<{
-  aides: AidesResponse<{ relCategories: CategoriesResponse,}>[]
+  aides: AidesResponse<{ relCategories: CategoriesResponse}>[]
+}>()
+
+const emit = defineEmits<{
+  (e: 'delete', id: string): void
 }>()
 
 const { currentUser, refreshUser } = useAuth()
-
-// ... (Le reste de ta logique favoris reste identique) ...
 
 const favoriteAides = computed(() => currentUser.value?.expand?.relFavoris ?? [])
 
@@ -23,7 +23,9 @@ const isFavorite = (aideId: string) => favoriteAides.value.some((f) => f.id === 
 const toggleFavorite = async (aideId: string) => {
   if (!currentUser.value) return
   const currentIds = currentUser.value.relFavoris ?? []
-  const newIds = isFavorite(aideId)
+  const removing = isFavorite(aideId)
+  
+  const newIds = removing
     ? currentIds.filter((id) => id !== aideId)
     : [...currentIds, aideId]
 
@@ -31,6 +33,11 @@ const toggleFavorite = async (aideId: string) => {
     await pb.collection('users').update(currentUser.value.id, {
       relFavoris: newIds,
     })
+
+    if (removing) {
+      emit('delete', aideId)
+    }
+
     await refreshUser()
   } catch (err) {
     console.error('Erreur gestion favoris:', err)
@@ -39,8 +46,6 @@ const toggleFavorite = async (aideId: string) => {
 
 const FavorisIconOff = await pb.collection('LogosAndImages').getFirstListItem(`nom="FavOff"`)
 const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(`nom="FavOn"`)
-
-// SUPPRIME LE FETCH 'aideCategorie' ICI, IL EST INUTILE
 </script>
 
 <template>
@@ -61,12 +66,12 @@ const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(`no
 
       <div
         class="absolute inset-0 transition-colors duration-300 mix-blend-multiply z-10"
-           :class="{
-              'bg-Bleu-clair': aide.expand?.relCategories?.nom === 'finances',
-              'bg-Rose/85': aide.expand?.relCategories?.nom === 'sante',
-              'bg-Bleu/85': aide.expand?.relCategories?.nom ===  'entrepreunariat',
-              'bg-green-500/85': aide.expand?.relCategories?.nom ===  'test',
-            }"
+        :class="{
+          'bg-Bleu-clair': aide.expand?.relCategories?.nom === 'finances',
+          'bg-Rose/85': aide.expand?.relCategories?.nom === 'sante',
+          'bg-Bleu/85': aide.expand?.relCategories?.nom === 'entrepreunariat',
+          'bg-green-500/85': aide.expand?.relCategories?.nom === 'test',
+        }"
       ></div>
 
       <div class="absolute inset-0 z-20 p-5 flex flex-col justify-between">
@@ -105,8 +110,8 @@ const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(`no
             :class="{
               'text-Bleu-clair': aide.expand?.relCategories?.nom === 'finances',
               'text-Rose': aide.expand?.relCategories?.nom === 'sante',
-              'text-Bleu': aide.expand?.relCategories?.nom ===  'entrepreunariat',
-              'text-green-500': aide.expand?.relCategories?.nom ===  'test'
+              'text-Bleu': aide.expand?.relCategories?.nom === 'entrepreunariat',
+              'text-green-500': aide.expand?.relCategories?.nom === 'test'
             }"
           >
             Découvrir

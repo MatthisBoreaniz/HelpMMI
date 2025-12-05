@@ -1,28 +1,34 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import useAuth from '@/composables/useAuth'
 import CardAides from '@/components/CardAides.vue'
 import { pb } from '@/backend'
 import LayoutDefault from '@/layouts/LayoutDefault.vue'
+import type { AidesResponse, CategoriesResponse } from '@/pocketbase-types'
+
+type AideFavorite = AidesResponse<{
+  relCategories: CategoriesResponse
+}>
 
 const mode = ref<'aides' | 'favoris' | 'obtenues'>('aides')
 const { currentUser, refreshUser } = useAuth()
+const favorisEnrichis = ref<AideFavorite[]>([])
 
 const numberFavoris = computed(() => currentUser.value?.expand?.relFavoris?.length || 0)
 
-// On prépare les favoris enrichis avec relCategories
-const favorisEnrichis = ref<any[]>([])
+await refreshUser()
 
 if (currentUser.value?.relFavoris?.length) {
-  const promises = currentUser.value.relFavoris.map(async (favId: string) => {
-    // Récupère l'aide complète avec la relation relCategories
-    return pb.collection('aides').getOne(favId, { expand: 'relCategories' })
-  })
+  const promises = currentUser.value.relFavoris.map((favId: string) => 
+    pb.collection('Aides').getOne<AideFavorite>(favId, { expand: 'relCategories' })
+  )
   favorisEnrichis.value = await Promise.all(promises)
 }
 
-await refreshUser()
+const handleLocalDelete = (idAide: string) => {
+  favorisEnrichis.value = favorisEnrichis.value.filter(aide => aide.id !== idAide)
+  refreshUser()
+}
 </script>
 
 <template>
@@ -35,8 +41,9 @@ await refreshUser()
         <a
           href="/authPage"
           class="block text-center p-4 bg-Bleu text-Blanc font-bold text-lg rounded-2xl"
-          >Aller à la page de connexion</a
         >
+          Aller à la page de connexion
+        </a>
       </div>
 
       <div v-else>
@@ -63,13 +70,18 @@ await refreshUser()
             Aides Obtenues
           </li>
         </ul>
+
         <div v-if="mode === 'favoris'">
-          <div v-if="currentUser" class="flex flex-col gap-6">
+          <div class="flex flex-col gap-6">
             <h1 class="font-bold text-lg font-agrandir-narrow mt-5">
               Retrouvez vos aides mises en favoris
             </h1>
             <div>
-              <CardAides v-if="favorisEnrichis.length" :aides="favorisEnrichis" />
+              <CardAides 
+                v-if="favorisEnrichis.length" 
+                :aides="favorisEnrichis" 
+                @delete="handleLocalDelete"
+              />
 
               <div v-else class="bg-none rounded-lg border border-Bleu">
                 <p class="p-4 text-center">Aucun favori pour le moment.</p>

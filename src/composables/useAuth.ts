@@ -2,53 +2,68 @@ import { ref, computed } from 'vue'
 import { pb } from '@/backend'
 import type { UsersResponse, AvatarsResponse, AidesResponse } from '@/pocketbase-types'
 
-// --- Payload de création minimal ---
-type UsersCreatePayload = {
-  email: string
-  password: string
-  passwordConfirm: string
-  username?: string
-}
-
-// --- Utilisateur courant avec expansions ---
-const currentUser = ref<UsersResponse<{
+// --- Types ---
+type UsersExpanded = UsersResponse<{
   relAvatars: AvatarsResponse
   relFavoris: AidesResponse[]
-}> | null>(null)
+}>
 
-// --- Rafraîchir le user loggé ---
+// --- Etat utilisateur ---
+const currentUser = ref<UsersExpanded | null>(null)
+
+// --- Locks pour éviter les bugs ---
+let isRefreshing = false
+let isLoggingOut = false
+
+// --- Refresh sécurisé ---
 async function refreshUser() {
   if (!pb.authStore.model) return null
 
-  try {
-    const user = await pb.collection('users').getOne<UsersResponse<{
-      relAvatars: AvatarsResponse
-      relFavoris: AidesResponse[]
-    }>>(pb.authStore.model.id, {
-      expand: 'relAvatars, relFavoris',
-    })
+  // Empêche plusieurs refresh simultanés
+  if (isRefreshing) return
+  isRefreshing = true
 
+  try {
+    const user = await pb
+      .collection('users')
+      .getOne<UsersExpanded>(pb.authStore.model.id, { expand: 'relAvatars, relFavoris' })
+
+    // Mette à jour l'authStore + user
     pb.authStore.save(pb.authStore.token, user)
     currentUser.value = user
+
     return user
   } catch (e) {
     console.error('Erreur refreshUser:', e)
     return null
+  } finally {
+    isRefreshing = false
   }
 }
 
-// --- Mise à jour automatique quand authStore change ---
+// --- Déclenchement auto lorsque authStore change ---
 pb.authStore.onChange(() => {
-  if (pb.authStore.isValid) refreshUser()
-  else currentUser.value = null
+  // Si logout en cours → on ne refresh PAS
+  if (isLoggingOut) {
+    isLoggingOut = false
+    return
+  }
+
+  // Refresh normal
+  if (pb.authStore.isValid) {
+    refreshUser()
+  } else {
+    currentUser.value = null
+  }
 })
 
+// --- Inscription ---
 async function register(email: string, password: string, username: string) {
   try {
     const data = {
       username,
       email,
-      emailVisibility: true, // recommandé pour PB
+      emailVisibility: true,
       password,
       passwordConfirm: password,
     }
@@ -60,7 +75,7 @@ async function register(email: string, password: string, username: string) {
 
     return record
   } catch (err) {
-    console.error('Erreur lors de l’inscription :', err)
+    console.error('Erreur inscription:', err)
     throw err
   }
 }
@@ -71,37 +86,51 @@ async function login(email: string, password: string) {
     await pb.collection('users').authWithPassword(email, password)
     await refreshUser()
   } catch (err) {
-    console.error('Erreur de connexion :', err)
+    console.error('Erreur connexion:', err)
     throw err
   }
 }
 
-// --- Déconnexion ---
+// --- Déconnexion stable ---
 function logout() {
+  isLoggingOut = true
   pb.authStore.clear()
   currentUser.value = null
 }
 
-// --- Suppression ---
+// --- Suppression du compte ---
 async function DeleteUser() {
   const user = pb.authStore.model
-
-  if (!user) {
-    console.error('Aucun user connecté, impossible de supprimer.')
-    return
-  }
+  if (!user) return
 
   try {
     await pb.collection('users').delete(user.id)
+    isLoggingOut = true
     pb.authStore.clear()
     currentUser.value = null
   } catch (error) {
-    console.error('Erreur lors de la suppression :', error)
+    console.error('Erreur suppression:', error)
+  }
+}
+
+// --- Mise à jour user ---
+async function updateUser(data: FormData | Record<string, any>) {
+  const user = pb.authStore.model
+  if (!user) return
+
+  try {
+    const updatedRecord = await pb.collection('users').update(user.id, data)
+    await refreshUser()
+    return updatedRecord
+  } catch (err) {
+    console.error('Erreur update profil:', err)
+    throw err
   }
 }
 
 const isLoggedIn = computed(() => !!pb.authStore.token)
 
+// --- Export composable ---
 export default function useAuth() {
   return {
     pb,
@@ -112,5 +141,6 @@ export default function useAuth() {
     logout,
     refreshUser,
     DeleteUser,
+    updateUser,
   }
 }
