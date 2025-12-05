@@ -232,7 +232,7 @@ const updatePassword = async () => {
       </div>
       <div class="border border-Bleu px-4 rounded-xl py-4 md:py-5 hover:bg-gray-50 cursor-pointer transition-colors">
         <RouterLink to="/legal/mentions">
-          <p class="text-sm md:text-base font-bold">CGU</p>
+          <p class="text-sm md:text-base font-bold">Mentions légales</p>
         </RouterLink>
       </div>
       
