@@ -9,6 +9,7 @@ export enum Collections {
 	Aides = "Aides",
 	Avatars = "Avatars",
 	Categories = "Categories",
+	Etapes = "Etapes",
 	LogosAndImages = "LogosAndImages",
 	Users = "users",
 }
@@ -55,6 +56,13 @@ export type CategoriesRecord = {
 	nom?: string
 }
 
+export type EtapesRecord = {
+	contenu?: HTMLString
+	ordre?: number
+	relAide?: RecordIdString[]
+	titre?: string
+}
+
 export type LogosAndImagesRecord = {
 	image?: string
 	nom?: string
@@ -75,6 +83,7 @@ export type UsersRecord = {
 export type AidesResponse<Texpand = unknown> = Required<AidesRecord> & BaseSystemFields<Texpand>
 export type AvatarsResponse<Texpand = unknown> = Required<AvatarsRecord> & BaseSystemFields<Texpand>
 export type CategoriesResponse<Texpand = unknown> = Required<CategoriesRecord> & BaseSystemFields<Texpand>
+export type EtapesResponse<Texpand = unknown> = Required<EtapesRecord> & BaseSystemFields<Texpand>
 export type LogosAndImagesResponse<Texpand = unknown> = Required<LogosAndImagesRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
@@ -84,6 +93,7 @@ export type CollectionRecords = {
 	Aides: AidesRecord
 	Avatars: AvatarsRecord
 	Categories: CategoriesRecord
+	Etapes: EtapesRecord
 	LogosAndImages: LogosAndImagesRecord
 	users: UsersRecord
 }
@@ -92,6 +102,7 @@ export type CollectionResponses = {
 	Aides: AidesResponse
 	Avatars: AvatarsResponse
 	Categories: CategoriesResponse
+	Etapes: EtapesResponse
 	LogosAndImages: LogosAndImagesResponse
 	users: UsersResponse
 }
@@ -103,6 +114,7 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'Aides'): RecordService<AidesResponse>
 	collection(idOrName: 'Avatars'): RecordService<AvatarsResponse>
 	collection(idOrName: 'Categories'): RecordService<CategoriesResponse>
+	collection(idOrName: 'Etapes'): RecordService<EtapesResponse>
 	collection(idOrName: 'LogosAndImages'): RecordService<LogosAndImagesResponse>
 	collection(idOrName: 'users'): RecordService<UsersResponse>
 }
