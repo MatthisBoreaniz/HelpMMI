@@ -58,6 +58,27 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/legal/cgu': RouteRecordInfo<
+      '/legal/cgu',
+      '/legal/cgu',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/legal/mentions': RouteRecordInfo<
+      '/legal/mentions',
+      '/legal/mentions',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/legal/privacy': RouteRecordInfo<
+      '/legal/privacy',
+      '/legal/privacy',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/MesAides': RouteRecordInfo<
       '/MesAides',
       '/MesAides',
@@ -112,6 +133,24 @@ declare module 'vue-router/auto-routes' {
     'src/pages/ForgotPassword.vue': {
       routes:
         | '/ForgotPassword'
+      views:
+        | never
+    }
+    'src/pages/legal/cgu.vue': {
+      routes:
+        | '/legal/cgu'
+      views:
+        | never
+    }
+    'src/pages/legal/mentions.vue': {
+      routes:
+        | '/legal/mentions'
+      views:
+        | never
+    }
+    'src/pages/legal/privacy.vue': {
+      routes:
+        | '/legal/privacy'
       views:
         | never
     }

@@ -28,7 +28,6 @@ const togglePasswordForm = () => {
   message.value = ''
 }
 
-// --- LOGIQUE D'ÉDITION GÉNÉRIQUE ---
 const showEditModal = ref(false)
 const currentField = ref('') 
 const currentLabel = ref('') 
@@ -222,12 +221,17 @@ const updatePassword = async () => {
 
     <div v-if="mode === 'parametres'" class="flex flex-col gap-3">
       <div class="border border-Bleu px-4 rounded-xl py-4 md:py-5 hover:bg-gray-50 cursor-pointer transition-colors">
-        <RouterLink to="privacy">
+        <RouterLink to="/legal/privacy">
           <p class="text-sm md:text-base font-bold">Politique de confidentialité</p>
         </RouterLink>
       </div>
       <div class="border border-Bleu px-4 rounded-xl py-4 md:py-5 hover:bg-gray-50 cursor-pointer transition-colors">
-        <RouterLink to="/cgu">
+        <RouterLink to="/legal/cgu">
+          <p class="text-sm md:text-base font-bold">CGU</p>
+        </RouterLink>
+      </div>
+      <div class="border border-Bleu px-4 rounded-xl py-4 md:py-5 hover:bg-gray-50 cursor-pointer transition-colors">
+        <RouterLink to="/legal/mentions">
           <p class="text-sm md:text-base font-bold">CGU</p>
         </RouterLink>
       </div>

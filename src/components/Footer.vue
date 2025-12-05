@@ -95,7 +95,11 @@
 
     <div class="mt-12 pt-4 text-center text-sm border-t border-white/20 lg:border-none">
       <p class="opacity-90">
-        Conditions d'utilisations &nbsp;|&nbsp; Politique de confidentialité
+        <RouterLink to="/legal/cgu" class="hover:underline">Conditions d'utilisations</RouterLink>
+        &nbsp;|&nbsp;
+        <RouterLink to="/legal/mentions" class="hover:underline">Mentions légales</RouterLink>
+        &nbsp;|&nbsp;
+        <RouterLink to="/legal/privacy" class="hover:underline">Politique de confidentialité</RouterLink>
       </p>
     </div>
   </footer>
