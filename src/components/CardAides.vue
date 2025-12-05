@@ -60,18 +60,21 @@ const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(`no
         v-if="aide.imageCard"
         :record="aide"
         :filename="aide.imageCard"
-        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 blur-sm"
       />
-      <div v-else class="absolute inset-0 bg-gray-300 w-full h-full"></div>
+      <div v-else class="absolute inset-0 bg-gray-400 w-full h-full"></div>
 
       <div
         class="absolute inset-0 transition-colors duration-300 mix-blend-multiply z-10"
         :class="{
           'bg-Bleu-clair': aide.expand?.relCategories?.nom === 'finances',
-          'bg-Rose/85': aide.expand?.relCategories?.nom === 'sante',
-          'bg-Bleu/85': aide.expand?.relCategories?.nom === 'entrepreunariat',
+          'bg-Rose': aide.expand?.relCategories?.nom === 'sante',
+          'bg-Bleu': aide.expand?.relCategories?.nom === 'entrepreunariat',
           'bg-green-500/85': aide.expand?.relCategories?.nom === 'test',
         }"
+      ></div>
+      <div
+        class="absolute inset-0 transition-colors duration-300 mix-blend-multiply z-5 bg-black/20"
       ></div>
 
       <div class="absolute inset-0 z-20 p-5 flex flex-col justify-between">
@@ -107,12 +110,6 @@ const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(`no
         <div class="w-full">
           <div
             class="bg-[#FFFBF5] font-agrandir font-bold text-lg py-3 rounded-2xl text-center shadow-md group-hover:bg-white transition-colors"
-            :class="{
-              'text-Bleu-clair': aide.expand?.relCategories?.nom === 'finances',
-              'text-Rose': aide.expand?.relCategories?.nom === 'sante',
-              'text-Bleu': aide.expand?.relCategories?.nom === 'entrepreunariat',
-              'text-green-500': aide.expand?.relCategories?.nom === 'test'
-            }"
           >
             Découvrir
           </div>
