@@ -249,7 +249,7 @@ const updatePassword = async () => {
 
   <div v-if="showDeletePopup" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
     <div class="bg-white p-6 rounded-2xl shadow-2xl flex flex-col items-center w-full max-w-sm text-center">
-      <h3 class="font-bold text-xl mb-2 text-Rose">Attention</h3>
+      <h3 class="font-bold text-xl mb-2 text-Rose/60">Attention</h3>
       <p class="mb-6 text-gray-600">Cette action est irréversible. Voulez-vous vraiment nous quitter ?</p>
       <div class="flex flex-col md:flex-row gap-3 w-full">
         <button @click="(DeleteUser(), toggleDeletePopup())" class="flex-1 bg-red-500 text-white px-4 py-3 rounded-xl hover:bg-red-600 font-bold transition-colors">
@@ -266,7 +266,7 @@ const updatePassword = async () => {
     <div class="bg-white p-6 rounded-2xl shadow-2xl flex flex-col gap-4 w-full max-w-md mx-4">
       <div class="flex justify-between items-center border-b pb-2">
          <h3 class="font-bold text-lg text-Bleu">Changer le mot de passe</h3>
-         <button @click="togglePasswordForm" class="text-Rose font-bold hover:bg-Rose/10 px-2 rounded transition-colors">Fermer</button>
+         <button @click="togglePasswordForm" class="text-Rose/60 font-bold hover:bg-Rose/10 px-2 rounded transition-colors">Fermer</button>
       </div>
       
       <div class="flex flex-col gap-3">
@@ -278,7 +278,7 @@ const updatePassword = async () => {
       <button @click="updatePassword" class="mt-2 bg-Bleu text-white px-4 py-3 rounded-xl font-bold hover:opacity-90 transition-opacity shadow-md">
         Valider
       </button>
-      <p v-if="message" class="text-Rose text-sm text-center font-bold animate-pulse">{{ message }}</p>
+      <p v-if="message" class="text-Bleu text-sm text-center font-bold animate-pulse">{{ message }}</p>
     </div>
   </div>
 
@@ -286,7 +286,7 @@ const updatePassword = async () => {
     <div class="bg-white p-6 rounded-2xl shadow-2xl flex flex-col gap-5 w-full max-w-md mx-4">
       <div class="flex justify-between items-center border-b pb-2">
         <h3 class="font-bold text-lg text-Bleu">Modifier : {{ currentLabel }}</h3>
-        <button @click="showEditModal = false" class="text-Rose font-bold hover:bg-Rose/10 px-2 rounded transition-colors">Fermer</button>
+        <button @click="showEditModal = false" class="text-Rose/60 font-bold hover:bg-Rose/10 px-2 rounded transition-colors">Fermer</button>
       </div>
 
       <div>
@@ -309,7 +309,7 @@ const updatePassword = async () => {
         Enregistrer
       </button>
 
-      <p v-if="message" class="text-Rose text-sm text-center font-bold">{{ message }}</p>
+      <p v-if="message" class="text-Rose/60 text-sm text-center font-bold">{{ message }}</p>
     </div>
   </div>
 </template>

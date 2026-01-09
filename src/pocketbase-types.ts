@@ -42,6 +42,10 @@ export type AuthSystemFields<T = unknown> = {
 // Record types for each collection
 
 export type AidesRecord = {
+	Astuce?: HTMLString
+	Contact?: HTMLString
+	Description?: HTMLString
+	Document?: HTMLString
 	imageCard?: string
 	nom?: string
 	relCategories?: RecordIdString[]

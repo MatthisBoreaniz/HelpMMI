@@ -179,28 +179,28 @@ const toggleFavorite = async (aideId: string) => {
 
           <div class="space-y-6">
             <p
-              v-if="lesAides.length === 0 && searchQuery"
+              v-if="!lesAides.length && searchQuery"
               class="text-center text-Bleu font-permanent-marker"
             >
               Aucune aide trouvée pour "{{ searchQuery }}"
             </p>
 
             <div v-for="aide in lesAides" :key="aide.id" class="z-10 mb-10">
-              <h3 class="font-permanent-marker text-xl text-Bleu mb-2 ml-2">
-                {{ aide.nom }}
-              </h3>
-              <CardAides
-                :aides="[aide as any]"
-                :favoriteAides="favoriteAides"
-                :isFavorite="isFavorite"
-                :toggleFavorite="toggleFavorite"
-              />
+              <RouterLink to ="`/aides/${aide.id}`">
+                <CardAides
+                  class="mb-10 "
+                  :aides="lesAides as any"
+                  :favoriteAides="favoriteAides"
+                  :isFavorite="isFavorite"
+                  :toggleFavorite="toggleFavorite"
+                />
+              </RouterLink>
             </div>
           </div>
         </div>
       </section>
 
-      <TestFiltre />
+      <TestFiltre/>
       <AideFinder class="z-50" />
     </div>
   </LayoutDefault>
