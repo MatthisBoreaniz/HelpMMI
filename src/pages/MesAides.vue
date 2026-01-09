@@ -5,12 +5,13 @@ import CardAides from '@/components/CardAides.vue'
 import { pb } from '@/backend'
 import LayoutDefault from '@/layouts/LayoutDefault.vue'
 import type { AidesResponse, CategoriesResponse } from '@/pocketbase-types'
+import TestFiltre from '@/components/testFiltre.vue'
 
 type AideFavorite = AidesResponse<{
   relCategories: CategoriesResponse
 }>
 
-const mode = ref<'aides' | 'favoris' | 'obtenues'>('aides')
+const mode = ref<'tout' | 'aides' | 'favoris' | 'obtenues'>('aides')
 const { currentUser, refreshUser } = useAuth()
 const favorisEnrichis = ref<AideFavorite[]>([])
 
@@ -19,14 +20,14 @@ const numberFavoris = computed(() => currentUser.value?.expand?.relFavoris?.leng
 await refreshUser()
 
 if (currentUser.value?.relFavoris?.length) {
-  const promises = currentUser.value.relFavoris.map((favId: string) => 
-    pb.collection('Aides').getOne<AideFavorite>(favId, { expand: 'relCategories' })
+  const promises = currentUser.value.relFavoris.map((favId: string) =>
+    pb.collection('Aides').getOne<AideFavorite>(favId, { expand: 'relCategories' }),
   )
   favorisEnrichis.value = await Promise.all(promises)
 }
 
 const handleLocalDelete = (idAide: string) => {
-  favorisEnrichis.value = favorisEnrichis.value.filter(aide => aide.id !== idAide)
+  favorisEnrichis.value = favorisEnrichis.value.filter((aide) => aide.id !== idAide)
   refreshUser()
 }
 </script>
@@ -47,29 +48,45 @@ const handleLocalDelete = (idAide: string) => {
       </div>
 
       <div v-else>
-        <ul class="flex gap-4 text-gray-300 text-base md:text-xl">
+        <!-- Desktop Navigation -->
+        <ul class="hidden md:flex flex-wrap gap-2 md:gap-4 text-gray-300 text-sm md:text-xl">
+          <li
+            @click="mode = 'tout'"
+            class="cursor-pointer px-2 md:px-0"
+            :class="{ 'text-Bleu font-bold': mode === 'tout' }"
+          >
+            Toutes les aides
+          </li>
           <li
             @click="mode = 'aides'"
-            class="cursor-pointer"
+            class="cursor-pointer px-2 md:px-0"
             :class="{ 'text-Bleu font-bold': mode === 'aides' }"
           >
             Mes aides
           </li>
           <li
             @click="mode = 'favoris'"
-            class="cursor-pointer"
+            class="cursor-pointer px-2 md:px-0"
             :class="{ 'text-Bleu font-bold': mode === 'favoris' }"
           >
             Mes favoris ({{ numberFavoris }})
           </li>
           <li
             @click="mode = 'obtenues'"
-            class="cursor-pointer"
+            class="cursor-pointer px-2 md:px-0"
             :class="{ 'text-Bleu font-bold': mode === 'obtenues' }"
           >
             Aides Obtenues
           </li>
         </ul>
+
+        <!-- Mobile Select -->
+        <select v-model="mode" class="md:hidden w-full p-2 rounded border border-Bleu text-gray-300">
+          <option value="tout">Toutes les aides</option>
+          <option value="aides">Mes aides</option>
+          <option value="favoris">Mes favoris ({{ numberFavoris }})</option>
+          <option value="obtenues">Aides Obtenues</option>
+        </select>
 
         <div v-if="mode === 'favoris'">
           <div class="flex flex-col gap-6">
@@ -77,9 +94,9 @@ const handleLocalDelete = (idAide: string) => {
               Retrouvez vos aides mises en favoris
             </h1>
             <div>
-              <CardAides 
-                v-if="favorisEnrichis.length" 
-                :aides="favorisEnrichis" 
+              <CardAides
+                v-if="favorisEnrichis.length"
+                :aides="favorisEnrichis"
                 @delete="handleLocalDelete"
               />
 
@@ -88,6 +105,9 @@ const handleLocalDelete = (idAide: string) => {
               </div>
             </div>
           </div>
+        </div>
+        <div v-if="mode === 'tout'">
+              <TestFiltre class="p-10 pt-0" />
         </div>
       </div>
     </div>
