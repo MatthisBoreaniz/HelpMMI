@@ -11,6 +11,7 @@ export enum Collections {
 	Categories = "Categories",
 	Etapes = "Etapes",
 	LogosAndImages = "LogosAndImages",
+	Questions = "Questions",
 	Users = "users",
 }
 
@@ -41,8 +42,9 @@ export type AuthSystemFields<T = unknown> = {
 
 // Record types for each collection
 
-export type AidesRecord = {
+export type AidesRecord<TConditions = unknown> = {
 	Astuce?: HTMLString
+	Conditions?: null | TConditions
 	Contact?: HTMLString
 	Description?: HTMLString
 	Document?: HTMLString
@@ -72,6 +74,16 @@ export type LogosAndImagesRecord = {
 	nom?: string
 }
 
+export enum QuestionsCategorieOptions {
+
+}
+export type QuestionsRecord<Toptions = unknown> = {
+	categorie?: string
+	options?: null | Toptions
+	question?: string
+	slug?: string
+}
+
 export type UsersRecord = {
 	Adress?: string
 	BirthDate?: IsoDateString
@@ -84,11 +96,12 @@ export type UsersRecord = {
 }
 
 // Response types include system fields and match responses from the PocketBase API
-export type AidesResponse<Texpand = unknown> = Required<AidesRecord> & BaseSystemFields<Texpand>
+export type AidesResponse<TConditions = unknown, Texpand = unknown> = Required<AidesRecord<TConditions>> & BaseSystemFields<Texpand>
 export type AvatarsResponse<Texpand = unknown> = Required<AvatarsRecord> & BaseSystemFields<Texpand>
 export type CategoriesResponse<Texpand = unknown> = Required<CategoriesRecord> & BaseSystemFields<Texpand>
 export type EtapesResponse<Texpand = unknown> = Required<EtapesRecord> & BaseSystemFields<Texpand>
 export type LogosAndImagesResponse<Texpand = unknown> = Required<LogosAndImagesRecord> & BaseSystemFields<Texpand>
+export type QuestionsResponse<Toptions = unknown, Texpand = unknown> = Required<QuestionsRecord<Toptions>> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
@@ -99,6 +112,7 @@ export type CollectionRecords = {
 	Categories: CategoriesRecord
 	Etapes: EtapesRecord
 	LogosAndImages: LogosAndImagesRecord
+	Questions: QuestionsRecord
 	users: UsersRecord
 }
 
@@ -108,6 +122,7 @@ export type CollectionResponses = {
 	Categories: CategoriesResponse
 	Etapes: EtapesResponse
 	LogosAndImages: LogosAndImagesResponse
+	Questions: QuestionsResponse
 	users: UsersResponse
 }
 
@@ -120,5 +135,6 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'Categories'): RecordService<CategoriesResponse>
 	collection(idOrName: 'Etapes'): RecordService<EtapesResponse>
 	collection(idOrName: 'LogosAndImages'): RecordService<LogosAndImagesResponse>
+	collection(idOrName: 'Questions'): RecordService<QuestionsResponse>
 	collection(idOrName: 'users'): RecordService<UsersResponse>
 }
