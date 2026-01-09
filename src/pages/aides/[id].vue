@@ -22,12 +22,13 @@ const aide = await pb
 const stepIcon = await pb.collection('LogosAndImages').getFirstListItem('nom="stepIcon"')
 const stepArrow = await pb.collection('LogosAndImages').getFirstListItem('nom="stepArrow"')
 </script>
+
 <template>
 <LayoutDefault>
-  <div class="space-y-6 p-4">
+  <div class="space-y-6 p-4 container mx-auto px-4">
 
     <!-- Card principale -->
-    <div class="relative w-full max-w-full mx-auto rounded-2xl shadow-md overflow-hidden bg-Bleu cursor-pointer hover:shadow-lg hover:scale-[1.01] transition-transform">
+    <div class="relative w-full rounded-2xl shadow-md overflow-hidden bg-Bleu cursor-pointer hover:shadow-lg hover:scale-[1.01] transition-transform">
       <div
         class="absolute inset-0 bg-Bleu/70 backdrop-blur-sm mix-blend-multiply transition-colors duration-300"
         :style="aide.imageCard ? {
@@ -44,28 +45,31 @@ const stepArrow = await pb.collection('LogosAndImages').getFirstListItem('nom="s
     </div>
 
     <!-- Découvrir -->
-    <section class="w-full max-w-full mx-auto space-y-2">
+    <section class="w-full space-y-2">
       <h2 class="inline-block bg-Bleu text-white font-permanent-marker text-lg rounded-2xl px-3 py-2">
         Découvrir
       </h2>
-      <div class="bg-white shadow-sm rounded-xl p-3 text-gray-600 text-sm break-words
-                  [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-lg [&_img]:mx-auto
-                  [&_iframe]:w-full [&_iframe]:aspect-video [&_a]:text-Bleu [&_a]:underline [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_*]:mb-4"
-           v-html="sanitizeHtml(aide.Description)">
+      <div class="overflow-x-auto">
+        <div class="max-w-full break-words [&_img]:max-w-full [&_img]:h-auto [&_img]:mx-auto [&_iframe]:w-full [&_iframe]:aspect-video [&_iframe]:block [&_table]:w-full [&_table]:table-auto p-3 bg-white shadow-sm rounded-xl text-gray-600 text-sm">
+          <div v-html="sanitizeHtml(aide.Description)"></div>
+        </div>
       </div>
     </section>
 
     <!-- Astuce -->
-    <section class="w-full max-w-full mx-auto space-y-2">
-      <div class="border-2 border-Bleu-clair border-dashed rounded-xl bg-white shadow-sm overflow-hidden p-3 text-gray-600 text-sm break-words
-                  [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-lg [&_img]:mx-auto
-                  [&_iframe]:w-full [&_iframe]:aspect-video [&_a]:text-Rose [&_a]:underline [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_*]:mb-4"
-           v-html="sanitizeHtml(aide.Astuce)">
+    <section class="w-full space-y-2">
+      <h2 class="inline-block bg-Bleu-clair text-white font-permanent-marker text-lg rounded-2xl px-3 py-2">
+        Astuce
+      </h2>
+      <div class="overflow-x-auto">
+        <div class="max-w-full break-words [&_img]:max-w-full [&_img]:h-auto [&_img]:mx-auto [&_iframe]:w-full [&_iframe]:aspect-video [&_iframe]:block [&_table]:w-full [&_table]:table-auto p-3 border-2 border-Bleu-clair border-dashed rounded-xl bg-white shadow-sm text-gray-600 text-sm">
+          <div v-html="sanitizeHtml(aide.Astuce)"></div>
+        </div>
       </div>
     </section>
 
     <!-- Étapes -->
-    <section class="w-full max-w-full mx-auto space-y-2">
+    <section class="w-full space-y-2">
       <h2 class="inline-block bg-Rose text-white font-permanent-marker text-lg rounded-2xl px-3 py-2">
         ÉTAPES À SUIVRE
       </h2>
@@ -90,41 +94,39 @@ const stepArrow = await pb.collection('LogosAndImages').getFirstListItem('nom="s
                    class="w-4 h-4 transform transition-transform duration-300 group-open:rotate-180" />
             </div>
           </summary>
-          <div class="p-3 text-gray-600 text-sm break-words w-full
-                      [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-lg [&_img]:mx-auto
-                      [&_iframe]:w-full [&_iframe]:aspect-video [&_a]:text-Rose [&_a]:underline [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_*]:mb-4">
-            <div v-html="sanitizeHtml(etape.contenu)"></div>
+          <div class="overflow-x-auto">
+            <div class="max-w-full break-words [&_img]:max-w-full [&_img]:h-auto [&_img]:mx-auto [&_iframe]:w-full [&_iframe]:aspect-video [&_iframe]:block [&_table]:w-full [&_table]:table-auto p-3 text-gray-600 text-sm">
+              <div v-html="sanitizeHtml(etape.contenu)"></div>
+            </div>
           </div>
         </details>
       </div>
     </section>
 
     <!-- Documents -->
-    <section class="w-full max-w-full mx-auto space-y-2">
+    <section class="w-full space-y-2">
       <h2 class="inline-block bg-Rose text-white font-permanent-marker text-lg rounded-2xl px-3 py-2">
         Documents
       </h2>
-      <div class="border-2 border-Rose rounded-xl bg-white shadow-sm overflow-hidden p-3 text-gray-600 text-sm break-words
-                  [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-lg [&_img]:mx-auto
-                  [&_iframe]:w-full [&_iframe]:aspect-video [&_a]:text-Rose [&_a]:underline [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_*]:mb-4"
-           v-html="sanitizeHtml(aide.Document)">
+      <div class="overflow-x-auto">
+        <div class="max-w-full break-words [&_img]:max-w-full [&_img]:h-auto [&_img]:mx-auto [&_iframe]:w-full [&_iframe]:aspect-video [&_iframe]:block [&_table]:w-full [&_table]:table-auto p-3 border-2 border-Rose rounded-xl bg-white shadow-sm text-gray-600 text-sm">
+          <div v-html="sanitizeHtml(aide.Document)"></div>
+        </div>
       </div>
     </section>
 
     <!-- Adresses et Contacts -->
-    <section class="w-full max-w-full mx-auto space-y-2">
+    <section class="w-full space-y-2">
       <h2 class="inline-block bg-Bleu text-white font-permanent-marker text-lg rounded-2xl px-3 py-2">
         Adresses et contacts
       </h2>
-      <div class="border-2 border-Bleu rounded-xl bg-white shadow-sm overflow-hidden p-3 text-gray-600 text-sm break-words
-                  [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-lg [&_img]:mx-auto
-                  [&_iframe]:w-full [&_iframe]:aspect-video [&_a]:text-Bleu [&_a]:underline [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_*]:mb-4"
-           v-html="sanitizeHtml(aide.Contact)">
+      <div class="overflow-x-auto">
+        <div class="max-w-full break-words [&_img]:max-w-full [&_img]:h-auto [&_img]:mx-auto [&_iframe]:w-full [&_iframe]:aspect-video [&_iframe]:block [&_table]:w-full [&_table]:table-auto p-3 border-2 border-Bleu rounded-xl bg-white shadow-sm text-gray-600 text-sm">
+          <div v-html="sanitizeHtml(aide.Contact)"></div>
+        </div>
       </div>
     </section>
 
   </div>
 </LayoutDefault>
-
-
 </template>
