@@ -57,7 +57,7 @@ const stepArrow = await pb.collection('LogosAndImages').getFirstListItem('nom="s
     </section>
 
     <!-- Astuce -->
-    <section class="w-full space-y-2">
+    <section v-if="aide.Astuce" class="w-full space-y-2">
       <h2 class="inline-block bg-Bleu-clair text-white font-permanent-marker text-lg rounded-2xl px-3 py-2">
         Astuce
       </h2>
