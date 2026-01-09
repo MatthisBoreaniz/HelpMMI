@@ -67,6 +67,7 @@ async function sendMessageToAI(question: string) {
       'Désolé, je n’ai pas compris ta question.'
 
     messages.value.push({ from: 'bot', text: answer })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     messages.value.push({
       from: 'bot',

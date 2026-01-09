@@ -1,3 +1,4 @@
+<!-- eslint-disable @typescript-eslint/no-explicit-any -->
 
 <script setup lang="ts">
 import useAuth from '@/composables/useAuth'
@@ -38,7 +39,7 @@ const openEditModal = (field: string, label: string, value: any) => {
   currentLabel.value = label
   
   if (field === 'BirthDate' && value) {
-    tempValue.value = new Date(value).toISOString().split('T')[0]
+    tempValue.value = new Date(value).toISOString().split('T')[0] || ''
   } else {
     tempValue.value = value || ''
   }
