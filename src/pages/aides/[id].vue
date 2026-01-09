@@ -25,7 +25,7 @@ const stepArrow = await pb.collection('LogosAndImages').getFirstListItem('nom="s
 
 <template>
 <LayoutDefault>
-  <div class="space-y-6 p-4 container mx-auto px-4">
+  <div class="space-y-6 p-4 mx-auto px-4">
 
     <!-- Card principale -->
     <div class="relative w-full rounded-2xl shadow-md overflow-hidden bg-Bleu cursor-pointer hover:shadow-lg hover:scale-[1.01] transition-transform">

@@ -8,7 +8,7 @@ import AideFinder from '@/components/aideFinder.vue';
 <template>
   <div class="min-h-screen flex flex-col">
     <Header />
-    <div class="flex flex-1">
+    <div class="lg:flex lg:flex-1 md:flex md:flex-1">
       <Menu class="hidden md:block" />
       <main class="flex-1 font-agrandir">
         <slot />
