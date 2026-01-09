@@ -21,10 +21,6 @@ const filteredAides = computed(() => {
   })
 })
 
-const clearSearch = () => {
-  searchTerm.value = ''
-}
-
 const ChatBox = ref(false)
 const toggleChatBox = () => {
   ChatBox.value = !ChatBox.value
