@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue' // <-- 1. Import de watch
+import { ref, computed, watch } from 'vue'
 import useAuth from '@/composables/useAuth'
 import CardAides from '@/components/CardAides.vue'
 import { pb } from '@/backend'
@@ -25,7 +25,7 @@ const aidesObtenuesEnrichies = ref<AideFavorite[]>([])
 // 1. Récupération initiale de l'utilisateur
 await refreshUser()
 
-// --- FONCTIONS DE CHARGEMENT RÉUTILISABLES ---
+// --- FONCTIONS DE CHARGEMENT ---
 
 // A. Charger les favoris
 const loadFavoris = async () => {
@@ -36,13 +36,15 @@ const loadFavoris = async () => {
       const result = await pb.collection('Aides').getFullList({
         filter: filterString,
         expand: 'relCategories',
+        requestKey: null // <--- LE FIX EST ICI (empêche l'annulation)
       })
       favorisEnrichis.value = result as unknown as AideFavorite[]
-    } catch (error) {
-      console.error("Erreur chargement favoris :", error)
+    } catch (error: any) {
+      // On ignore l'erreur si c'est juste une annulation (au cas où)
+      if (error.status !== 0) console.error("Erreur chargement favoris :", error)
     }
   } else {
-    favorisEnrichis.value = [] // Important : vider si plus de favoris
+    favorisEnrichis.value = [] 
   }
 }
 
@@ -55,11 +57,14 @@ const loadMesAides = async () => {
       const result = await pb.collection('Aides').getFullList({
         filter: filterString,
         expand: 'relCategories',
+        requestKey: null // <--- LE FIX EST ICI
       })
       mesAidesEnrichies.value = result as unknown as AideFavorite[]
-    } catch (error) {
-      console.error("Erreur chargement Mes Aides :", error)
+    } catch (error: any) {
+      if (error.status !== 0) console.error("Erreur chargement Mes Aides :", error)
     }
+  } else {
+     mesAidesEnrichies.value = []
   }
 }
 
@@ -72,10 +77,11 @@ const loadAidesObtenues = async () => {
       const result = await pb.collection('Aides').getFullList({
         filter: filterString,
         expand: 'relCategories',
+        requestKey: null // <--- LE FIX EST ICI
       })
       aidesObtenuesEnrichies.value = result as unknown as AideFavorite[]
-    } catch (error) {
-      console.error("Erreur chargement Aides Obtenues :", error)
+    } catch (error: any) {
+      if (error.status !== 0) console.error("Erreur chargement Aides Obtenues :", error)
     }
   } else {
     aidesObtenuesEnrichies.value = []
@@ -83,19 +89,19 @@ const loadAidesObtenues = async () => {
 }
 
 // --- INITIALISATION ---
-// On lance les chargements une première fois
+// On lance tout sans peur que ça s'annule
 await Promise.all([loadFavoris(), loadMesAides(), loadAidesObtenues()])
 
 
 // --- SURVEILLANCE (WATCHERS) ---
-// C'est ici que la magie opère : si currentUser change, on recharge les listes
-
-// 1. Si la liste des IDs favoris change, on recharge `favorisEnrichis`
 watch(() => currentUser.value?.relFavoris, async () => {
   await loadFavoris()
 }, { deep: true })
 
-// 2. Si la liste des aides obtenues change, on recharge `aidesObtenuesEnrichies`
+watch(() => currentUser.value?.mes_aides, async () => {
+  await loadMesAides()
+}, { deep: true })
+
 watch(() => currentUser.value?.aides_obtenues, async () => {
   await loadAidesObtenues()
 }, { deep: true })
@@ -103,17 +109,12 @@ watch(() => currentUser.value?.aides_obtenues, async () => {
 
 const numberFavoris = computed(() => currentUser.value?.relFavoris?.length || 0)
 
-// Fonction de suppression locale
+// Fonction de suppression locale (CORRIGÉE : ne vide que la liste concernée)
 const handleLocalDelete = async (idAide: string) => {
-  
-  // 1. On retire toujours l'aide de la liste locale des favoris
-  // (Car si on clique sur le cœur, ce n'est plus un favori)
+  // 1. Visuellement, on retire l'aide des favoris tout de suite
   favorisEnrichis.value = favorisEnrichis.value.filter((aide) => aide.id !== idAide)
-
-  // ⚠️ 2. IMPORTANT : ON NE TOUCHE PAS à 'mesAidesEnrichies' ni 'aidesObtenuesEnrichies'
-  // Ce n'est pas parce qu'on retire une aide des favoris qu'elle n'est plus éligible !
   
-  // 3. On rafraichit l'utilisateur pour que le cœur se mette à jour visuellement
+  // 2. On met à jour l'utilisateur, ce qui déclenchera les watchers proprement
   await refreshUser()
 }
 </script>
