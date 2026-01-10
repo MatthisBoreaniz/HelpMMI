@@ -88,7 +88,7 @@ const toggleEtape = async (etapeId: string) => {
 <LayoutDefault>
   <div class="space-y-6 p-4 mx-auto px-4">
 
-    <div class="relative w-full rounded-2xl shadow-md overflow-hidden bg-Bleu cursor-pointer hover:shadow-lg hover:scale-[1.01] transition-transform">
+    <div class="relative w-full rounded-2xl shadow-md overflow-hidden bg-Bleu  transition-transform">
       <div
         class="absolute inset-0 bg-Bleu/70 backdrop-blur-sm mix-blend-multiply transition-colors duration-300"
         :style="aide.imageCard ? {
