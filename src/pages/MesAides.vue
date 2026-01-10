@@ -3,13 +3,13 @@ import { ref, computed } from 'vue'
 import useAuth from '@/composables/useAuth'
 import CardAides from '@/components/CardAides.vue'
 import { pb } from '@/backend'
-import LayoutDefault from '@/layouts/LayoutDefault.vue'
 import type { AidesResponse, CategoriesResponse } from '@/pocketbase-types'
+import LayoutDefault from '@/layouts/LayoutDefault.vue'
 import TestFiltre from '@/components/testFiltre.vue'
 
-type AideFavorite = AidesResponse &{
+type AideFavorite = AidesResponse & {
   expand: {
-  relCategories: CategoriesResponse
+    relCategories: CategoriesResponse
   }
 }
 
@@ -17,16 +17,27 @@ const mode = ref<'tout' | 'aides' | 'favoris' | 'obtenues'>('aides')
 const { currentUser, refreshUser } = useAuth()
 const favorisEnrichis = ref<AideFavorite[]>([])
 
-const numberFavoris = computed(() => currentUser.value?.expand?.relFavoris?.length || 0)
-
 await refreshUser()
 
-if (currentUser.value?.relFavoris?.length) {
-  const promises = currentUser.value.relFavoris.map((favId: string) =>
-    pb.collection('Aides').getOne<AideFavorite>(favId, { expand: 'relCategories' }),
-  )
-  favorisEnrichis.value = await Promise.all(promises)
+const idsFavoris = currentUser.value?.relFavoris || []
+
+if (idsFavoris.length > 0) {
+  const filterString = idsFavoris.map((id: string) => `id="${id}"`).join(' || ')
+
+  try {
+    const result = await pb.collection('Aides').getFullList({
+      filter: filterString,
+      expand: 'relCategories',
+    })
+
+    favorisEnrichis.value = result as unknown as AideFavorite[]
+    
+  } catch (error) {
+    console.error("Erreur lors du chargement des favoris :", error)
+  }
 }
+
+const numberFavoris = computed(() => currentUser.value?.relFavoris?.length || 0)
 
 const handleLocalDelete = (idAide: string) => {
   favorisEnrichis.value = favorisEnrichis.value.filter((aide) => aide.id !== idAide)
