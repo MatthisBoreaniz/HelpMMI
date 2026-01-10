@@ -70,7 +70,7 @@ const confirmRestart = () => {
   // L'utilisateur accepte de refaire
   showResetPrompt.value = false
   // Optionnel : Si tu veux vraiment qu'il reparte de zéro, décommente la ligne suivante :
-  // userResponses.value = {} 
+   userResponses.value = {} 
   window.scrollTo(0, 0)
 }
 
