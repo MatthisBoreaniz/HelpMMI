@@ -6,6 +6,14 @@ import ImgPb from '@/components/ImgPb.vue'
 
 import type { AidesResponse, CategoriesResponse } from '@/pocketbase-types'
 
+// --- 1. DÉFINITION DU TYPE STRICT ---
+// On définit exactement ce qu'attend le composant enfant (CardAides)
+type AideAvecCategorie = AidesResponse & {
+  expand: {
+    relCategories: CategoriesResponse;
+  }
+};
+
 // Dropdown state
 const showSelect = ref(false)
 const dropdownRef = ref<HTMLElement | null>(null)
@@ -33,16 +41,21 @@ onUnmounted(() => {
 })
 
 // Data
-const aides = ref<AidesResponse<{ relCategories: CategoriesResponse }>[]>([])
+// --- 2. UTILISATION DU TYPE STRICT ICI ---
+const aides = ref<AideAvecCategorie[]>([])
 const categories = ref<CategoriesResponse[]>([])
 const selectedCategory = ref<string | null>(null)
 
 // Fetch data
 const fetchAllAides = async () => {
-  aides.value = await pb.collection('Aides').getFullList({
+  const result = await pb.collection('Aides').getFullList({
     expand: 'relCategories',
   })
+  
+  // --- 3. FORCER LE TYPE (CASTING) ---
+  aides.value = result as unknown as AideAvecCategorie[]
 }
+
 const fetchCategories = async () => {
   categories.value = await pb.collection('Categories').getFullList()
 }
@@ -59,10 +72,13 @@ const filtrerParCategorie = async (catId: string | null) => {
     return
   }
 
-  aides.value = await pb.collection('Aides').getFullList({
+  const result = await pb.collection('Aides').getFullList({
     filter: `relCategories.id ?= "${catId}"`,
     expand: 'relCategories',
   })
+
+  // --- 3. FORCER LE TYPE (CASTING) ---
+  aides.value = result as unknown as AideAvecCategorie[]
 }
 
 // Icônes
@@ -77,7 +93,7 @@ const showMore = () => {
 
 const showLess = () => {
   visibleCount.value -= 3;
-  visibleCount.value -= 3;
+  // Correction: pas besoin de soustraire deux fois, juste vérifier la limite après
   if (visibleCount.value < 3) visibleCount.value = 3;
 
   const el = document.getElementById('backScroll');
@@ -86,7 +102,6 @@ const showLess = () => {
   } else {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-
 }
 
 const aidesAffichees = computed(() => {
@@ -96,7 +111,6 @@ const aidesAffichees = computed(() => {
 
 <template>
   <div class="relative">
-    <!-- Dropdown Bouton -->
     <div class="relative mb-6 w-full flex justify-center" id="backScroll" ref="dropdownRef">
       <div class="flex justify-center">
       <button
@@ -119,7 +133,6 @@ const aidesAffichees = computed(() => {
       </button>
       </div>
 
-      <!-- Dropdown menu -->
       <transition
       enter-active-class="transition-all duration-300"
       enter-from-class="opacity-0 max-h-0 translate-y-2"
@@ -152,10 +165,8 @@ const aidesAffichees = computed(() => {
       </transition>
     </div>
 
-    <!-- Cartes Aides -->
     <CardAides :aides="aidesAffichees" />
 
-    <!-- Boutons Voir Plus / Voir Moins -->
     <div class="flex justify-center mt-6 space-x-4">
       <button
         v-if="visibleCount < aides.length"

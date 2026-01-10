@@ -6,9 +6,16 @@ import { pb } from '@/backend'
 import ImgPb from '@/components/ImgPb.vue'
 import { RouterLink } from 'vue-router'
 
+type AideAvecCategorie = AidesResponse & {
+  expand: {
+    relCategories: CategoriesResponse;
+  }
+};
+
+// 2. On utilise ce type précis dans les props
 defineProps<{
-  aides: AidesResponse<{ relCategories: CategoriesResponse}>[]
-}>()
+  aides: AideAvecCategorie[]
+}>();
 
 const emit = defineEmits<{
   (e: 'delete', id: string): void

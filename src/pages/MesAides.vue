@@ -7,9 +7,11 @@ import LayoutDefault from '@/layouts/LayoutDefault.vue'
 import type { AidesResponse, CategoriesResponse } from '@/pocketbase-types'
 import TestFiltre from '@/components/testFiltre.vue'
 
-type AideFavorite = AidesResponse<{
+type AideFavorite = AidesResponse &{
+  expand: {
   relCategories: CategoriesResponse
-}>
+  }
+}
 
 const mode = ref<'tout' | 'aides' | 'favoris' | 'obtenues'>('aides')
 const { currentUser, refreshUser } = useAuth()

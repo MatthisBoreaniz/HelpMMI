@@ -9,15 +9,17 @@ import sanitizeHtml from 'sanitize-html'
 
 const route = useRoute('/aides/[id]')
 
+type AideAvecEtapes = AidesResponse & {
+  expand: {
+    Etapes_via_relAide: EtapesResponse[];
+  }
+};
+
 const aide = await pb
-  .collection<
-    AidesResponse<{
-      Etapes_via_relAide: EtapesResponse[]
-    }>
-  >('Aides')
+  .collection('Aides')
   .getOne(route.params.id as string, {
     expand: 'Etapes_via_relAide',
-  })
+  }) as unknown as AideAvecEtapes;
 
 const stepIcon = await pb.collection('LogosAndImages').getFirstListItem('nom="stepIcon"')
 const stepArrow = await pb.collection('LogosAndImages').getFirstListItem('nom="stepArrow"')
