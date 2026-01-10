@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue' // <-- 1. Import de watch
 import useAuth from '@/composables/useAuth'
 import CardAides from '@/components/CardAides.vue'
 import { pb } from '@/backend'
@@ -7,14 +7,13 @@ import type { AidesResponse, CategoriesResponse } from '@/pocketbase-types'
 import LayoutDefault from '@/layouts/LayoutDefault.vue'
 import TestFiltre from '@/components/testFiltre.vue'
 
-// Type strict pour les aides avec catégories étendues
+// Type strict
 type AideFavorite = AidesResponse & {
   expand: {
     relCategories: CategoriesResponse
   }
 }
 
-// État de l'interface
 const mode = ref<'tout' | 'aides' | 'favoris' | 'obtenues'>('aides')
 const { currentUser, refreshUser } = useAuth()
 
@@ -23,62 +22,99 @@ const favorisEnrichis = ref<AideFavorite[]>([])
 const mesAidesEnrichies = ref<AideFavorite[]>([])
 const aidesObtenuesEnrichies = ref<AideFavorite[]>([])
 
-// 1. Récupération de l'utilisateur
+// 1. Récupération initiale de l'utilisateur
 await refreshUser()
 
-// 2. Chargement des FAVORIS
-const idsFavoris = currentUser.value?.relFavoris || []
-if (idsFavoris.length > 0) {
-  const filterString = idsFavoris.map((id: string) => `id="${id}"`).join(' || ')
-  try {
-    const result = await pb.collection('Aides').getFullList({
-      filter: filterString,
-      expand: 'relCategories',
-    })
-    favorisEnrichis.value = result as unknown as AideFavorite[]
-  } catch (error) {
-    console.error("Erreur chargement favoris :", error)
+// --- FONCTIONS DE CHARGEMENT RÉUTILISABLES ---
+
+// A. Charger les favoris
+const loadFavoris = async () => {
+  const idsFavoris = currentUser.value?.relFavoris || []
+  if (idsFavoris.length > 0) {
+    const filterString = idsFavoris.map((id: string) => `id="${id}"`).join(' || ')
+    try {
+      const result = await pb.collection('Aides').getFullList({
+        filter: filterString,
+        expand: 'relCategories',
+      })
+      favorisEnrichis.value = result as unknown as AideFavorite[]
+    } catch (error) {
+      console.error("Erreur chargement favoris :", error)
+    }
+  } else {
+    favorisEnrichis.value = [] // Important : vider si plus de favoris
   }
 }
 
-// 3. Chargement de MES AIDES (Résultats simulation)
-const idsMesAides = currentUser.value?.mes_aides || [] 
-if (idsMesAides.length > 0) {
-  const filterString = idsMesAides.map((id: string) => `id="${id}"`).join(' || ')
-  try {
-    const result = await pb.collection('Aides').getFullList({
-      filter: filterString,
-      expand: 'relCategories',
-    })
-    mesAidesEnrichies.value = result as unknown as AideFavorite[]
-  } catch (error) {
-    console.error("Erreur chargement Mes Aides :", error)
+// B. Charger mes aides (simulation)
+const loadMesAides = async () => {
+  const idsMesAides = currentUser.value?.mes_aides || [] 
+  if (idsMesAides.length > 0) {
+    const filterString = idsMesAides.map((id: string) => `id="${id}"`).join(' || ')
+    try {
+      const result = await pb.collection('Aides').getFullList({
+        filter: filterString,
+        expand: 'relCategories',
+      })
+      mesAidesEnrichies.value = result as unknown as AideFavorite[]
+    } catch (error) {
+      console.error("Erreur chargement Mes Aides :", error)
+    }
   }
 }
 
-// 4. Chargement des AIDES OBTENUES (Complétées à 100%)
-const idsAidesObtenues = currentUser.value?.aides_obtenues || []
-if (idsAidesObtenues.length > 0) {
-  const filterString = idsAidesObtenues.map((id: string) => `id="${id}"`).join(' || ')
-  try {
-    const result = await pb.collection('Aides').getFullList({
-      filter: filterString,
-      expand: 'relCategories',
-    })
-    aidesObtenuesEnrichies.value = result as unknown as AideFavorite[]
-  } catch (error) {
-    console.error("Erreur chargement Aides Obtenues :", error)
+// C. Charger aides obtenues
+const loadAidesObtenues = async () => {
+  const idsAidesObtenues = currentUser.value?.aides_obtenues || []
+  if (idsAidesObtenues.length > 0) {
+    const filterString = idsAidesObtenues.map((id: string) => `id="${id}"`).join(' || ')
+    try {
+      const result = await pb.collection('Aides').getFullList({
+        filter: filterString,
+        expand: 'relCategories',
+      })
+      aidesObtenuesEnrichies.value = result as unknown as AideFavorite[]
+    } catch (error) {
+      console.error("Erreur chargement Aides Obtenues :", error)
+    }
+  } else {
+    aidesObtenuesEnrichies.value = []
   }
 }
+
+// --- INITIALISATION ---
+// On lance les chargements une première fois
+await Promise.all([loadFavoris(), loadMesAides(), loadAidesObtenues()])
+
+
+// --- SURVEILLANCE (WATCHERS) ---
+// C'est ici que la magie opère : si currentUser change, on recharge les listes
+
+// 1. Si la liste des IDs favoris change, on recharge `favorisEnrichis`
+watch(() => currentUser.value?.relFavoris, async () => {
+  await loadFavoris()
+}, { deep: true })
+
+// 2. Si la liste des aides obtenues change, on recharge `aidesObtenuesEnrichies`
+watch(() => currentUser.value?.aides_obtenues, async () => {
+  await loadAidesObtenues()
+}, { deep: true })
+
 
 const numberFavoris = computed(() => currentUser.value?.relFavoris?.length || 0)
 
-// Fonction de suppression locale (met à jour toutes les listes pour éviter un refresh page)
-const handleLocalDelete = (idAide: string) => {
+// Fonction de suppression locale
+const handleLocalDelete = async (idAide: string) => {
+  
+  // 1. On retire toujours l'aide de la liste locale des favoris
+  // (Car si on clique sur le cœur, ce n'est plus un favori)
   favorisEnrichis.value = favorisEnrichis.value.filter((aide) => aide.id !== idAide)
-  mesAidesEnrichies.value = mesAidesEnrichies.value.filter((aide) => aide.id !== idAide)
-  aidesObtenuesEnrichies.value = aidesObtenuesEnrichies.value.filter((aide) => aide.id !== idAide)
-  refreshUser()
+
+  // ⚠️ 2. IMPORTANT : ON NE TOUCHE PAS à 'mesAidesEnrichies' ni 'aidesObtenuesEnrichies'
+  // Ce n'est pas parce qu'on retire une aide des favoris qu'elle n'est plus éligible !
+  
+  // 3. On rafraichit l'utilisateur pour que le cœur se mette à jour visuellement
+  await refreshUser()
 }
 </script>
 
