@@ -22,7 +22,7 @@ const menuItems = [
     authRequired: false 
   },
   { 
-    label: 'Mes Aides', 
+    label: 'Aides', 
     path: '/MesAides', 
     icon: iconAides, 
     authRequired: true 
