@@ -29,7 +29,7 @@ const menuItems = [
   },
   { 
     label: 'Simulation', 
-    path: '/simulation',
+    path: '/PageSimulation',
     icon: iconSimulation, 
     authRequired: false 
   },

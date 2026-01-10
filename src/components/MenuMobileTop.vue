@@ -47,7 +47,7 @@ const toggleMenu = () => {
           </RouterLink>
         </li>
         <li @click="isOpen = false">
-          <RouterLink to="/contact" class="flex items-center gap-2 font-bold hover:text-Bleu">
+          <RouterLink to="/PageSimulation" class="flex items-center gap-2 font-bold hover:text-Bleu">
             Simulation
           </RouterLink>
         </li>

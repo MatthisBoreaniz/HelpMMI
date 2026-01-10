@@ -86,6 +86,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/PageSimulation': RouteRecordInfo<
+      '/PageSimulation',
+      '/PageSimulation',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/ResetPassword': RouteRecordInfo<
       '/ResetPassword',
       '/ResetPassword',
@@ -157,6 +164,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/MesAides.vue': {
       routes:
         | '/MesAides'
+      views:
+        | never
+    }
+    'src/pages/PageSimulation.vue': {
+      routes:
+        | '/PageSimulation'
       views:
         | never
     }
