@@ -186,7 +186,7 @@ const handleLocalDelete = (idAide: string) => {
 
         <div v-if="mode === 'obtenues'">
           <div class="flex flex-col gap-6">
-            <h1 class="font-bold text-lg font-agrandir-narrow mt-2 text-green-600 flex items-center gap-2">
+            <h1 v-if="currentUser?.expand.aides_obtenues" class="font-bold text-lg font-agrandir-narrow mt-2 text-green-600 flex items-center gap-2">
               <span>🎉</span> Félicitations ! Vos aides complétées
             </h1>
             <div>
