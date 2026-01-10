@@ -144,7 +144,19 @@ const finishSimulation = async () => {
 
 <template>
   <LayoutDefault>
-      <div class="max-w-2xl mx-auto px-4 py-8">
+    <div v-if="!currentUser" class="flex flex-col justify-center items-center w-full">
+        <p class="text-center mt-10 text-Rose">
+          Veuillez vous connecter pour voir vos aides et favoris.
+        </p>
+        <a
+          href="/authPage"
+          class="block text-center p-4 bg-Bleu text-Blanc font-bold text-lg rounded-2xl mt-4 hover:bg-blue-800 transition-colors"
+        >
+          Aller à la page de connexion
+        </a>
+      </div>
+
+      <div v-else class="max-w-2xl mx-auto px-4 py-8">
       
         <div v-if="loading" class="text-center py-10 text-Bleu">
           Chargement...
