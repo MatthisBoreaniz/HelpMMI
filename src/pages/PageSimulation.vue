@@ -9,6 +9,7 @@ import type {
   AidesResponse, 
   UsersResponse 
 } from '@/pocketbase-types'
+import LayoutDefault from '@/layouts/LayoutDefault.vue'
 
 // --- 1. TYPAGE STRICT ---
 
@@ -142,116 +143,111 @@ const finishSimulation = async () => {
 </script>
 
 <template>
-  <div class="max-w-2xl mx-auto px-4 py-8">
-    
-    <div v-if="loading" class="text-center py-10 text-Bleu">
-      Chargement...
-    </div>
-
-    <div v-else>
+  <LayoutDefault>
+      <div class="max-w-2xl mx-auto px-4 py-8">
       
-      <div v-if="showResetPrompt" class="bg-white p-8 rounded-xl shadow-lg border-2 border-Rose text-center">
-        <div class="mb-6 flex justify-center">
-          <span class="text-5xl">⚠️</span>
+        <div v-if="loading" class="text-center py-10 text-Bleu">
+          Chargement...
         </div>
-        
-        <h2 class="text-2xl font-bold text-Bleu mb-4 font-agrandir-narrow">
-          Vous avez déjà fait une simulation
-        </h2>
-        
-        <p class="text-gray-600 mb-8 text-lg">
-          Attention, si vous relancez la simulation maintenant, 
-          <span class="font-bold text-Rose">vos aides recommandées actuelles seront remplacées</span> 
-          par les nouveaux résultats à la fin du questionnaire.
-        </p>
-        
-        <div class="flex flex-col md:flex-row gap-4 justify-center">
-          <button 
-            @click="cancelRestart"
-            class="px-6 py-3 rounded-lg border-2 border-Bleu text-Bleu font-bold hover:bg-blue-50 transition-colors"
-          >
-            Annuler (Voir mes aides)
-          </button>
-          
-          <button 
-            @click="confirmRestart"
-            class="px-6 py-3 rounded-lg bg-Rose text-white font-bold hover:bg-pink-600 shadow-md transition-colors"
-          >
-            Refaire la simulation
-          </button>
-        </div>
-      </div>
-
-      <div v-else>
-        <div class="mb-8">
-          <div class="text-sm font-bold text-Bleu mb-2">
-            Étape {{ currentCategoryIndex + 1 }} / {{ categories.length }}
-          </div>
-          <div class="w-full bg-gray-200 rounded-full h-2.5">
-            <div 
-              class="bg-Bleu h-2.5 rounded-full transition-all duration-300" 
-              :style="{ width: ((currentCategoryIndex + 1) / categories.length) * 100 + '%' }"
-            ></div>
-          </div>
-        </div>
-
-        <div class="space-y-8 min-h-[400px]">
-          <div v-for="q in currentQuestions" :key="q.id" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <h3 class="text-lg font-semibold text-Bleu mb-4">{{ q.question }}</h3>
-            
-            <div class="flex flex-wrap gap-3">
-              <template v-if="q.options">
-                <button
-                  v-for="opt in q.options"
-                  :key="opt.label"
-                  @click="q.slug && (userResponses[q.slug] = opt.value)"
-                  class="px-4 py-2 rounded-lg border transition-all duration-200 text-sm font-medium"
-                  :class="[
-                    q.slug && userResponses[q.slug] === opt.value
-                      ? 'bg-Bleu text-white border-Bleu shadow-md'
-                      : 'bg-white text-gray-700 border-gray-300 hover:border-Bleu hover:bg-blue-50'
-                  ]"
-                >
-                  {{ opt.label }}
-                </button>
-              </template>
+        <div v-else>
+      
+          <div v-if="showResetPrompt" class="bg-white p-8 rounded-xl shadow-lg border-2 border-Rose text-center">
+            <div class="mb-6 flex justify-center">
+              <span class="text-5xl">⚠️</span>
+            </div>
+      
+            <h2 class="text-2xl font-bold text-Bleu mb-4 font-agrandir-narrow">
+              Vous avez déjà fait une simulation
+            </h2>
+      
+            <p class="text-gray-600 mb-8 text-lg">
+              Attention, si vous relancez la simulation maintenant,
+              <span class="font-bold text-Rose">vos aides recommandées actuelles seront remplacées</span>
+              par les nouveaux résultats à la fin du questionnaire.
+            </p>
+      
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+              <button
+                @click="cancelRestart"
+                class="px-6 py-3 rounded-lg border-2 border-Bleu text-Bleu font-bold hover:bg-blue-50 transition-colors"
+              >
+                Annuler (Voir mes aides)
+              </button>
+      
+              <button
+                @click="confirmRestart"
+                class="px-6 py-3 rounded-lg bg-Rose text-white font-bold hover:bg-pink-600 shadow-md transition-colors"
+              >
+                Refaire la simulation
+              </button>
             </div>
           </div>
-
-          <div v-if="currentQuestions.length === 0" class="text-gray-500 italic text-center">
-            Cliquez sur suivant pour continuer.
+          <div v-else>
+            <div class="mb-8">
+              <div class="text-sm font-bold text-Bleu mb-2">
+                Étape {{ currentCategoryIndex + 1 }} / {{ categories.length }}
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div
+                  class="bg-Bleu h-2.5 rounded-full transition-all duration-300"
+                  :style="{ width: ((currentCategoryIndex + 1) / categories.length) * 100 + '%' }"
+                ></div>
+              </div>
+            </div>
+            <div class="space-y-8 min-h-[400px]">
+              <div v-for="q in currentQuestions" :key="q.id" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <h3 class="text-lg font-semibold text-Bleu mb-4">{{ q.question }}</h3>
+      
+                <div class="flex flex-wrap gap-3">
+                  <template v-if="q.options">
+                    <button
+                      v-for="opt in q.options"
+                      :key="opt.label"
+                      @click="q.slug && (userResponses[q.slug] = opt.value)"
+                      class="px-4 py-2 rounded-lg border transition-all duration-200 text-sm font-medium"
+                      :class="[
+                        q.slug && userResponses[q.slug] === opt.value
+                          ? 'bg-Bleu text-white border-Bleu shadow-md'
+                          : 'bg-white text-gray-700 border-gray-300 hover:border-Bleu hover:bg-blue-50'
+                      ]"
+                    >
+                      {{ opt.label }}
+                    </button>
+                  </template>
+                </div>
+              </div>
+              <div v-if="currentQuestions.length === 0" class="text-gray-500 italic text-center">
+                Cliquez sur suivant pour continuer.
+              </div>
+            </div>
+            <div class="flex justify-between mt-10 pt-6 border-t">
+              <button
+                @click="prevStep"
+                :disabled="currentCategoryIndex === 0"
+                class="px-6 py-2 rounded-lg text-gray-600 hover:bg-gray-100 disabled:opacity-30"
+              >
+                ← Retour
+              </button>
+              <button
+                v-if="currentCategoryIndex < categories.length - 1"
+                @click="nextStep"
+                class="px-6 py-2 rounded-lg bg-Bleu text-white hover:bg-blue-700 transition-colors shadow-lg"
+              >
+                Suivant →
+              </button>
+              <button
+                v-else
+                @click="finishSimulation"
+                :disabled="calculating"
+                class="px-6 py-2 rounded-lg bg-Rose text-white hover:bg-pink-600 transition-colors shadow-lg flex items-center gap-2"
+              >
+                <span v-if="calculating">Calcul...</span>
+                <span v-else>Voir mes résultats 🎉</span>
+              </button>
+            </div>
           </div>
-        </div>
-
-        <div class="flex justify-between mt-10 pt-6 border-t">
-          <button 
-            @click="prevStep" 
-            :disabled="currentCategoryIndex === 0"
-            class="px-6 py-2 rounded-lg text-gray-600 hover:bg-gray-100 disabled:opacity-30"
-          >
-            ← Retour
-          </button>
-
-          <button 
-            v-if="currentCategoryIndex < categories.length - 1"
-            @click="nextStep"
-            class="px-6 py-2 rounded-lg bg-Bleu text-white hover:bg-blue-700 transition-colors shadow-lg"
-          >
-            Suivant →
-          </button>
-
-          <button 
-            v-else
-            @click="finishSimulation"
-            :disabled="calculating"
-            class="px-6 py-2 rounded-lg bg-Rose text-white hover:bg-pink-600 transition-colors shadow-lg flex items-center gap-2"
-          >
-            <span v-if="calculating">Calcul...</span>
-            <span v-else>Voir mes résultats 🎉</span>
-          </button>
+      
         </div>
       </div>
-      
-    </div>
-  </div>
+  </LayoutDefault>
 </template>
