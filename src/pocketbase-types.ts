@@ -90,6 +90,7 @@ export type UsersRecord = {
 	Formation?: string
 	Phone?: number
 	firstName?: string
+	mes_aides?: RecordIdString[]
 	name?: string
 	relAvatars?: RecordIdString[]
 	relFavoris?: RecordIdString[]
