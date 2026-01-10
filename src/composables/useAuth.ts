@@ -6,6 +6,7 @@ import type { UsersResponse, AvatarsResponse, AidesResponse } from '@/pocketbase
 type UsersExpanded = UsersResponse<{
   relAvatars: AvatarsResponse
   relFavoris: AidesResponse[]
+  mes_aides: AidesResponse[]
 }>
 
 // --- Etat utilisateur ---
@@ -26,7 +27,7 @@ async function refreshUser() {
   try {
     const user = await pb
       .collection('users')
-      .getOne<UsersExpanded>(pb.authStore.model.id, { expand: 'relAvatars, relFavoris' })
+      .getOne<UsersExpanded>(pb.authStore.model.id, { expand: 'relAvatars, relFavoris, mes_aides' })
 
     // Mette à jour l'authStore + user
     pb.authStore.save(pb.authStore.token, user)

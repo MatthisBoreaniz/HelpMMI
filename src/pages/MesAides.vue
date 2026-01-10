@@ -16,6 +16,7 @@ type AideFavorite = AidesResponse & {
 const mode = ref<'tout' | 'aides' | 'favoris' | 'obtenues'>('aides')
 const { currentUser, refreshUser } = useAuth()
 const favorisEnrichis = ref<AideFavorite[]>([])
+const mesAidesEnrichies = ref<AideFavorite[]>([])
 
 await refreshUser()
 
@@ -36,11 +37,31 @@ if (idsFavoris.length > 0) {
     console.error("Erreur lors du chargement des favoris :", error)
   }
 }
+const idsMesAides = currentUser.value?.mes_aides || [] 
+
+if (idsMesAides.length > 0) {
+  // On construit le filtre id="X" || id="Y"
+  const filterString = idsMesAides.map((id: string) => `id="${id}"`).join(' || ')
+
+  try {
+    const result = await pb.collection('Aides').getFullList({
+      filter: filterString,
+      expand: 'relCategories', // Important pour avoir la couleur/catégorie
+    })
+    
+    // On stocke le résultat complet
+    mesAidesEnrichies.value = result as unknown as AideFavorite[]
+    
+  } catch (error) {
+    console.error("Erreur lors du chargement de Mes Aides :", error)
+  }
+}
 
 const numberFavoris = computed(() => currentUser.value?.relFavoris?.length || 0)
 
 const handleLocalDelete = (idAide: string) => {
   favorisEnrichis.value = favorisEnrichis.value.filter((aide) => aide.id !== idAide)
+  mesAidesEnrichies.value = mesAidesEnrichies.value.filter((aide) => aide.id !== idAide)
   refreshUser()
 }
 </script>
@@ -115,6 +136,24 @@ const handleLocalDelete = (idAide: string) => {
 
               <div v-else class="bg-none rounded-lg border border-Bleu">
                 <p class="p-4 text-center">Aucun favori pour le moment.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div v-if="mode === 'aides'">
+          <div class="flex flex-col gap-6">
+            <h1 class="font-bold text-lg font-agrandir-narrow mt-5">
+              Aides qui pourraient vous intéresser
+            </h1>
+            <div>
+              <CardAides
+                v-if="currentUser?.expand?.mes_aides?.length"
+                :aides="mesAidesEnrichies"
+                @delete="handleLocalDelete"
+              />
+
+              <div v-else class="bg-none rounded-lg border border-Bleu">
+                <p class="p-4 text-center">Aucune aide trouvée, veuillez faire la <RouterLink class="underline text-Bleu font-semibold" to="/PageSimulation">simulation</RouterLink></p>
               </div>
             </div>
           </div>
