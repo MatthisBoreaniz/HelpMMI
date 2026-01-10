@@ -1,12 +1,14 @@
 import { ref, computed } from 'vue'
 import { pb } from '@/backend'
-import type { UsersResponse, AvatarsResponse, AidesResponse } from '@/pocketbase-types'
+import type { UsersResponse, AvatarsResponse, AidesResponse, EtapesResponse } from '@/pocketbase-types'
 
 // --- Types ---
 type UsersExpanded = UsersResponse<{
   relAvatars: AvatarsResponse
   relFavoris: AidesResponse[]
   mes_aides: AidesResponse[]
+  etapes_validees: EtapesResponse[]
+  aides_obtenues: AidesResponse[]
 }>
 
 // --- Etat utilisateur ---
@@ -27,7 +29,7 @@ async function refreshUser() {
   try {
     const user = await pb
       .collection('users')
-      .getOne<UsersExpanded>(pb.authStore.model.id, { expand: 'relAvatars, relFavoris, mes_aides' })
+      .getOne<UsersExpanded>(pb.authStore.model.id, { expand: 'relAvatars, relFavoris, mes_aides, etapes_validees, aides_obtenues' })
 
     // Mette à jour l'authStore + user
     pb.authStore.save(pb.authStore.token, user)

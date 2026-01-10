@@ -89,6 +89,8 @@ export type UsersRecord = {
 	BirthDate?: IsoDateString
 	Formation?: string
 	Phone?: number
+	aides_obtenues?: RecordIdString[]
+	etapes_validees?: RecordIdString[]
 	firstName?: string
 	mes_aides?: RecordIdString[]
 	name?: string

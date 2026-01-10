@@ -136,7 +136,7 @@ const toggleFavorite = async (aideId: string) => {
             class="bg-Blanc text-Bleu font-bold font-permanent-marker text-lg md:text-sm rounded-2xl p-4 md:p-6 lg:p-4 flex items-center justify-center hover:scale-105 transition-transform duration-300 shadow-md min-h-[80px] md:min-h-[200px]"
           >MES AIDES</RouterLink>
           <RouterLink
-            to="/simulation"
+            to="/PageSimulation"
             class="bg-Blanc text-Bleu font-bold font-permanent-marker text-lg md:text-sm rounded-2xl p-4 md:p-6 lg:p-4 flex items-center justify-center hover:scale-105 transition-transform duration-300 shadow-md min-h-[80px] md:min-h-[200px]"
           >SIMULATION</RouterLink>
           <RouterLink
