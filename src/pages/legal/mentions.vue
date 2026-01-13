@@ -120,4 +120,10 @@ function onScroll() {
 
 onMounted(() => window.addEventListener('scroll', onScroll))
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
+onMounted(async () => {
+  await ensureAuthReady()
+})
+
+import useAuth from '@/composables/useAuth'
+const { ensureAuthReady } = useAuth()
 </script>

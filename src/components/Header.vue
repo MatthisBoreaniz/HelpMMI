@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import useAuth from '@/composables/useAuth'
 import MenuMobileTop from './MenuMobileTop.vue'
@@ -10,11 +10,28 @@ import ImgPb from './ImgPb.vue'
 
 const { currentUser } = useAuth()
 const showNotifs = ref(false)
+const notifRef = ref<HTMLElement | null>(null)
 const toggleShowNotifs = () => (showNotifs.value = !showNotifs.value)
 
 const iconNotif = await pb
       .collection('LogosAndImages')
       .getFirstListItem('nom="notifIcon"')
+
+const handleClickOutside = (event: MouseEvent) => {
+  if (!notifRef.value) return
+
+  if (!notifRef.value.contains(event.target as Node)) {
+    showNotifs.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
 </script>
 
 <template>
@@ -28,12 +45,14 @@ const iconNotif = await pb
     <div class="hidden md:flex items-center gap-4">
       <template v-if="currentUser">
         <div class="flex items-center gap-4 group relative cursor-pointer">
-          <button @click="toggleShowNotifs" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose flex items-center gap-2">
-            <ImgPb v-if="iconNotif" :record="iconNotif" :filename="iconNotif.image" class="w-6 h-6"/>
-            Notification
-          </button>
-          <div v-if="showNotifs" class="absolute top-5 right-0 mt-2 z-50">
-            <NotifsToast />
+          <div ref="notifRef" class="relative">
+            <button @click="toggleShowNotifs" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose flex items-center gap-2">
+              <ImgPb v-if="iconNotif" :record="iconNotif" :filename="iconNotif.image" class="w-6 h-6"/>
+              Notification
+            </button>
+            <div v-if="showNotifs" class="absolute top-5 right-0 mt-2 z-50">
+              <NotifsToast />
+            </div>
           </div>
 
           <RouterLink

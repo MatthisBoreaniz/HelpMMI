@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import useAuth from '@/composables/useAuth'
 import NotifsToast from './notifsToast.vue'
 import { pb } from '@/backend'
@@ -10,22 +10,44 @@ const isOpen = ref(false)
 const toggleMenu = () => {
   isOpen.value = !isOpen.value
 }
-const showNotifs = ref(false);
+const showNotifs = ref(false)
 const toggleShowNotifs = () => {
-  showNotifs.value = !showNotifs.value;
-};
+  showNotifs.value = !showNotifs.value
+}
 
-const iconNotif = await pb
-      .collection('LogosAndImages')
-      .getFirstListItem('nom="notifIcon"')
+const iconNotif = await pb.collection('LogosAndImages').getFirstListItem('nom="notifIcon"')
+
+const notifRef = ref<HTMLElement | null>(null)
+const handleClickOutside = (event: MouseEvent) => {
+  if (!notifRef.value) return
+
+  if (!notifRef.value.contains(event.target as Node)) {
+    showNotifs.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
 </script>
 
 <template>
   <nav class="md:hidden relative">
     <div class="flex space-x-4">
-      <div v-if=currentUser class="flex items-center gap-4 group relative cursor-pointer">
-        <button @click="toggleShowNotifs" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose flex items-center justify-center">
-          <ImgPb v-if="iconNotif" :record="iconNotif" :filename="iconNotif.image" class="w-6 h-6"/>
+      <div
+        ref="notifRef"
+        v-if="currentUser"
+        class="flex items-center gap-4 group relative cursor-pointer"
+      >
+        <button
+          @click="toggleShowNotifs"
+          class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose flex items-center justify-center"
+        >
+          <ImgPb v-if="iconNotif" :record="iconNotif" :filename="iconNotif.image" class="w-6 h-6" />
         </button>
         <div v-if="showNotifs" class="absolute top-5 right-0 mt-2 z-50">
           <NotifsToast />
@@ -53,7 +75,7 @@ const iconNotif = await pb
     <div
       v-scroll-lock="isOpen"
       v-if="isOpen"
-      class="fixed inset-0 bg-Rose z-40 flex flex-col items-center justify-center transition-transform duration-300 min-h-screen"
+      class="fixed top-0 left-0 w-screen h-[100dvh] bg-Rose z-40 flex flex-col items-center justify-center overflow-hidden"
     >
       <img src="/src/assets//Img//helpMMi.png" alt="HelpMMI Logo" class="w-40 mb-8" />
       <ul class="flex flex-col items-center p-6 space-y-6 text-lg text-white">
