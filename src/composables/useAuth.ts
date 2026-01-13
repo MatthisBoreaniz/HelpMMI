@@ -19,6 +19,8 @@ const currentUser = ref<UserExpanded | null>(null)
 let isRefreshing = false
 let isLoggingOut = false
 
+const loadingUser = ref(true)
+
 // --- Refresh sécurisé ---
 async function refreshUser() {
   if (!pb.authStore.model) return null
@@ -26,11 +28,14 @@ async function refreshUser() {
   // Empêche plusieurs refresh simultanés
   if (isRefreshing) return
   isRefreshing = true
+  loadingUser.value = true
 
   try {
     const user = await pb
       .collection('users')
-      .getOne<UserExpanded>(pb.authStore.model.id, { expand: 'relAvatars, relFavoris, mes_aides, etapes_validees, aides_obtenues' })
+      .getOne<UserExpanded>(pb.authStore.model.id, {
+        expand: 'relAvatars, relFavoris, mes_aides, etapes_validees, aides_obtenues',
+      })
 
     // Mette à jour l'authStore + user
     pb.authStore.save(pb.authStore.token, user)
@@ -42,6 +47,7 @@ async function refreshUser() {
     return null
   } finally {
     isRefreshing = false
+    loadingUser.value = false
   }
 }
 
@@ -134,12 +140,14 @@ async function updateUser(data: FormData | Record<string, string | number | bool
 
 const isLoggedIn = computed(() => !!pb.authStore.token)
 
+
 // --- Export composable ---
 export default function useAuth() {
   return {
     pb,
     currentUser,
     isLoggedIn,
+    loadingUser,
     register,
     login,
     logout,

@@ -1,28 +1,47 @@
 <script setup lang="ts">
-import { ref} from 'vue'
+import { ref, onMounted } from 'vue'
 import useAuth from '@/composables/useAuth'
 import LoginForm from '@/components/LogIn.vue'
 import RegisterForm from '@/components/Register.vue'
 import LoggedIn from '@/components/LoggedIn.vue'
 import ImgPb from '@/components/ImgPb.vue'
-import { pb } from '@/backend'
-import LogInOut from '@/components/LogInOut.vue'
 import LayoutAuth from '@/layouts/LayoutAuth.vue'
 import LayoutDefault from '@/layouts/LayoutDefault.vue'
-const { currentUser } = useAuth()
+import { pb } from '@/backend'
+
+const { currentUser, refreshUser, loadingUser } = useAuth()
 const mode = ref<'login' | 'register'>('login')
-const ImageConnexion = await pb
-  .collection('LogosAndImages')
-  .getFirstListItem('nom="ImageConnexion"')
+const ImageConnexion = ref(null)
 
+// --- fetch image et user au montage ---
+onMounted(async () => {
+  // refresh du user si déjà logué
+  if (pb.authStore.isValid) {
+    await refreshUser()
+  }else {
+    // Sinon, pas besoin d'attendre, on stoppe le loader
+    loadingUser.value = false
+  }
 
+  // récupère l'image depuis PocketBase
+  try {
+    ImageConnexion.value = await pb
+      .collection('LogosAndImages')
+      .getFirstListItem('nom="ImageConnexion"')
+  } catch (err) {
+    console.error('Erreur récupération image:', err)
+  }
+})
 </script>
 
 <template>
-  <LayoutDefault v-if="currentUser">
-    <div>
-      <LoggedIn />
-    </div>
+  <!-- loader tant que refreshUser est en cours -->
+  <div v-if="loadingUser" class="flex justify-center items-center h-screen">
+    Chargement...
+  </div>
+
+  <LayoutDefault v-else-if="currentUser">
+    <LoggedIn />
   </LayoutDefault>
 
   <LayoutAuth v-else>
@@ -46,8 +65,6 @@ const ImageConnexion = await pb
             <h2 class="text-Bleu font-permanent-agrandir text-xl mt-2">Et commence tes recherches</h2>
           </div>
 
-          <LogInOut class="my-8 flex justify-center items-center mx-auto" />
-
           <Transition name="fade-slide" mode="out-in">
             <div v-if="mode === 'login'" key="login" class="flex flex-col items-center w-full">
               <LoginForm class="w-full" />
@@ -55,9 +72,6 @@ const ImageConnexion = await pb
                 <button @click="mode = 'register'" class="text-Bleu hover:underline">
                   Pas encore inscrit ? Crée un compte !
                 </button>
-                <RouterLink class="text-Bleu text-sm hover:underline" to="/ForgotPassword">
-                  Mot de passe oublié ?
-                </RouterLink>
               </div>
             </div>
 
@@ -73,20 +87,3 @@ const ImageConnexion = await pb
     </div>
   </LayoutAuth>
 </template>
-
-<style scoped>
-.fade-slide-enter-active,
-.fade-slide-leave-active {
-  transition: all 0.5s ease-out;
-}
-.fade-slide-enter-from,
-.fade-slide-leave-to {
-  opacity: 0;
-  transform: translateY(20px);
-}
-.fade-slide-enter-to,
-.fade-slide-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>

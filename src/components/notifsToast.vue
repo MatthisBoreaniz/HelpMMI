@@ -1,6 +1,6 @@
 <template>
-  <div class="p-4 bg-white rounded-lg shadow-md w-80 max-h-[500px] overflow-y-auto">
-    <h2 class="text-center text-lg font-bold mb-4 text-pink-300">Centre des notifications</h2>
+  <div class="z-50! p-4 bg-white rounded-lg shadow-md w-80 max-h-[500px] overflow-y-auto">
+    <h2 class="text-center text-lg font-bold mb-4 text-Rose">Centre des notifications</h2>
 
     <ul class="flex flex-col gap-2">
       <li
@@ -16,7 +16,7 @@
       </li>
     </ul>
 
-    <button @click="markAllAsRead" class="mt-4 w-full bg-pink-200 text-white font-bold py-2 rounded hover:bg-pink-300 transition">
+    <button @click="markAllAsRead" class="mt-4 w-full bg-Bleu text-white font-bold py-2 rounded hover:bg-pink-300 transition">
       Tous marqués comme lu
     </button>
   </div>

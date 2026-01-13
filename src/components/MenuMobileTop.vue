@@ -21,7 +21,7 @@ const toggleShowNotifs = () => {
         <button @click="toggleShowNotifs" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose">
           Notification
         </button>
-        <div v-if="showNotifs" class="absolute right-0 mt-2">
+        <div v-if="showNotifs" class="absolute top-5 right-0 mt-2 z-50">
           <NotifsToast />
         </div>
       </div>

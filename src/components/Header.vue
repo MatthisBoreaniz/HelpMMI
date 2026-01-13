@@ -1,16 +1,14 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import useAuth from '@/composables/useAuth'
+import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import useAuth from '@/composables/useAuth'
 import MenuMobileTop from './MenuMobileTop.vue'
-import NotifsToast from './notifsToast.vue';
-import { ref } from 'vue';
+import NotifsToast from './notifsToast.vue'
 
 const { currentUser } = useAuth()
-const showNotifs = ref(false);
-const toggleShowNotifs = () => {
-  showNotifs.value = !showNotifs.value;
-};
+const showNotifs = ref(false)
+const toggleShowNotifs = () => (showNotifs.value = !showNotifs.value)
 </script>
 
 <template>
@@ -22,31 +20,33 @@ const toggleShowNotifs = () => {
     </div>
 
     <div class="hidden md:flex items-center gap-4">
-      <div v-if="currentUser" class="flex items-center gap-4 group relative cursor-pointer">
-        <div>
+      <template v-if="currentUser">
+        <div class="flex items-center gap-4 group relative cursor-pointer">
           <button @click="toggleShowNotifs" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose">
-              Notification
+            Notification
           </button>
-          <div v-if="showNotifs" class="absolute right-0 mt-2">
+          <div v-if="showNotifs" class="absolute right-0 mt-2 z-50">
             <NotifsToast />
           </div>
-        </div>
-        <button>
-          <RouterLink to="/authPage" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose">
+
+          <RouterLink
+            to="/authPage"
+            class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose"
+          >
             Mon Profil
           </RouterLink>
-        </button>
-      </div>
-      <div v-else class="cursor-pointer">
+        </div>
+      </template>
 
-        <RouterLink
-          to="/authPage"
-          class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose"
-        >
-          Connexion
-        </RouterLink>
-      </div>
+      <RouterLink
+        v-else
+        to="/authPage"
+        class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose"
+      >
+        Connexion
+      </RouterLink>
     </div>
+
     <div class="md:hidden">
       <MenuMobileTop />
     </div>
