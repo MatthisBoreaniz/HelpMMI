@@ -11,6 +11,8 @@ export enum Collections {
 	Categories = "Categories",
 	Etapes = "Etapes",
 	LogosAndImages = "LogosAndImages",
+	Notifications = "Notifications",
+	NotificationsEtat = "NotificationsEtat",
 	Questions = "Questions",
 	Users = "users",
 }
@@ -74,6 +76,26 @@ export type LogosAndImagesRecord = {
 	nom?: string
 }
 
+export enum NotificationsTypeOptions {
+
+}
+export type NotificationsRecord = {
+	aide?: RecordIdString[]
+	forAllUsers?: boolean
+	message?: string
+	read?: boolean
+	titre?: string
+	type?: string
+	user?: RecordIdString[]
+}
+
+export type NotificationsEtatRecord = {
+	isDeleted?: boolean
+	isRead?: boolean
+	notification?: RecordIdString[]
+	user?: RecordIdString[]
+}
+
 export enum QuestionsCategorieOptions {
 
 }
@@ -105,6 +127,8 @@ export type AvatarsResponse<Texpand = unknown> = Required<AvatarsRecord> & BaseS
 export type CategoriesResponse<Texpand = unknown> = Required<CategoriesRecord> & BaseSystemFields<Texpand>
 export type EtapesResponse<Texpand = unknown> = Required<EtapesRecord> & BaseSystemFields<Texpand>
 export type LogosAndImagesResponse<Texpand = unknown> = Required<LogosAndImagesRecord> & BaseSystemFields<Texpand>
+export type NotificationsResponse<Texpand = unknown> = Required<NotificationsRecord> & BaseSystemFields<Texpand>
+export type NotificationsEtatResponse<Texpand = unknown> = Required<NotificationsEtatRecord> & BaseSystemFields<Texpand>
 export type QuestionsResponse<Toptions = unknown, Texpand = unknown> = Required<QuestionsRecord<Toptions>> & BaseSystemFields<Texpand>
 export type UsersResponse<Treponses = unknown, Texpand = unknown> = Required<UsersRecord<Treponses>> & AuthSystemFields<Texpand>
 
@@ -116,6 +140,8 @@ export type CollectionRecords = {
 	Categories: CategoriesRecord
 	Etapes: EtapesRecord
 	LogosAndImages: LogosAndImagesRecord
+	Notifications: NotificationsRecord
+	NotificationsEtat: NotificationsEtatRecord
 	Questions: QuestionsRecord
 	users: UsersRecord
 }
@@ -126,6 +152,8 @@ export type CollectionResponses = {
 	Categories: CategoriesResponse
 	Etapes: EtapesResponse
 	LogosAndImages: LogosAndImagesResponse
+	Notifications: NotificationsResponse
+	NotificationsEtat: NotificationsEtatResponse
 	Questions: QuestionsResponse
 	users: UsersResponse
 }
@@ -139,6 +167,8 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'Categories'): RecordService<CategoriesResponse>
 	collection(idOrName: 'Etapes'): RecordService<EtapesResponse>
 	collection(idOrName: 'LogosAndImages'): RecordService<LogosAndImagesResponse>
+	collection(idOrName: 'Notifications'): RecordService<NotificationsResponse>
+	collection(idOrName: 'NotificationsEtat'): RecordService<NotificationsEtatResponse>
 	collection(idOrName: 'Questions'): RecordService<QuestionsResponse>
 	collection(idOrName: 'users'): RecordService<UsersResponse>
 }

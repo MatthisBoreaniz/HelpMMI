@@ -84,7 +84,6 @@ const isActive = (path: string) => route.path === path;
             {{ item.label }}
           </RouterLink>
         </li>
-
       </ul>
     </div>
   </nav>

@@ -32,6 +32,7 @@ coverage
 # PocketBase
 /pocketbase/*
 !/pocketbase/pb_migrations
+!/pocketbase/pb_hooks
 
 #.env.development
 .env.production
