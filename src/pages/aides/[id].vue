@@ -102,7 +102,7 @@ const toggleEtape = async (etapeId: string) => {
         COMPLÉTÉE 🎉
       </div>
 
-      <div class="relative z-10 px-4 py-4 text-center">
+      <div class="relative px-4 py-4 text-center">
         <h2 class="text-white font-permanent-marker text-lg sm:text-xl md:text-2xl">
           {{ aide.nom }}
         </h2>
