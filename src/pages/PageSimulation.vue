@@ -25,7 +25,11 @@ type UserWithReponses = UsersResponse & {
 }
 
 const router = useRouter()
-const { currentUser, refreshUser } = useAuth()
+const { currentUser, refreshUser, ensureAuthReady } = useAuth()
+
+onMounted(async () => {
+  await ensureAuthReady()
+})
 
 // --- 2. ÉTAT ---
 const loading = ref(true)

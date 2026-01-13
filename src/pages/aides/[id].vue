@@ -7,11 +7,12 @@ import LayoutDefault from '@/layouts/LayoutDefault.vue'
 import type { AidesResponse, EtapesResponse } from '@/pocketbase-types'
 import sanitizeHtml from 'sanitize-html'
 import useAuth from '@/composables/useAuth' // <--- IMPORT AJOUTÉ
+import { onMounted } from 'vue'
 
 const route = useRoute('/aides/[id]')
 
 // On récupère l'utilisateur
-const { currentUser, refreshUser } = useAuth()
+const { currentUser, refreshUser, ensureAuthReady } = useAuth()
 
 type AideAvecEtapes = AidesResponse & {
   expand: {
@@ -82,6 +83,9 @@ const toggleEtape = async (etapeId: string) => {
     console.error("Erreur sauvegarde étape", err)
   }
 }
+onMounted(async () => {
+  await ensureAuthReady()
+})
 </script>
 
 <template>

@@ -26,7 +26,10 @@ type AideEnrichie = AidesResponse<{
 const aidesEnrichies = ref<AideEnrichie[]>([])
 const loadingAides = ref(false)
 
-const { currentUser } = useAuth()
+const { currentUser, ensureAuthReady } = useAuth()
+onMounted(async () => {
+  await ensureAuthReady()
+})
 const questions = ref<QuestionResponseWithOptions[]>([])
 const loading = ref(true)
 

@@ -139,7 +139,20 @@ async function updateUser(data: FormData | Record<string, string | number | bool
 }
 
 const isLoggedIn = computed(() => !!pb.authStore.token)
+const authReady = ref(false)
 
+async function ensureAuthReady() {
+  // Déjà prêt → on ne refait rien
+  if (authReady.value) return
+
+  // Si connecté → on hydrate le user
+  if (pb.authStore.isValid) {
+    await refreshUser()
+  }
+
+  // Dans tous les cas, l’auth est maintenant prête
+  authReady.value = true
+}
 
 // --- Export composable ---
 export default function useAuth() {
@@ -148,6 +161,7 @@ export default function useAuth() {
     currentUser,
     isLoggedIn,
     loadingUser,
+    ensureAuthReady,
     register,
     login,
     logout,
