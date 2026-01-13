@@ -17,7 +17,7 @@ const toggleShowNotifs = () => {
 <template>
   <nav class="md:hidden relative">
     <div class="flex space-x-4">
-      <div>
+      <div v-if=currentUser class="flex items-center gap-4 group relative cursor-pointer">
         <button @click="toggleShowNotifs" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose">
           Notification
         </button>
