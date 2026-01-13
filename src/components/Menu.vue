@@ -35,7 +35,7 @@ const menuItems = [
   },
   { 
     label: 'Mes Informations', 
-    path: '/profil', 
+    path: '/mesInfos', 
     icon: iconInfos, 
     authRequired: true 
   },

@@ -86,6 +86,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/mesInfos': RouteRecordInfo<
+      '/mesInfos',
+      '/mesInfos',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/PageSimulation': RouteRecordInfo<
       '/PageSimulation',
       '/PageSimulation',
@@ -164,6 +171,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/MesAides.vue': {
       routes:
         | '/MesAides'
+      views:
+        | never
+    }
+    'src/pages/mesInfos.vue': {
+      routes:
+        | '/mesInfos'
       views:
         | never
     }

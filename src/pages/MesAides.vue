@@ -109,12 +109,9 @@ watch(() => currentUser.value?.aides_obtenues, async () => {
 
 const numberFavoris = computed(() => currentUser.value?.relFavoris?.length || 0)
 
-// Fonction de suppression locale (CORRIGÉE : ne vide que la liste concernée)
 const handleLocalDelete = async (idAide: string) => {
-  // 1. Visuellement, on retire l'aide des favoris tout de suite
   favorisEnrichis.value = favorisEnrichis.value.filter((aide) => aide.id !== idAide)
-  
-  // 2. On met à jour l'utilisateur, ce qui déclenchera les watchers proprement
+
   await refreshUser()
 }
 </script>
@@ -223,7 +220,7 @@ const handleLocalDelete = async (idAide: string) => {
 
         <div v-if="mode === 'obtenues'">
           <div class="flex flex-col gap-6">
-            <h1 v-if="currentUser?.expand.aides_obtenues" class="font-bold text-lg font-agrandir-narrow mt-2 text-green-600 flex items-center gap-2">
+            <h1 v-if="currentUser?.expand && (currentUser.expand as any).aides_obtenues" class="font-bold text-lg font-agrandir-narrow mt-2 text-green-600 flex items-center gap-2">
               <span>🎉</span> Félicitations ! Vos aides complétées
             </h1>
             <div>

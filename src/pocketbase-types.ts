@@ -84,7 +84,7 @@ export type QuestionsRecord<Toptions = unknown> = {
 	slug?: string
 }
 
-export type UsersRecord = {
+export type UsersRecord<Treponses = unknown> = {
 	Adress?: string
 	BirthDate?: IsoDateString
 	Formation?: string
@@ -96,6 +96,7 @@ export type UsersRecord = {
 	name?: string
 	relAvatars?: RecordIdString[]
 	relFavoris?: RecordIdString[]
+	reponses?: null | Treponses
 }
 
 // Response types include system fields and match responses from the PocketBase API
@@ -105,7 +106,7 @@ export type CategoriesResponse<Texpand = unknown> = Required<CategoriesRecord> &
 export type EtapesResponse<Texpand = unknown> = Required<EtapesRecord> & BaseSystemFields<Texpand>
 export type LogosAndImagesResponse<Texpand = unknown> = Required<LogosAndImagesRecord> & BaseSystemFields<Texpand>
 export type QuestionsResponse<Toptions = unknown, Texpand = unknown> = Required<QuestionsRecord<Toptions>> & BaseSystemFields<Texpand>
-export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
+export type UsersResponse<Treponses = unknown, Texpand = unknown> = Required<UsersRecord<Treponses>> & AuthSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
 

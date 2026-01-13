@@ -1,18 +1,19 @@
 import { ref, computed } from 'vue'
 import { pb } from '@/backend'
-import type { UsersResponse, AvatarsResponse, AidesResponse, EtapesResponse } from '@/pocketbase-types'
+// import type { UsersResponse, AvatarsResponse, AidesResponse, EtapesResponse } from '@/pocketbase-types'
+import type { UserExpanded } from '@/composables/types/users'
 
-// --- Types ---
-type UsersExpanded = UsersResponse<{
-  relAvatars: AvatarsResponse
-  relFavoris: AidesResponse[]
-  mes_aides: AidesResponse[]
-  etapes_validees: EtapesResponse[]
-  aides_obtenues: AidesResponse[]
-}>
+// // --- Types ---
+// type UsersExpanded = UsersResponse<{
+//   relAvatars: AvatarsResponse
+//   relFavoris: AidesResponse[]
+//   mes_aides: AidesResponse[]
+//   etapes_validees: EtapesResponse[]
+//   aides_obtenues: AidesResponse[]
+// }>
 
 // --- Etat utilisateur ---
-const currentUser = ref<UsersExpanded | null>(null)
+const currentUser = ref<UserExpanded | null>(null)
 
 // --- Locks pour éviter les bugs ---
 let isRefreshing = false
@@ -29,7 +30,7 @@ async function refreshUser() {
   try {
     const user = await pb
       .collection('users')
-      .getOne<UsersExpanded>(pb.authStore.model.id, { expand: 'relAvatars, relFavoris, mes_aides, etapes_validees, aides_obtenues' })
+      .getOne<UserExpanded>(pb.authStore.model.id, { expand: 'relAvatars, relFavoris, mes_aides, etapes_validees, aides_obtenues' })
 
     // Mette à jour l'authStore + user
     pb.authStore.save(pb.authStore.token, user)
@@ -117,7 +118,7 @@ async function DeleteUser() {
 }
 
 // --- Mise à jour user ---
-async function updateUser(data: FormData | Record<string, any>) {
+async function updateUser(data: FormData | Record<string, string | number | boolean>) {
   const user = pb.authStore.model
   if (!user) return
 
