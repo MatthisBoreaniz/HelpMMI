@@ -11,14 +11,14 @@ import { pb } from '@/backend'
 
 const { currentUser, refreshUser, loadingUser } = useAuth()
 const mode = ref<'login' | 'register'>('login')
-const ImageConnexion = ref(null)
+const ImageConnexion = ref<any>(null)
 
 // --- fetch image et user au montage ---
 onMounted(async () => {
   // refresh du user si déjà logué
   if (pb.authStore.isValid) {
     await refreshUser()
-  }else {
+  } else {
     // Sinon, pas besoin d'attendre, on stoppe le loader
     loadingUser.value = false
   }
@@ -36,9 +36,7 @@ onMounted(async () => {
 
 <template>
   <!-- loader tant que refreshUser est en cours -->
-  <div v-if="loadingUser" class="flex justify-center items-center h-screen">
-    Chargement...
-  </div>
+  <div v-if="loadingUser" class="flex justify-center items-center h-screen">Chargement...</div>
 
   <LayoutDefault v-else-if="currentUser">
     <LoggedIn />
@@ -58,11 +56,15 @@ onMounted(async () => {
         ></div>
       </div>
 
-      <div class="w-full md:w-3/5 flex flex-col justify-center items-center bg-white p-6 md:p-12 h-auto md:h-full">
+      <div
+        class="w-full md:w-3/5 flex flex-col justify-center items-center bg-white p-6 md:p-12 h-auto md:h-full"
+      >
         <div class="w-full max-w-md py-8 md:py-0">
           <div class="mb-8 text-center md:text-left">
             <h1 class="text-Bleu font-bold font-permanent-marker text-3xl">REJOINS HELPMMI</h1>
-            <h2 class="text-Bleu font-permanent-agrandir text-xl mt-2">Et commence tes recherches</h2>
+            <h2 class="text-Bleu font-permanent-agrandir text-xl mt-2">
+              Et commence tes recherches
+            </h2>
           </div>
 
           <Transition name="fade-slide" mode="out-in">

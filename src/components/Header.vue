@@ -5,10 +5,16 @@ import { RouterLink } from 'vue-router'
 import useAuth from '@/composables/useAuth'
 import MenuMobileTop from './MenuMobileTop.vue'
 import NotifsToast from './notifsToast.vue'
+import { pb } from '@/backend'
+import ImgPb from './ImgPb.vue'
 
 const { currentUser } = useAuth()
 const showNotifs = ref(false)
 const toggleShowNotifs = () => (showNotifs.value = !showNotifs.value)
+
+const iconNotif = await pb
+      .collection('LogosAndImages')
+      .getFirstListItem('nom="notifIcon"')
 </script>
 
 <template>
@@ -22,10 +28,11 @@ const toggleShowNotifs = () => (showNotifs.value = !showNotifs.value)
     <div class="hidden md:flex items-center gap-4">
       <template v-if="currentUser">
         <div class="flex items-center gap-4 group relative cursor-pointer">
-          <button @click="toggleShowNotifs" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose">
+          <button @click="toggleShowNotifs" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose flex items-center gap-2">
+            <ImgPb v-if="iconNotif" :record="iconNotif" :filename="iconNotif.image" class="w-6 h-6"/>
             Notification
           </button>
-          <div v-if="showNotifs" class="absolute right-0 mt-2 z-50">
+          <div v-if="showNotifs" class="absolute top-5 right-0 mt-2 z-50">
             <NotifsToast />
           </div>
 

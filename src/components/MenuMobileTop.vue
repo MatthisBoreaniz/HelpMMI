@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import useAuth from '@/composables/useAuth'
 import NotifsToast from './notifsToast.vue'
+import { pb } from '@/backend'
+import ImgPb from './ImgPb.vue'
 const { currentUser } = useAuth()
 
 const isOpen = ref(false)
@@ -12,14 +14,18 @@ const showNotifs = ref(false);
 const toggleShowNotifs = () => {
   showNotifs.value = !showNotifs.value;
 };
+
+const iconNotif = await pb
+      .collection('LogosAndImages')
+      .getFirstListItem('nom="notifIcon"')
 </script>
 
 <template>
   <nav class="md:hidden relative">
     <div class="flex space-x-4">
       <div v-if=currentUser class="flex items-center gap-4 group relative cursor-pointer">
-        <button @click="toggleShowNotifs" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose">
-          Notification
+        <button @click="toggleShowNotifs" class="bg-Bleu text-white px-4 py-2 rounded hover:bg-Rose flex items-center justify-center">
+          <ImgPb v-if="iconNotif" :record="iconNotif" :filename="iconNotif.image" class="w-6 h-6"/>
         </button>
         <div v-if="showNotifs" class="absolute top-5 right-0 mt-2 z-50">
           <NotifsToast />
