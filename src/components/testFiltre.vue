@@ -92,7 +92,7 @@ const showMore = () => {
 } 
 
 const showLess = () => {
-  visibleCount.value -= 3;
+  visibleCount.value -= 6;
   // Correction: pas besoin de soustraire deux fois, juste vérifier la limite après
   if (visibleCount.value < 3) visibleCount.value = 3;
 

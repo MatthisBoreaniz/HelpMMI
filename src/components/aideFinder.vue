@@ -51,19 +51,17 @@ async function sendMessageToAI(question: string) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'aides-etudiantes', // 👈 nom EXACT du modèle
-        stream: false,            // 👈 TRÈS IMPORTANT
+        stream: false, // 👈 TRÈS IMPORTANT
         messages: [{ role: 'user', content: question }],
       }),
     })
 
     const data = await res.json()
 
-    const answer =
-      data?.message?.content ??
-      'Désolé, je n’ai pas compris ta question.'
+    const answer = data?.message?.content ?? 'Désolé, je n’ai pas compris ta question.'
 
     messages.value.push({ from: 'bot', text: answer })
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     messages.value.push({
       from: 'bot',
@@ -88,7 +86,7 @@ function onEnter(e: KeyboardEvent) {
   <img
     @click="toggleChatBox"
     class="w-16 h-16 fixed bottom-5 right-5 cursor-pointer hover:scale-110 transition"
-    src="../assets/Icones/chatbot.png"
+    src="../assets/Icones/MascotteChat-landingPage.svg"
     alt="Chatbot"
   />
 
@@ -121,7 +119,6 @@ function onEnter(e: KeyboardEvent) {
 
     <!-- CONTENT -->
     <div class="flex-1 overflow-y-auto p-3">
-
       <!-- FAQ RAPIDE -->
       <div v-if="mode === 'faq'" class="overflow-y-auto max-h-96">
         <input
@@ -135,13 +132,9 @@ function onEnter(e: KeyboardEvent) {
         </div>
 
         <ul class="space-y-2">
-          <li
-        v-for="aide in filteredAides"
-        :key="aide.id"
-        class="p-2 bg-gray-100 rounded"
-          >
-        <div class="font-medium">{{ aide.question }}</div>
-        <div class="text-sm text-gray-600" v-html="aide.reponse" />
+          <li v-for="aide in filteredAides" :key="aide.id" class="p-2 bg-gray-100 rounded">
+            <div class="font-medium">{{ aide.question }}</div>
+            <div class="text-sm text-gray-600" v-html="aide.reponse" />
           </li>
         </ul>
       </div>
@@ -156,17 +149,13 @@ function onEnter(e: KeyboardEvent) {
         >
           <div
             class="px-3 py-2 rounded-xl max-w-[80%]"
-            :class="msg.from === 'user'
-              ? 'bg-Bleu text-white'
-              : 'bg-gray-200 text-gray-800'"
+            :class="msg.from === 'user' ? 'bg-Bleu text-white' : 'bg-gray-200 text-gray-800'"
           >
             {{ msg.text }}
           </div>
         </div>
 
-        <div v-if="loading" class="text-sm italic text-gray-500">
-          L’IA réfléchit…
-        </div>
+        <div v-if="loading" class="text-sm italic text-gray-500">L’IA réfléchit…</div>
       </div>
     </div>
 
@@ -187,4 +176,3 @@ function onEnter(e: KeyboardEvent) {
     </div>
   </div>
 </template>
-

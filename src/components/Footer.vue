@@ -7,7 +7,7 @@
       >
         <div class="flex flex-wrap items-center gap-3 justify-center lg:justify-start">
           <img
-            src="../assets/Img/helpMMi.png"
+            src="../assets/Img/Logo-simple.svg"
             alt="Help MMi Logo"
             class="w-16 h-auto flex-shrink-0"
           />

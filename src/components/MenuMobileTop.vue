@@ -77,7 +77,7 @@ onBeforeUnmount(() => {
       v-if="isOpen"
       class="fixed top-0 left-0 w-screen h-[100dvh] bg-Rose z-40 flex flex-col items-center justify-center overflow-hidden"
     >
-      <img src="/src/assets//Img//helpMMi.png" alt="HelpMMI Logo" class="w-40 mb-8" />
+      <img src="/src/assets//Img//Logo-simple.svg" alt="HelpMMI Logo" class="w-40 mb-8" />
       <ul class="flex flex-col items-center p-6 space-y-6 text-lg text-white">
         <li @click="isOpen = false">
           <RouterLink to="/" class="flex items-center gap-2 font-bold hover:text-Bleu">
