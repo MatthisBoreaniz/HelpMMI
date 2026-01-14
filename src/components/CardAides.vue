@@ -107,8 +107,8 @@ const FavorisIconOn = await pb.collection('LogosAndImages').getFirstListItem(`no
         </div>
 
         <div class="flex-grow flex items-center justify-center">
-          <h3
-            class="text-white font-permanent-marker text-xl md:text-2xl text-center leading-tight drop-shadow-lg rotate-[-2deg]"
+            <h3
+            class="text-white font-permanent-marker text-xl md:text-2xl text-center leading-tight drop-shadow-lg rotate-[-2deg] line-clamp-2 break-words"
           >
             {{ aide.nom }}
           </h3>

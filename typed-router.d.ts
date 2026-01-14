@@ -44,6 +44,13 @@ declare module 'vue-router/auto-routes' {
       { id: ParamValue<false> },
       | never
     >,
+    '/annuaires': RouteRecordInfo<
+      '/annuaires',
+      '/annuaires',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/AuthPage': RouteRecordInfo<
       '/AuthPage',
       '/AuthPage',
@@ -135,6 +142,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/aides/[id].vue': {
       routes:
         | '/aides/[id]'
+      views:
+        | never
+    }
+    'src/pages/annuaires.vue': {
+      routes:
+        | '/annuaires'
       views:
         | never
     }

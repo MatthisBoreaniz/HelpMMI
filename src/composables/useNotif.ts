@@ -201,6 +201,14 @@ export default function useNotifications(currentUserId: string) {
     }
   }
 
+    // ------------------------------------------------------
+    // Supprimer toutes les notifications
+    // ------------------------------------------------------
+    const deleteAllNotifications = async () => {
+      const allIds = notifications.value.map((n) => n.id)
+      // On lance toutes les suppressions en parallèle
+      await Promise.all(allIds.map((id) => deleteNotification(id)))
+    }
   // ------------------------------------------------------
   // Tout marquer comme lu
   // ------------------------------------------------------
@@ -249,6 +257,7 @@ export default function useNotifications(currentUserId: string) {
     addNotification,
     markAsRead,
     deleteNotification,
+    deleteAllNotifications,
     markAllAsRead,
   }
 }

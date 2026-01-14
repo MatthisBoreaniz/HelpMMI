@@ -70,8 +70,13 @@ pb.authStore.onChange(() => {
 // --- Inscription ---
 async function register(email: string, password: string, username: string) {
   try {
+    const cleanUsername = username
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '_') // espaces → _
+      .replace(/[^a-z0-9._-]/g, '') // caractères interdits
     const data = {
-      username,
+      username: cleanUsername,
       email,
       emailVisibility: true,
       password,

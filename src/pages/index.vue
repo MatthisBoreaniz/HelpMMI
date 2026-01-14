@@ -147,7 +147,7 @@ onMounted(async () => {
               >SIMULATION</RouterLink
             >
             <RouterLink
-              to="/annuaire"
+              to="/annuaires"
               class="bg-Blanc text-Bleu font-bold font-permanent-marker text-lg md:text-sm rounded-2xl p-4 md:p-6 lg:p-4 flex items-center justify-center hover:scale-105 transition-transform duration-300 shadow-md min-h-[80px] md:min-h-[200px]"
               >ANNUAIRE</RouterLink
             >

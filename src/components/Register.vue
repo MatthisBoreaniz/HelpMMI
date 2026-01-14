@@ -13,19 +13,60 @@ const message = ref('')
 const acceptTerms = ref(false)
 
 const handleRegister = async () => {
+  message.value = ''
+
+  // 🔴 Champs obligatoires
+  if (!name.value.trim()) {
+    message.value = 'Le nom est obligatoire.'
+    return
+  }
+
+  if (!email.value.trim()) {
+    message.value = 'L’email est obligatoire.'
+    return
+  }
+
+  if (!password.value) {
+    message.value = 'Le mot de passe est obligatoire.'
+    return
+  }
+
+  if (!passwordConfirm.value) {
+    message.value = 'La confirmation du mot de passe est obligatoire.'
+    return
+  }
+
+  // 🔴 Email invalide
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(email.value)) {
+    message.value = 'Adresse email invalide.'
+    return
+  }
+
+  // 🔴 Mot de passe trop court
+  if (password.value.length < 8) {
+    message.value = 'Le mot de passe doit contenir au moins 8 caractères.'
+    return
+  }
+
+  // 🔴 Mots de passe différents
   if (password.value !== passwordConfirm.value) {
     message.value = 'Les mots de passe ne correspondent pas.'
     return
-  } else if (!acceptTerms.value) {
+  }
+
+  // 🔴 Conditions non acceptées
+  if (!acceptTerms.value) {
     message.value = 'Vous devez accepter les conditions d’utilisation et la politique de confidentialité.'
     return
   }
+
+  // ✅ Appel backend
   try {
     await register(email.value, password.value, name.value)
     message.value = 'Compte créé avec succès !'
-  } catch (err) {
-    console.error(err)
-    message.value = 'Erreur lors de l’inscription.'
+  } catch (err: any) {
+    message.value = err?.message || 'Erreur lors de l’inscription.'
   }
 }
 
