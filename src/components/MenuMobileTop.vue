@@ -103,7 +103,7 @@ onBeforeUnmount(() => {
           </RouterLink>
         </li>
         <li @click="isOpen = false">
-          <RouterLink to="/contact" class="flex items-center gap-2 font-bold hover:text-Bleu">
+          <RouterLink to="/annuaires" class="flex items-center gap-2 font-bold hover:text-Bleu">
             Annuaires
           </RouterLink>
         </li>
